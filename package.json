@@ -1,0 +1,60 @@
+{
+    "name": "hardcore",
+    "version": "0.0.1",
+    "description": "hardcore.js is a diagram javascript library for drawing creative charts, based on gojs",
+    "main": "lib/main.js",
+    "scripts": {
+        "dev": "cross-env libname=main  type=dipan webpack --display-modules --progress --colors --watch --env dev",
+        "build": "cross-env libname=hardcore  type=dipan webpack --env dev && cross-env libname=hardcore  type=dipan webpack --env build",
+        "publish": "cross-env uploadOss=true hasVersion=true libname=hardcore  webpack --env build --config ./webpack.config.publish.js && cross-env libname=hardcore  type=dipan uploadOss=true webpack --env build --config ./webpack.config.publish.js",
+        "build:dipan": "cross-env libname=dipan webpack --env dev && cross-env libname=dipan webpack --env build",
+        "build:main": "cross-env libname=main  type=dipan webpack --env dev && cross-env libname=main  type=dipan webpack --env build",
+        "build:yunpanhome": "cross-env libname=yunpanhome  type=dipan webpack --env dev && cross-env libname=yunpanhome  type=dipan webpack --env build",
+        "dev:dipan": "cross-env libname=dipan webpack --progress --colors --watch --env dev",
+        "dev:main": "cross-env libname=main  type=dipan webpack --display-modules --progress --colors --watch --env dev",
+        "dev:yunpanhome": "cross-env libname=yunpanhome  type=dipan webpack --display-modules --progress --colors --watch --env dev",
+        "test": "mocha --require babel-core/register --colors ./test/*.spec.js",
+        "test:watch": "mocha --require babel-core/register --colors -w ./test/*.spec.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "webpack",
+        "es6",
+        "hardcore",
+        "library",
+        "universal",
+        "trtd",
+        "commonjs"
+    ],
+    "author": "Zhenyuan",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "devDependencies": {
+        "aliyun-oss-webpack-plugin": "^2.0.1",
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.0",
+        "babel-eslint": "^8.0.3",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-add-module-exports": "^0.2.1",
+        "babel-preset-env": "^1.6.1",
+        "chai": "^4.1.2",
+        "dotenv": "^7.0.0",
+        "eslint": "^4.13.1",
+        "eslint-loader": "^1.9.0",
+        "mocha": "^4.0.1",
+        "semver": "^6.0.0",
+        "webpack": "^3.12.0",
+        "yargs": "^10.0.3"
+    },
+    "dependencies": {
+        "cross-env": "^5.2.0",
+        "css-loader": "^0.28.11",
+        "style-loader": "^0.21.0"
+    }
+}

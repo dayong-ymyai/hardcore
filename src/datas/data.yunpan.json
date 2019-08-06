@@ -1,0 +1,20 @@
+{
+    "nodeDataArray": [ 
+        {"key": 1,"category": "yunpan","angle": 90,"stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4,2],"strokeWidth":2,"loc": "0 -200"},
+        {"key": 2,"category": "ytext" ,"text":"维度1","loc": "0 -200","dir": "right"}, 
+        {"key": 3,"category": "yunpan","angle": 90,"stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "0 -400"},
+        {"key": 4,"category": "ytext" ,"text":"维度2","loc": "0 -400","dir": "right"}, 
+        {"key": 5,"category": "yunpan","angle": 90,"stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "0 -600" },
+        {"key": 6,"category": "ytext" ,"text":"维度3","loc": "0 -600","dir": "right"}, 
+        {"key": 7,"category": "yunpan","stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "200 0" },
+        {"key": 8,"category": "xtext" ,"text":"维度1","loc": "200 0","dir": "top"}, 
+        {"key": 9,"category": "yunpan","stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "400 0" },
+        {"key": 10,"category": "xtext" ,"text":"维度2","loc": "400 0","dir": "top"}, 
+        {"key": 11,"category": "yunpan","stroke":"gray","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "600 0" },
+        {"key":12,"category": "xtext" ,"text":"维度3","loc": "600 0","dir": "top"},
+        {"key": 13,"category": "x" ,"strokeWidth":2,"stroke":"gray","height":810,"angle": 90,"loc": "0 0"},
+        {"key": 14,"category": "y","strokeWidth":2,"stroke":"gray","height":810,"loc": "0 0"},
+        {"key": 15,"category": "LogicXor","strokeWidth":2,"stroke":"gray","loc": "810 5"},
+        {"key": 16,"category": "LogicXor","strokeWidth":2,"stroke":"gray","loc": "-20 -825"}
+        ]
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo6</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv{
+            width: 100%;
+            height: 500px;
+            margin: 50px auto;
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='../lib/main.js'></script>
+
+<script>
+    var myDiagram;
+    function load(){
+        console.log('dddd',window.Trtd)
+        if(myDiagram){
+            myDiagram.destroyNewInstance();
+        }
+
+        var jsonData = { "class": "go.GraphLinksModel",
+  "modelData": {"currentType":"tianpan", "type":"shui", "updatedAt":1556452369529},
+  "nodeDataArray": [ 
+{"group":"2d98d502-abc8-db5f-c5f6-e65a7bd0a6c3", "text":"", "resizable":false, "category":"pic", "loc":"876.3006671586232 3144.1979830267464", "picture":"https://static.365trtd.com/system/water/water.png", "width":400, "height":850, "key":-12},
+{"category":"picGroup", "isGroup":true, "level":0, "key":"2d98d502-abc8-db5f-c5f6-e65a7bd0a6c3", "loc":"683.0698072924642 3251.064357149551", "deletable":true, "angle":0},
+{"key":"0f50ab02-07b8-3aee-489c-368e1383b1ec","deletable":false,"movable":false, "group":-10, "text":"问题", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":0, "loc":"894.1187484391669 2393.143880653542", "isparent":"13", "rad":22.000000000000046},
+{"key":"0f50ab02-07b8-3aee-489c-368e1383b1ec2","deletable":false,"movable":false, "group":-6, "text":"规律", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":0, "loc":"1082.2847570812294 2718.6720067063297", "isparent":"9", "rad":22.000000000000046},
+{"key":"0f50ab02-07b8-3aee-489c-368e1383b1ec22","deletable":false,"movable":false, "group":-14, "text":"实践", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":0, "loc":"1254.5085339569025 3037.1146964185023", "isparent":"17", "rad":22.000000000000046},
+{"isGroup":true, "group":"2d98d502-abc8-db5f-c5f6-e65a7bd0a6c3", "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec2", "fill":"rgba(0,0,0,0)", "stroke":"rgba(0,0,0,0)", "strokeWidth":0, "level":0, "key":-6, "loc":"1115.4228011041666 2688.434682267731"},
+{"key":"6", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec2", "prev":"8", "radius":100, "group":-6, "fill":"white", "category":"0", "loc":"1247.8019472598583 2790.576503984828", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":8.141592653589793},
+{"key":"8", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec2", "prev":"9", "next":"6", "radius":100, "group":-6, "fill":"white", "category":"0", "loc":"1144.3865929422516 2586.2928605506354", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":6.570796326794897},
+{"key":"9", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec2", "next":"8", "radius":100, "group":-6, "fill":"white", "category":"0", "loc":"983.0436549484759 2666.3728322627867", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5},
+{"isGroup":true, "group":"2d98d502-abc8-db5f-c5f6-e65a7bd0a6c3", "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec", "fill":"rgba(0,0,0,0)", "stroke":"rgba(0,0,0,0)", "strokeWidth":0, "level":0, "key":-10, "loc":"927.2567924621036 2362.90655621494"},
+{"key":"10", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec", "prev":"12", "radius":100, "group":-10, "fill":"white", "category":"0", "loc":"1059.6359386177953 2465.0483779320307", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5},
+{"key":"12", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec", "prev":"13", "next":"10", "radius":100, "group":-10, "fill":"white", "category":"0", "loc":"956.2205843001882 2260.764734497848", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5},
+{"key":"13", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec", "next":"12", "radius":100, "group":-10, "fill":"white", "category":"0", "loc":"794.877646306412 2340.8447062099945", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5},
+{"isGroup":true, "group":"2d98d502-abc8-db5f-c5f6-e65a7bd0a6c3", "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec22", "fill":"rgba(0,0,0,0)", "stroke":"rgba(0,0,0,0)", "strokeWidth":0, "level":0, "key":-14, "loc":"1287.6465779798389 3006.877371979907"},
+{"key":"14", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec22", "prev":"16", "radius":100, "group":-14, "fill":"white", "category":"0", "loc":"1420.0257241355305 3109.019193697005", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":8.141592653589793},
+{"key":"16", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec22", "prev":"17", "next":"14", "radius":100, "group":-14, "fill":"white", "category":"0", "loc":"1316.6103698179234 2904.7355502628084", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":6.570796326794897},
+{"key":"17", "text":"", "level":1, "parent":"0f50ab02-07b8-3aee-489c-368e1383b1ec22", "next":"16", "radius":100, "group":-14, "fill":"white", "category":"0", "loc":"1155.2674318241477 2984.8155219749556", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5}
+ ],
+  "linkDataArray": [ 
+{"from":"8", "to":"6", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[1189.681115185901,2609.7322772396165,1231.7475848461895,2640.7400876786514,1255.6399234239798,2687.9363092362782,1255.7262544132036,2740.195899024789]},
+{"from":"0f50ab02-07b8-3aee-489c-368e1383b1ec2", "to":"9", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "points":[1036.828155491241,2741.795530916299,1017.6434273176851,2741.877224169911,1000.4428417210888,2732.812669189011,989.6653203283595,2716.941138024369], "curviness":22.000000000000046, "unautoLink":false},
+{"from":"9", "to":"8", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[1008.83635237311,2622.3758237331003,1030.913815777415,2597.744973263233,1060.7805735293655,2582.921088526474,1093.7481017339373,2580.231242932753]},
+{"from":"12", "to":"10", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[1001.5151065438376,2284.204151186825,1043.581576204127,2315.211961625861,1067.4739147819173,2362.408183183489,1067.5602457711407,2414.6677729719995]},
+{"from":"0f50ab02-07b8-3aee-489c-368e1383b1ec", "to":"13", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "points":[848.662146849177,2416.267404863507,829.477418675621,2416.3490981171194,812.276833079025,2407.2845431362193,801.499311686296,2391.4130119715774], "curviness":22.000000000000046, "unautoLink":false},
+{"from":"13", "to":"12", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[820.6703437310465,2296.847697680309,842.7478071353505,2272.2168472104418,872.6145648873011,2257.392962473683,905.5820930918735,2254.7031168799617]},
+{"from":"16", "to":"14", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[1361.9048920615735,2928.1749669517867,1403.971361721863,2959.182777390823,1427.8637002996538,3006.378998948452,1427.9500312888774,3058.6385887369643]},
+{"from":"0f50ab02-07b8-3aee-489c-368e1383b1ec22", "to":"17", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "points":[1209.0519323669134,3060.23822062847,1189.867204193357,3060.319913882083,1172.6666185967606,3051.2553589011823,1161.8890972040315,3035.3838277365408], "curviness":22.000000000000046, "unautoLink":false},
+{"from":"17", "to":"16", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":22.000000000000046, "unautoLink":false, "points":[1181.0601292487815,2940.8185134452724,1203.1375926530861,2916.1876629754042,1233.0043504050366,2901.363778238645,1265.9718786096093,2898.6739326449238]}
+ ]}
+
+ myDiagram = new Trtd("myDiagramDiv",{type:'shui',
+        model: JSON.stringify(jsonData),
+            modelChangedListener:function(m){
+                // console.log('from trtd:',m);
+            }
+        })
+        // myDiagram.loadModel(JSON.stringify(jsonData));
+
+        // var tdData = myDiagram.getTdData();
+        // console.log('tdData:', tdData);
+
+        // myDiagram.downloadImage();
+        // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
+        // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
+        // document.getElementById('imgbase64').setAttribute('src', myDiagram.downloadImage())
+        
+        
+        // 双击画布创建的节点类型
+        // myDiagram.doubleClickCreateNodeType('0');
+    }
+    load();
+</script>
+<script src='./domjs.js'></script>
+</html>

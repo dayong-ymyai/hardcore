@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo2</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv {
+            width: 100%;
+            height: 900px;
+            /* margin: 50px auto; */
+            border: solid 1px #000;
+        }
+
+        #demo-btn {
+            position: fixed;
+            bottom: 120px;
+            cursor: pointer;
+            z-index: 9999;
+            right: 20px;
+            width: 100px;
+            height: 30px;
+            display: block;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+    </div>
+    <div id="demo-btn">下一页</div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='figure.js'></script>
+
+<script src='../lib/main.js'></script>
+
+<script>
+    // 定义gojs画布对象
+    var myDiagram;
+    function load() {
+
+        if (myDiagram) {
+            myDiagram.diagram == null;
+        }
+        // 初始化canvas图形对应的json数据，这里用的是默认的拓扑数据
+        var jsonData = {
+            "class": "go.GraphLinksModel",
+            // type用来定义当前图形类型，火花矩阵和拓扑用的都是“dspriral”
+            "modelData": { "currentType": "tianpan", "type": "dspiral", "updatedAt": 1565074310990 },
+            // nodeDataArray里记录图形里面所有的节点元素，数组。
+            "nodeDataArray": [
+                // category用来定义当前节点元素的类别，labelGroup表示的是橄榄左上角图例框组的节点。
+                // isGroup=true表示该节点是gojs里的group，可以包含其他节点元素（node）。
+                // loc：表示当前节点在画布里的位置，通过go.Point.stringify(point)来获得
+                // key：节点元素在画布的唯一标志，不允许重复，如果不指定会自动生产
+                // deletable：是否允许删除
+                // selectable：是否允许选中
+                { "category": "labelGroup", "group": -19, "role": "labelGroup", "isGroup": true, "level": 0, "key": -145, "loc": "-165.9188527901979 -401.3352989284005", "deletable": false, "selectable": false },
+                // category=waveGroup，表示橄榄串组的节点，是一个gojs的group类型，包含来诸如实线颜色（shiStroke），虚线颜色（xuStroke），中线颜色（centerStroke），橄榄长度（oliveWidth），橄榄厚度（oliveHeight），是否包含开放尾部（haveTail），橄榄类型（oliveType：Wave螺旋形状，olive为橄榄形状），允许的最大橄榄数量（maxOlive），文字方向（textAngle：horizontal表示水平，vertical表示文字平行中轴）
+                { "category": "waveGroup", "deletable": false, "haveTail": false, "oliveType": "Wave", "shiStroke": "rgba(14, 57, 157, 1)", "xuStroke": "rgba(203, 28, 39, 1)", "oliveWidth": 150, "oliveHeight": 120, "isGroup": true, "level": 0, "key": -15, "loc": "-267.41885279019795 -104.90629298215362", "angle": 330.08938180947, "group": -19, "movable": false, "desiredSize": "700 120", "textAngle": "horizontal", "centerTextAngle": "independent", "centerTextMode": "independent", "centerStroke": "rgba(9, 166, 9, 1)", "maxOlive": 50 },
+                // category=axisGroup，表示拓扑图形最外层的group
+                { "category": "axisGroup", "isGroup": true, "level": 0, "key": -19, "loc": "-267.41885279019795 -104.90629298215367", "angle": 0, "desiredSize": "300 150", "textStroke": "black", "textAlign": "center" },
+                // catgory=line表示直线类型的节点，width：直线的长度，height：直线宽度，group=-15表示该直线属于key=-15的group节点，angle表示该直线旋转的角度（水平右方向为0度），role=centerLine表示该直线为拓扑里中轴线（中轴线的angle控制整个橄榄串的角度，中轴线上的所有橄榄会自动对齐角度），stroke控制直线的颜色（css一样的颜色定义方式），desiredSize控制节点元素的实际大小（优先级高于width和height）
+                { "category": "line", "level": 0, "key": -11, "loc": "-267.41885279019783 -104.90629298215379", "desiredSize": "700 1", "width": 1400, "height": 1, "group": -15, "angle": 330.08938180947, "role": "centerLine", "selectable": false, "stroke": "rgba(9, 166, 9, 1)" },
+                // 直线类型节点，role=axisX表示该直线为坐标轴X轴（横轴）
+                { "category": "line", "level": 0, "key": -8, "loc": "-267.4188527901981 -104.90629298215362", "desiredSize": "606.7630471788291 10", "width": 1400, "height": 1, "angle": 0, "group": -19, "role": "axisX", "selectable": false, "stroke": "#0e399d" },
+                // 直线类型节点，role=axisY表示该直线为坐标轴Y轴（纵轴）
+                { "category": "line", "level": 0, "key": -7, "loc": "-267.4188527901979 -104.90629298215384", "desiredSize": "349.05387059630493 10", "width": 1400, "height": 1, "angle": 270, "group": -19, "role": "axisY", "selectable": false, "stroke": "#cb1c27" },
+                // category=autoText表示该节点为通用文字节点元素，role=axisYText表示该文字为Y轴顶部文字（随纵轴长度变化自动调整位置），locationSpot表示文字相对坐标中心的位置（参考[gojs文档](https://gojs.net/latest/api/symbols/Spot.html)），text存储该节点对应的文字内容，font控制该文字字体样式（同CSS文字样式）
+                { "text": "能量", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "-277.4188527901979 -453.9601635784589", "key": -12, "role": "axisYText", "locationSpot": "1 0.5 0 0", "group": -19, "movable": true },
+                // role=themeText表示该节点为该拓扑的主题（不允许删除，可以通过myDiagram.__trtd.apiGetTheme()获取该节点对应text），movable控制该节点是否允许拖动，width控制该文字最大宽度（超过该宽度会自动换行）
+                { "text": "主题", "role": "themeText", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "-310.9294316472132 -101.40896142630251", "key": -13, "level": 0, "group": -19, "locationSpot": "0.5 0 0 0", "movable": true, "width": 300 },
+                // role=axisXText表示该文字为X轴顶部文字（随横轴长度变化自动调整位置）
+                { "text": "时间", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "339.3441943886312 -104.90629298215362", "key": -14, "role": "axisXText", "group": -19, "locationSpot": "0.5 0 0 0" },
+                // role=labelText1表示该文字为图例框中第一个文字，iconVisible控制文字节点是否显示左侧的图标，textAlign控制文字对齐方式（start，end，center），visible控制节点是否显示，minSize控制文字节点最小宽高
+                { "text": "实线：", "deletable": false, "fill": "rgba(14, 57, 157, 1)", "iconVisible": true, "locationSpot": "0 0 0 0", "textAlign": "start", "category": "autoText", "loc": "-239.41885279019792 -462.19828720965", "key": -114, "role": "labelText1", "movable": true, "group": -145, "visible": true, "minSize": "120 30" },
+                // role=labelText1表示该文字为图例框中第二个文字
+                { "text": "虚线：", "deletable": false, "fill": "rgba(203, 28, 39, 1)", "iconVisible": true, "locationSpot": "0 0 0 0", "textAlign": "start", "category": "autoText", "loc": "-239.41885279019792 -421.3352989284021", "key": -116, "role": "labelText2", "movable": true, "group": -145, "visible": true, "minSize": "120 30" },
+                // role=labelText1表示该文字为图例框中第三个文字
+                { "text": "中线：", "deletable": false, "fill": "rgba(9, 166, 9, 1)", "iconVisible": true, "locationSpot": "0 0 0 0", "textAlign": "start", "category": "autoText", "loc": "-239.41885279019792 -380.4723106471507", "key": -117, "role": "labelText3", "movable": true, "group": -145, "visible": true, "minSize": "120 30" },
+                // category=wave表示该节点是橄榄节点，order表示该橄榄在橄榄串中的位置（从1开始，橄榄串会根据order值从小到大排布顺序），shiText指向该橄榄对应的实线文字的key，xuText指向该橄榄对应的虚线文字的key，angle为该橄榄的角度一般跟随role=centerLine的中线，centerText指向该橄榄对应的隐藏中线上文字节点的key（为了实线中线文字横向而添加独立的文字节点），shiStroke控制该橄榄实线部分颜色，xuStroke控制该橄榄虚线部分颜色，textVisible控制该橄榄本身的文字是否显示（当橄榄串文字方向为horizontal时，显示独立的centerText，隐藏橄榄本身文字）
+                { "category": "wave", "text": "1\n", "level": 0, "key": "0807d53b-8c86-5a76-1a22-e782324e0521", "group": -15, "desiredSize": "150 120", "order": 1, "shiText": "72c7866c-5fb7-2406-a01d-e5e30cff982f", "xuText": "fb893883-db72-2a9d-0aa4-ef3b2382aabe", "angle": 330.08938180947, "loc": "-267.41885279019795 -104.90629298215376", "oliveType": "Wave", "textAlign": "center", "shiStroke": "rgba(14, 57, 157, 1)", "xuStroke": "rgba(203, 28, 39, 1)", "centerText": "63300656-f2f0-8b1d-7bb7-e6a5b8c832b5", "textVisible": false, "isNew": null },
+                // role=shiText表示该文字是实线上文字，order跟对应橄榄一致，olive指向对应的橄榄的key
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "72c7866c-5fb7-2406-a01d-e5e30cff982f", "width": 150, "role": "shiText", "level": 0, "group": -15, "order": 1, "olive": "0807d53b-8c86-5a76-1a22-e782324e0521", "loc": "-171.37349456638736 -90.36190699786798", "locationSpot": "0 0 0 0", "textStroke": "rgba(14, 57, 157, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                // role=xuText表示该文字是虚线上的文字，olive指向橄榄的key
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "fb893883-db72-2a9d-0aa4-ef3b2382aabe", "width": 150, "role": "xuText", "level": 0, "group": -15, "order": 1, "olive": "0807d53b-8c86-5a76-1a22-e782324e0521", "loc": "-231.70994934089146 -195.2452337244941", "locationSpot": "1 1 0 0", "textStroke": "rgba(203, 28, 39, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "category": "wave", "text": "3\n", "level": 0, "key": "d2177084-644e-df2d-713d-0118c8e705f0", "group": -15, "desiredSize": "150 120", "order": 3, "shiText": "b83a34a9-c1c6-45eb-6282-058467ca4860", "xuText": "9fe41098-8d5a-e18f-b79a-b4693eacd39d", "angle": 330.08938180947, "loc": "-7.377546856414142 -254.50080895199886", "oliveType": "Wave", "textAlign": "center", "shiStroke": "rgba(14, 57, 157, 1)", "xuStroke": "rgba(203, 28, 39, 1)", "centerText": "72f26550-69b5-a662-0721-0b4cda0990ba", "textVisible": false, "isNew": null },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "b83a34a9-c1c6-45eb-6282-058467ca4860", "width": 150, "role": "shiText", "level": 0, "group": -15, "order": 3, "olive": "d2177084-644e-df2d-713d-0118c8e705f0", "loc": "88.66781136739651 -239.9564229677131", "locationSpot": "0 0 0 0", "textStroke": "rgba(14, 57, 157, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "9fe41098-8d5a-e18f-b79a-b4693eacd39d", "width": 150, "role": "xuText", "level": 0, "group": -15, "order": 3, "olive": "d2177084-644e-df2d-713d-0118c8e705f0", "loc": "28.331356592892348 -344.8397496943397", "locationSpot": "1 1 0 0", "textStroke": "rgba(203, 28, 39, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "category": "wave", "text": "2\n", "level": 0, "key": "d41e4e41-a411-5d7e-f3af-4a6f33844f24", "group": -15, "desiredSize": "150 120", "order": 2, "shiText": "72b2748b-26eb-1a96-d189-cdcf9cac96da", "xuText": "e62f5aa7-dd70-8da3-839f-ef9ee75819cd", "angle": 330.08938180947, "loc": "-137.3981998233061 -179.70355096707618", "oliveType": "Wave", "textAlign": "center", "shiStroke": "rgba(14, 57, 157, 1)", "xuStroke": "rgba(203, 28, 39, 1)", "centerText": "20b8db09-e2fc-626e-8c46-93f4aac18cf3", "textVisible": false, "isNew": null },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "72b2748b-26eb-1a96-d189-cdcf9cac96da", "width": 150, "role": "shiText", "level": 0, "group": -15, "order": 2, "olive": "d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc": "-101.68929637399955 -270.0424917094167", "locationSpot": "1 1 0 0", "textStroke": "rgba(14, 57, 157, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "e62f5aa7-dd70-8da3-839f-ef9ee75819cd", "width": 150, "role": "xuText", "level": 0, "group": -15, "order": 2, "olive": "d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc": "-41.35284159949536 -165.15916498279054", "locationSpot": "0 0 0 0", "textStroke": "rgba(203, 28, 39, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "category": "wave", "text": "4\n", "level": 0, "key": "12b23a5e-f760-510c-98bf-8641fa243525", "group": -15, "desiredSize": "150 120", "order": 4, "shiText": "3a6128fd-ab19-7743-8dfa-ed91408614bc", "xuText": "f0e799d3-7696-ddc0-ee92-2688c66aee6e", "angle": 330.08938180947, "loc": "122.64310611047785 -329.2980669369216", "oliveType": "Wave", "textAlign": "center", "shiStroke": "rgba(14, 57, 157, 1)", "xuStroke": "rgba(203, 28, 39, 1)", "centerText": "5246a24e-e36b-f22d-a8d1-e40cc73c2423", "textVisible": false, "isNew": null },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "3a6128fd-ab19-7743-8dfa-ed91408614bc", "width": 150, "role": "shiText", "level": 0, "group": -15, "order": 4, "olive": "12b23a5e-f760-510c-98bf-8641fa243525", "loc": "158.35200955978416 -419.63700767926196", "locationSpot": "1 1 0 0", "textStroke": "rgba(14, 57, 157, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "deletable": false, "text": "", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "f0e799d3-7696-ddc0-ee92-2688c66aee6e", "width": 150, "role": "xuText", "level": 0, "group": -15, "order": 4, "olive": "12b23a5e-f760-510c-98bf-8641fa243525", "loc": "218.68846433428854 -314.75368095263576", "locationSpot": "0 0 0 0", "textStroke": "rgba(203, 28, 39, 1)", "showBorder": true, "angle": 0, "minSize": "120 30", "textAlign": "center" },
+                { "text": "1\n", "minSize": "120 30", "deletable": false, "textAlign": "center", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "63300656-f2f0-8b1d-7bb7-e6a5b8c832b5", "width": 120, "role": "centerText", "level": 0, "group": -15, "order": 1, "visible": true, "layerName": "Foreground", "locationSpot": "0.5 0.5 0 0", "selectable": false, "olive": "0807d53b-8c86-5a76-1a22-e782324e0521", "loc": "-201.54172195363935 -142.80357036118116", "angle": 0 },
+                { "text": "2\n", "minSize": "120 30", "deletable": false, "textAlign": "center", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "20b8db09-e2fc-626e-8c46-93f4aac18cf3", "width": 120, "role": "centerText", "level": 0, "group": -15, "order": 2, "visible": true, "layerName": "Foreground", "locationSpot": "0.5 0.5 0 0", "selectable": false, "olive": "d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc": "-71.52106898674745 -217.60082834610375", "angle": 0 },
+                { "text": "3\n", "minSize": "120 30", "deletable": false, "textAlign": "center", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "72f26550-69b5-a662-0721-0b4cda0990ba", "width": 120, "role": "centerText", "level": 0, "group": -15, "order": 3, "visible": true, "layerName": "Foreground", "locationSpot": "0.5 0.5 0 0", "selectable": false, "olive": "d2177084-644e-df2d-713d-0118c8e705f0", "loc": "58.49958398014448 -292.3980863310264", "angle": 0 },
+                { "text": "4\n", "minSize": "120 30", "deletable": false, "textAlign": "center", "font": "18px 'Microsoft YaHei'", "category": "autoText", "key": "5246a24e-e36b-f22d-a8d1-e40cc73c2423", "width": 120, "role": "centerText", "level": 0, "group": -15, "order": 4, "visible": true, "layerName": "Foreground", "locationSpot": "0.5 0.5 0 0", "selectable": false, "olive": "12b23a5e-f760-510c-98bf-8641fa243525", "loc": "188.52023694703627 -367.1953443159489", "angle": 0 }
+            ],
+            "linkDataArray": []
+        }
+
+
+        myDiagram = new Trtd("myDiagramDiv", {
+            modelChangedListener: function (m) {
+                // console.log('from trtd:',m);
+            },
+            model: JSON.stringify(jsonData)
+        })
+
+    }
+    load();
+
+</script>
+<script src='./domjs.js'></script>
+
+</html>

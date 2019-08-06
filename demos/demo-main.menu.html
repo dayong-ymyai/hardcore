@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo2</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv{
+            width: 100%;
+            height: 500px;
+            /* margin: 50px auto; */
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+        <div class="context-menu" tabindex="1" style="left: 622px; top: 155px; display: none;">
+            <ul>
+                <li trtd_action="addFollower" style="display: block;"><a class="i18n" data-lang="insertsl">插入兄弟节点</a></li>
+                <li trtd_action="startNewSpiral" style="display: block;"><a class="i18n" data-lang="icn">插入子节点</a></li>
+                <li trtd_action="apiDuplicateNode" style="display: block;"><a class="i18n" data-lang="duplicateNode">复制节点</a></li>
+                <li trtd_action="apiDeleteSelection" style="display: block;"><a class="i18n" data-lang="remove">删除</a></li>
+                <li trtd_action="orderChildNode" style="display: block;"><a class="i18n" data-lang="ordernode">子节点编号</a></li>
+                <li trtd_action="clearOrderChildNode" style="display: block;"><a class="i18n" data-lang="clearordernode">取消子节点编号</a></li>
+                <li trtd_action="clearNodeTextMenu" style="display: none;"><a class="i18n" data-lang="emptynodetext">清空节点文本</a></li>
+                <li trtd_action="insertTianpanMenu" style="display: none;"><a class="i18n" data-lang="insertnodetianpan">插入天盘节点</a></li>
+                <li trtd_action="insertTextMenu" style="display: none;"><a class="i18n" data-lang="inserttext">插入文本</a></li>
+                <li trtd_action="locateRootNodeMenu" style="display: none;"><a class="i18n" data-lang="locaterootnode">定位根节点</a></li>
+                <li trtd_action="showAllNodesMenu" style="display: none;"><a class="i18n" data-lang="displayallnodes">显示所有节点</a></li>
+                <li trtd_action="fixPictureMenu" style="display: none;"><a class="i18n" data-lang="fixnode">固定节点</a></li>
+                <li trtd_action="activePictureMenu" style="display: none;"><a class="i18n" data-lang="cancelfix">取消固定</a></li>
+            </ul>
+            </div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='../lib/main.js'></script>
+
+<script>
+     var myDiagram;
+    function load(){
+        console.log('dddd',window.Trtd)
+       
+        if(myDiagram){
+            myDiagram.diagram == null;
+        }
+        var mainbox = document.getElementById('mainbox')
+        let contextMeluDom = mainbox.getElementsByClassName('context-menu')[0]
+        bindMenuEventListener(contextMeluDom)
+    
+        myDiagram = new Trtd("myDiagramDiv",{type:'tianpan',
+            modelChangedListener:function(m){
+                // console.log('from trtd:',m);
+            },
+            cxElement: contextMeluDom,
+            showContextMenuListener: function(diagram, node){
+                let liL = contextMeluDom.getElementsByTagName('li')
+                for(let i = 0; i < liL.length; i++){
+                    liL[i].style.display = 'block';
+                }
+                contextMeluDom.style.display = "block";
+            }
+        })
+
+        function  bindMenuEventListener(cxElement){
+            let menuList = cxElement.getElementsByTagName('li');
+            console.log("创建的自定义菜单需要绑定一些事件")
+            for(let i = 0; i < menuList.length; i++){
+                menuList[i].addEventListener('click', () => {
+                    let val = menuList[i].getAttribute('trtd_action');
+                    // cxcommand(this, val);
+                    console.log("menuList[i].addEventListener('click'")
+                    myDiagram.diagram.currentTool.stopTool();
+                    myDiagram[val]();
+                })
+            }
+        }
+        // var jsonData = { "class": "go.GraphLinksModel",
+        // "modelData": {"currentType":"dipan","currentThemeID":6,"isNewFile":true},
+        // "nodeDataArray": [
+        //     { "key": 1, "text": "中心主题", "fill": "#FF91E4", "category": "Root", "dangle": 0, "sweep": 360, "dradius": 0, "level": 0, "isparent": 2 ,"group":"g_1"}, 
+        //     { "key": 2, "text": "双击编辑内容", "level": 1, "category": "dipan", "parent": 1, "radius": 100, "fill": "#EBBAFF", "strokeWidth": 2, "stroke": "#767678", "loc": "90.93266739736603 -52.50000000000005", "dangle": -30, "sweep": 120, "dradius": 70, "next":3, "isparent": 5, "group": -5 }, 
+        //     { "key": 3, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 90, "dradius": 70, "sweep": 120, "parent": 1, "prev": 2, "strokeWidth": 2, "stroke": "#767678", "loc": "0 105", "next": 4, "isparent": 7, "group": -7 }, 
+        //     { "key": 4, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 210, "dradius": 70, "sweep": 120, "parent": 1, "prev": 3, "strokeWidth": 2, "stroke": "#767678", "loc": "-90.93266739736605 -52.500000000000014", "isparent": 9, "group": -9 }, 
+        //     { "isGroup": true, "parent": 2, "key": -5 }, 
+        //     { "key": 5, "text": "双击编辑内容", "level": 2, "parent": 2, "category": "dipan", "radius": 90, "group": -5, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "151.55444566227672 -87.50000000000007", "dangle": -30, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": 3, "key": -7 }, 
+        //     { "key": 7, "text": "双击编辑内容", "level": 2, "parent": 3, "category": "dipan", "istemp": false, "radius": 90, "group": -7, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "0 175", "dangle": 90, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": "4", "key": -9 }, 
+        //     { "key": 9, "text": "双击编辑内容", "level": 2, "parent": 4, "category": "dipan", "istemp": false, "radius": 90, "group": -9, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "-151.55444566227675 -87.50000000000001", "dangle": 210, "sweep": 120, "dradius": 140 }
+        // ], 
+        // "linkDataArray": [
+        //     { "from": 1, "to": "2", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "2", "to": "3", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "3", "to": "4", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 },
+        //     { "from": "2", "to": "5", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "3", "to": "7", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "4", "to": "9", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }
+        // ]}
+        
+
+        var jsonData = { "class": "go.GraphLinksModel",
+        "modelData": {"currentType":"tianpan", "currentThemeID":14, "backgroundColor":"#ffffff", "updatedAt":1551082268010},
+        "nodeDataArray": [ 
+        {"key":"1", "text":"双击编辑内容", "level":0, "font":"bold 18px 幼圆", "radius":120, "loc":"-11 10", "angle":0, "category":"0", "isparent":"6", "rad":24.000000000000075, "group":-2},
+        {"isGroup":true, "parent":"1", "fill":"rgba(0,0,0,0)", "stroke":"rgba(0,0,0,0)", "strokeWidth":0, "level":0, "key":-2, "loc":"25.150593479567732 -22.98617211483233", "angle":0},
+        {"key":"4", "text":"双击编辑内容", "level":1, "parent":"1", "prev":"5", "next":null, "radius":100, "group":-2, "fill":"white", "category":"0", "loc":"169.56420746759514 88.44126975836257", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":8.141592653589793},
+        {"key":"5", "text":"双击编辑内容", "level":1, "parent":"1", "prev":"6", "next":"4", "radius":100, "group":-2, "fill":"white", "category":"0", "loc":"56.74745730293259 -134.41361398802718", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":6.570796326794897},
+        {"key":"6", "text":"双击编辑内容", "level":1, "parent":"1", "next":"5", "radius":100, "group":-2, "fill":"white", "category":"0", "loc":"-119.26302050845959 -47.05364484750268", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5}
+        ],
+        "linkDataArray": [ 
+        {"from":"5", "to":"4", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":24.000000000000075, "unautoLink":false, "points":[102.34822358600314,-111.57570439899584,151.9650818080063,-76.99100731827403,179.6554457494845,-22.292278378940708,178.154587055016,38.16995210560946]},
+        {"from":"1", "to":"6", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "points":[-66.66289640290826,34.95279471400154,-87.15083103391736,33.02025317764116,-104.63769424372387,21.6710027070896,-114.74623530087388,3.7459481763448323], "curviness":24.000000000000075, "unautoLink":false},
+        {"from":"6", "to":"5", "level":1, "isTreeLink":true, "strokeWidth":2, "color":"black", "curviness":24.000000000000075, "unautoLink":false, "points":[-94.21804141416528,-91.48054010438918,-68.88678400455206,-121.74094450474583,-33.20007062197425,-139.45347059179767,6.218714934581499,-141.3307083688207]}
+        ]}
+        myDiagram.loadModel(JSON.stringify(jsonData));
+        
+        // console.log('tdData:', tdData);
+        // var tdData = myDiagram.getTdData();
+        // console.log('tdData:', tdData);
+
+        // myDiagram.downloadImage();
+        // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
+        // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
+
+
+
+        setTimeout(function(){
+            
+            // 双击画布创建的节点类型
+            myDiagram.addTextNode('新增文本节点');
+            myDiagram.insertPicture('http://www.365trtd.com/media/images/qipao/gpsmapicons02_看图王.png');
+
+        },1000)
+
+
+    }
+    load();
+</script>
+<script src='./domjs.js'></script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo2</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv{
+            width: 80%;
+            margin-left: 10%;
+            height: 500px;
+            /* margin: 50px auto; */
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='../lib/main.js'></script>
+
+<script>
+     var myDiagram;
+    function load(){
+        console.log('dddd',window.Trtd)
+       
+        if(myDiagram){
+            myDiagram.diagram == null;
+        }
+        myDiagram = new Trtd("myDiagramDiv",{type:'dipan',
+        readOnly: true,
+        diagramConfig:{
+            // mouseDragOver: null,
+            autoScale: go.Diagram.UniformToFill,
+            position: new go.Point(0,0),
+            // isEnabled: false,
+            padding: 0,
+           
+            scrollMargin: 0,
+            "animationManager.isEnabled": false,//停止动画
+            "undoManager.isEnabled": true,//可以撤销
+            // "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,//滚轮改变图表比例
+            allowDrop: false,
+            allowZoom:false,
+            isReadOnly: true,//禁止修改
+            hasVerticalScrollbar: false,//取消垂直滚动条
+            hasHorizontalScrollbar: false,
+            // scrollMode: go.Diagram.InfiniteScroll,
+            // scrollMode: go.Diagram.DocumentScroll,
+            "toolManager.hoverDelay": 100,
+            allowMove:false,
+            contextMenu :null,
+            allowDragOut:false,
+            click : null,
+            "panningTool.isEnabled":false
+        },
+            modelChangedListener:function(m){
+                // console.log('from trtd:',m);
+                console.log("m")
+                console.log(m.nodeDataArray)
+                for(var i = 0; i<m.nodeDataArray.length;i++){
+                    if(m.nodeDataArray[i].font === undefined){
+                        m.nodeDataArray[i].fill ="#f0e9de";
+                    }
+                }
+                var jsonData ={nodeDataArray:[]}
+                
+                jsonData.nodeDataArray.push.apply(jsonData.nodeDataArray,m.nodeDataArray);
+                console.log(jsonData)
+                myDiagram.loadModel(JSON.stringify(jsonData));
+                // myDiagram.loadModel(JSON.stringify(m.nodeDataArray));
+            },
+            nodeClickListener:(node)=>{
+            //   this.nodeDoubleClickListener(node)
+            console.log(node.data)
+          },
+            // showContextMenuListener: function(diagram, node){
+            //     console.log("showContextMenuListener", diagram, node)
+            // },
+            // hideContextMenuListener: function(diagram){
+            //     console.log("hideContextMenuListener", diagram)
+            // }
+        })
+        // var jsonData = { "class": "go.GraphLinksModel",
+        // "modelData": {"currentType":"dipan","currentThemeID":6,"isNewFile":true},
+        // "nodeDataArray": [
+        //     { "key": 1, "text": "中心主题", "fill": "#FF91E4", "category": "Root", "dangle": 0, "sweep": 360, "dradius": 0, "level": 0, "isparent": 2 ,"group":"g_1"}, 
+        //     { "key": 2, "text": "双击编辑内容", "level": 1, "category": "dipan", "parent": 1, "radius": 100, "fill": "#EBBAFF", "strokeWidth": 2, "stroke": "#767678", "loc": "90.93266739736603 -52.50000000000005", "dangle": -30, "sweep": 120, "dradius": 70, "next":3, "isparent": 5, "group": -5 }, 
+        //     { "key": 3, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 90, "dradius": 70, "sweep": 120, "parent": 1, "prev": 2, "strokeWidth": 2, "stroke": "#767678", "loc": "0 105", "next": 4, "isparent": 7, "group": -7 }, 
+        //     { "key": 4, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 210, "dradius": 70, "sweep": 120, "parent": 1, "prev": 3, "strokeWidth": 2, "stroke": "#767678", "loc": "-90.93266739736605 -52.500000000000014", "isparent": 9, "group": -9 }, 
+        //     { "isGroup": true, "parent": 2, "key": -5 }, 
+        //     { "key": 5, "text": "双击编辑内容", "level": 2, "parent": 2, "category": "dipan", "radius": 90, "group": -5, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "151.55444566227672 -87.50000000000007", "dangle": -30, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": 3, "key": -7 }, 
+        //     { "key": 7, "text": "双击编辑内容", "level": 2, "parent": 3, "category": "dipan", "istemp": false, "radius": 90, "group": -7, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "0 175", "dangle": 90, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": "4", "key": -9 }, 
+        //     { "key": 9, "text": "双击编辑内容", "level": 2, "parent": 4, "category": "dipan", "istemp": false, "radius": 90, "group": -9, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "-151.55444566227675 -87.50000000000001", "dangle": 210, "sweep": 120, "dradius": 140 }
+        // ], 
+        // "linkDataArray": [
+        //     { "from": 1, "to": "2", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "2", "to": "3", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "3", "to": "4", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 },
+        //     { "from": "2", "to": "5", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "3", "to": "7", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "4", "to": "9", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }
+        // ]}
+        
+
+        var jsonData ={ "class": "go.GraphLinksModel",
+                "modelData": {"currentType":"dipan", "currentThemeID":6, "isNewFile":false, "updatedAt":1542969061833},
+                "nodeDataArray": [ 
+                {"key":1, "text":"西藏工具组合系统", "textStroke":"#535e75","fill":"#dccdb4","font":"26px 幼圆","width":120, "category":"Root", "dangle":0, "sweep":360, "dradius":0, "level":0, "isparent":2, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan",  "currentThemeID":6, "strokeWidth":2, "stroke":"#dccdb4"},
+                {"key":2, "text":"2","textStroke":"#535e75", "level":1, "category":"dipan", "parent":1, "radius":100, "fill":"#f0e9de", "strokeWidth":2, "stroke":"#dccdb4", "loc":"129.90381056766574 -75.00000000000007", "dangle":-30, "sweep":120, "dradius":100, "next":3, "isparent":5,  "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+                {"key":3, "text":"3","textStroke":"#535e75", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"#f0e9de", "dangle":90, "dradius":100, "sweep":120, "parent":1, "prev":2, "strokeWidth":2, "stroke":"#dccdb4", "loc":"0 150", "next":4, "isparent":7, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+                {"key":4, "text":"4","textStroke":"#535e75", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"#f0e9de", "dangle":210, "dradius":100, "sweep":120, "parent":1, "prev":3, "strokeWidth":2, "stroke":"#dccdb4", "loc":"-129.9038105676658 -75.00000000000001", "isparent":9, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":180},
+              
+                {"key":5, "text":"5", "textStroke":"#535e75","level":2, "parent":2, "category":"dipan", "radius":90,  "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"216.5063509461096 -125.00000000000011", "dangle":-30, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+              
+                {"key":7, "text":"6","textStroke":"#535e75", "level":2, "parent":3, "category":"dipan", "istemp":false, "radius":90, "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"0 250", "dangle":90, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+          
+                // {"key":9, "text":"7","textStroke":"#535e75", "level":2, "parent":4, "category":"dipan",  "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"-216.50635094610965 -125.00000000000003"},
+               
+                ],
+               }
+        
+        myDiagram.loadModel(JSON.stringify(jsonData));
+        
+        // console.log('tdData:', tdData);
+        // var tdData = myDiagram.getTdData();
+        // console.log('tdData:', tdData);
+
+        // myDiagram.downloadImage();
+        // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
+        // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
+
+
+
+        
+        
+        // 双击画布创建的节点类型
+        // myDiagram.addTextNode('text');
+    }
+    load();
+</script>
+<script src='./domjs.js'></script>
+</html>

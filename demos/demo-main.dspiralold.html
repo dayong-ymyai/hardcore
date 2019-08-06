@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo2</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv{
+            width: 100%;
+            height: 900px;
+            /* margin: 50px auto; */
+            border: solid 1px #000;
+        }
+        #demo-btn {
+            position: fixed;
+            bottom: 120px;
+            cursor: pointer;
+            z-index: 9999;
+            right:20px;
+            width:100px;
+            height:30px;
+            display: block;
+            background-color: antiquewhite;
+            
+        }
+    </style>
+</head>
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+    </div>
+    <div id="demo-btn">下一页</div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='figure.js'></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/2.0.5/go.js'></script> -->
+
+<script src='../lib/main.js'></script>
+
+<script>
+     var myDiagram;
+    function load(){
+        console.log('dddd',window.Trtd)
+       
+        if(myDiagram){
+            myDiagram.diagram == null;
+        }
+     
+        // var jsonData = { "class": "go.GraphLinksModel",
+        // "modelData": {"currentType":"dipan","currentThemeID":6,"isNewFile":true},
+        // "nodeDataArray": [
+        //     { "key": 1, "text": "中心主题", "fill": "#FF91E4", "category": "Root", "dangle": 0, "sweep": 360, "dradius": 0, "level": 0, "isparent": 2 ,"group":"g_1"}, 
+        //     { "key": 2, "text": "双击编辑内容", "level": 1, "category": "dipan", "parent": 1, "radius": 100, "fill": "#EBBAFF", "strokeWidth": 2, "stroke": "#767678", "loc": "90.93266739736603 -52.50000000000005", "dangle": -30, "sweep": 120, "dradius": 70, "next":3, "isparent": 5, "group": -5 }, 
+        //     { "key": 3, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 90, "dradius": 70, "sweep": 120, "parent": 1, "prev": 2, "strokeWidth": 2, "stroke": "#767678", "loc": "0 105", "next": 4, "isparent": 7, "group": -7 }, 
+        //     { "key": 4, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 210, "dradius": 70, "sweep": 120, "parent": 1, "prev": 3, "strokeWidth": 2, "stroke": "#767678", "loc": "-90.93266739736605 -52.500000000000014", "isparent": 9, "group": -9 }, 
+        //     { "isGroup": true, "parent": 2, "key": -5 }, 
+        //     { "key": 5, "text": "双击编辑内容", "level": 2, "parent": 2, "category": "dipan", "radius": 90, "group": -5, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "151.55444566227672 -87.50000000000007", "dangle": -30, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": 3, "key": -7 }, 
+        //     { "key": 7, "text": "双击编辑内容", "level": 2, "parent": 3, "category": "dipan", "istemp": false, "radius": 90, "group": -7, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "0 175", "dangle": 90, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": "4", "key": -9 }, 
+        //     { "key": 9, "text": "双击编辑内容", "level": 2, "parent": 4, "category": "dipan", "istemp": false, "radius": 90, "group": -9, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "-151.55444566227675 -87.50000000000001", "dangle": 210, "sweep": 120, "dradius": 140 }
+        // ], 
+        // "linkDataArray": [
+        //     { "from": 1, "to": "2", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "2", "to": "3", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "3", "to": "4", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 },
+        //     { "from": "2", "to": "5", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "3", "to": "7", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "4", "to": "9", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }
+        // ]}
+        
+
+        var jsonData ={ "class": "go.GraphLinksModel",
+  "modelData": {"currentType":"tianpan", "type":"dspiral", "updatedAt":1562901137708},
+  "nodeDataArray": [ 
+{"category":"labelGroup", "group":-19, "role":"labelGroup", "isGroup":true, "level":0, "key":-145, "loc":"-278.9188527901979 -408.90380478777547", "deletable":false, "selectable":false},
+{"category":"waveGroup", "deletable":false, "haveTail":false, "oliveType":"Wave", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "oliveWidth":150, "oliveHeight":120, "isGroup":true, "level":0, "key":-15, "loc":"-394.41885279019795 -4.040932476073976", "angle":330.08938180947, "group":-19, "movable":false, "desiredSize":"1150 120", "textAngle":"horizontal", "centerTextAngle":"independent", "centerTextMode":"independent", "centerStroke":"rgba(9, 166, 9, 1)", "maxOlive":50},
+{"category":"axisGroup", "isGroup":true, "level":0, "key":-19, "loc":"-394.41885279019795 -4.040932476073976", "angle":0, "desiredSize":"300 150", "textStroke":"black", "textAlign":"center"},
+{"category":"line", "level":0, "key":-11, "loc":"-394.41885279019795 -4.040932476073976", "desiredSize":"1150 1", "width":1400, "height":1, "group":-15, "angle":330.08938180947, "role":"centerLine", "selectable":false, "stroke":"rgba(9, 166, 9, 1)"},
+{"category":"line", "level":0, "key":-8, "loc":"-394.41885279019795 -4.040932476073976", "desiredSize":"996.825006079505 10", "width":1400, "height":1, "angle":0, "group":-19, "role":"axisX", "selectable":false, "stroke":"#0e399d"},
+{"category":"line", "level":0, "key":-7, "loc":"-394.41885279019795 -4.040932476073976", "desiredSize":"573.4456445510724 10", "width":1400, "height":1, "angle":270, "group":-19, "role":"axisY", "selectable":false, "stroke":"#cb1c27"},
+{"text":"能量", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"-404.41885279019795 -577.4865770271462", "key":-12, "role":"axisYText", "locationSpot":"1 0.5 0 0", "group":-19, "movable":true},
+{"text":"今日计划", "role":"themeText", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"-437.9294316472133 -2.4089614263024828", "key":-13, "level":0, "group":-19, "locationSpot":"0.5 0 0 0", "movable":true, "width":300},
+{"text":"时间", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"602.4061532893071 -4.040932476073976", "key":-14, "role":"axisXText", "group":-19, "locationSpot":"0.5 0 0 0"},
+{"text":"实线：问题", "deletable":false, "fill":"rgba(14, 57, 157, 1)", "iconVisible":true, "locationSpot":"0 0 0 0", "textAlign":"start", "category":"autoText", "loc":"-352.4188527901979 -470.19828720965006", "key":-114, "role":"labelText1", "movable":true, "group":-145, "visible":true, "minSize":"120 30"},
+{"text":"虚线：规律", "deletable":false, "fill":"rgba(203, 28, 39, 1)", "iconVisible":true, "locationSpot":"0 0 0 0", "textAlign":"start", "category":"autoText", "loc":"-352.4188527901979 -429.3352989283999", "key":-116, "role":"labelText2", "movable":true, "group":-145, "visible":true, "minSize":"120 30"},
+{"text":"中线：实践", "deletable":false, "fill":"rgba(9, 166, 9, 1)", "iconVisible":true, "locationSpot":"0 0 0 0", "textAlign":"start", "category":"autoText", "loc":"-352.4188527901979 -388.4723106471507", "key":-117, "role":"labelText3", "movable":true, "group":-145, "visible":true, "minSize":"120 30"},
+{"category":"wave", "text":"1\n", "level":0, "key":"0807d53b-8c86-5a76-1a22-e782324e0521", "group":-15, "desiredSize":"150 120", "order":1, "shiText":"72c7866c-5fb7-2406-a01d-e5e30cff982f", "xuText":"fb893883-db72-2a9d-0aa4-ef3b2382aabe", "angle":330.08938180947, "loc":"-394.41885279019726 -4.040932476073976", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "centerText":"63300656-f2f0-8b1d-7bb7-e6a5b8c832b5", "textVisible":false, "isNew":null},
+{"deletable":false, "text":"职新网十元系统打不开", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"72c7866c-5fb7-2406-a01d-e5e30cff982f", "width":150, "role":"shiText", "level":0, "group":-15, "order":1, "olive":"0807d53b-8c86-5a76-1a22-e782324e0521", "loc":"-298.3734945663873 10.503453508211663", "locationSpot":"0 0 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center", "nloc":null},
+{"deletable":false, "text":"缓存", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"fb893883-db72-2a9d-0aa4-ef3b2382aabe", "width":150, "role":"xuText", "level":0, "group":-15, "order":1, "olive":"0807d53b-8c86-5a76-1a22-e782324e0521", "loc":"-358.7099493408915 -94.37987321841447", "locationSpot":"1 1 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"category":"wave", "text":"3\n", "level":0, "key":"d2177084-644e-df2d-713d-0118c8e705f0", "group":-15, "desiredSize":"150 120", "order":3, "shiText":"b83a34a9-c1c6-45eb-6282-058467ca4860", "xuText":"9fe41098-8d5a-e18f-b79a-b4693eacd39d", "angle":330.08938180947, "loc":"-134.37754685641414 -153.6354484459191", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "centerText":"72f26550-69b5-a662-0721-0b4cda0990ba", "textVisible":false, "isNew":null},
+{"deletable":false, "text":"迁移圆转域名", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"b83a34a9-c1c6-45eb-6282-058467ca4860", "width":150, "role":"shiText", "level":0, "group":-15, "order":3, "olive":"d2177084-644e-df2d-713d-0118c8e705f0", "loc":"-38.33218863260345 -139.09106246163347", "locationSpot":"0 0 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"deletable":false, "text":"备案新域名\n迁移备案信息", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"9fe41098-8d5a-e18f-b79a-b4693eacd39d", "width":150, "role":"xuText", "level":0, "group":-15, "order":3, "olive":"d2177084-644e-df2d-713d-0118c8e705f0", "loc":"-98.66864340710765 -243.97438918825958", "locationSpot":"1 1 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"category":"wave", "text":"2\n", "level":0, "key":"d41e4e41-a411-5d7e-f3af-4a6f33844f24", "group":-15, "desiredSize":"150 120", "order":2, "shiText":"72b2748b-26eb-1a96-d189-cdcf9cac96da", "xuText":"e62f5aa7-dd70-8da3-839f-ef9ee75819cd", "angle":330.08938180947, "loc":"-264.3981998233061 -78.83819046099654", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "centerText":"20b8db09-e2fc-626e-8c46-93f4aac18cf3", "textVisible":false, "isNew":null},
+{"deletable":false, "text":"准备圆转材料", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"72b2748b-26eb-1a96-d189-cdcf9cac96da", "width":150, "role":"shiText", "level":0, "group":-15, "order":2, "olive":"d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc":"-228.68929637399958 -169.17713120333707", "locationSpot":"1 1 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"e62f5aa7-dd70-8da3-839f-ef9ee75819cd", "width":150, "role":"xuText", "level":0, "group":-15, "order":2, "olive":"d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc":"-168.35284159949538 -64.2938044767109", "locationSpot":"0 0 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"category":"wave", "text":"4\n", "level":0, "key":"12b23a5e-f760-510c-98bf-8641fa243525", "group":-15, "desiredSize":"150 120", "order":4, "shiText":"3a6128fd-ab19-7743-8dfa-ed91408614bc", "xuText":"f0e799d3-7696-ddc0-ee92-2688c66aee6e", "angle":330.08938180947, "loc":"-4.356893889522212 -228.43270643084168", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "centerText":"5246a24e-e36b-f22d-a8d1-e40cc73c2423", "textVisible":false, "isNew":null},
+{"deletable":false, "text":"迁移圆转服务器", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"3a6128fd-ab19-7743-8dfa-ed91408614bc", "width":150, "role":"shiText", "level":0, "group":-15, "order":4, "olive":"12b23a5e-f760-510c-98bf-8641fa243525", "loc":"31.35200955978422 -318.7716471731821", "locationSpot":"1 1 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"deletable":false, "text":"ECS，OSS，数据库", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"f0e799d3-7696-ddc0-ee92-2688c66aee6e", "width":150, "role":"xuText", "level":0, "group":-15, "order":4, "olive":"12b23a5e-f760-510c-98bf-8641fa243525", "loc":"91.68846433428843 -213.888320446556", "locationSpot":"0 0 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"text":"1\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"63300656-f2f0-8b1d-7bb7-e6a5b8c832b5", "width":120, "role":"centerText", "level":0, "group":-15, "order":1, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"0807d53b-8c86-5a76-1a22-e782324e0521", "loc":"-328.54172195363935 -41.938209855101405", "angle":0},
+{"text":"2\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"20b8db09-e2fc-626e-8c46-93f4aac18cf3", "width":120, "role":"centerText", "level":0, "group":-15, "order":2, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"d41e4e41-a411-5d7e-f3af-4a6f33844f24", "loc":"-198.52106898674737 -116.73546784002399", "angle":0},
+{"text":"3\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"72f26550-69b5-a662-0721-0b4cda0990ba", "width":120, "role":"centerText", "level":0, "group":-15, "order":3, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"d2177084-644e-df2d-713d-0118c8e705f0", "loc":"-68.50041601985544 -191.53272582494657", "angle":0},
+{"text":"4\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"5246a24e-e36b-f22d-a8d1-e40cc73c2423", "width":120, "role":"centerText", "level":0, "group":-15, "order":4, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"12b23a5e-f760-510c-98bf-8641fa243525", "loc":"61.520236947036324 -266.3299838098691", "angle":0},
+{"category":"wave", "text":"", "level":0, "key":"7af60974-4b85-ca3e-be3e-bb5aa580868c", "group":-15, "desiredSize":"150 120", "order":5, "shiText":"0e6b24c2-315f-7801-2e20-f1e55bad6986", "xuText":"70d97a88-8ff1-3956-a505-be92dbdb551e", "angle":330.08938180947, "loc":"125.66375907736966 -303.2299644157643", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "textVisible":false, "isNew":null, "centerText":"b876bf05-80ba-23da-0e1d-2a6a8c217d03"},
+{"deletable":false, "text":"拓扑文字位置跑的bug", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"0e6b24c2-315f-7801-2e20-f1e55bad6986", "width":150, "role":"shiText", "level":0, "group":-15, "order":5, "olive":"7af60974-4b85-ca3e-be3e-bb5aa580868c", "loc":"221.70911730118036 -288.6855784314786", "locationSpot":"0 0 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "nloc":null},
+{"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"70d97a88-8ff1-3956-a505-be92dbdb551e", "width":150, "role":"xuText", "level":0, "group":-15, "order":5, "olive":"7af60974-4b85-ca3e-be3e-bb5aa580868c", "loc":"161.37266252667627 -393.56890515810466", "locationSpot":"1 1 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"text":"", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"b876bf05-80ba-23da-0e1d-2a6a8c217d03", "width":120, "role":"centerText", "level":0, "group":-15, "order":5, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"7af60974-4b85-ca3e-be3e-bb5aa580868c", "loc":"191.54088991392842 -341.12724179479164", "angle":0},
+{"category":"wave", "text":"", "level":0, "key":"f10ca12d-e32b-7b82-94fe-01ec6729e07e", "group":-15, "desiredSize":"150 120", "order":6, "shiText":"b737f328-9107-481c-f201-7f984529cd36", "xuText":"6438a360-5b67-a74f-bfd3-7d0b13d5437b", "angle":330.08938180947, "loc":"255.6844120442616 -378.0272224006867", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "textVisible":false, "isNew":null, "centerText":"b013e1f6-4354-24e0-1aa4-4b3ba2b15855"},
+{"deletable":false, "text":"添加橄榄bug", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"b737f328-9107-481c-f201-7f984529cd36", "width":150, "role":"shiText", "level":0, "group":-15, "order":6, "olive":"f10ca12d-e32b-7b82-94fe-01ec6729e07e", "loc":"291.3933154935681 -468.3661631430272", "locationSpot":"1 1 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30"},
+{"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"6438a360-5b67-a74f-bfd3-7d0b13d5437b", "width":150, "role":"xuText", "level":0, "group":-15, "order":6, "olive":"f10ca12d-e32b-7b82-94fe-01ec6729e07e", "loc":"351.7297702680722 -363.48283641640114", "locationSpot":"0 0 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+{"text":"", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"b013e1f6-4354-24e0-1aa4-4b3ba2b15855", "width":120, "role":"centerText", "level":0, "group":-15, "order":6, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"f10ca12d-e32b-7b82-94fe-01ec6729e07e", "loc":"321.56154288082024 -415.9244997797142", "angle":0},
+{"category":"wave", "text":"已提交，待测试", "level":0, "key":"51453a68-6c81-11ba-5068-2c0da5a240d2", "group":-15, "desiredSize":"150 120", "order":7, "shiText":"1f71c70a-f816-a764-04fc-ffed40a1b64a", "xuText":"18ae650d-fe38-8446-9c18-0872d880ed02", "angle":330.08938180947, "loc":"385.70506501115347 -452.82448038560926", "oliveType":"Wave", "textAlign":"center", "shiStroke":"rgba(14, 57, 157, 1)", "xuStroke":"rgba(203, 28, 39, 1)", "textVisible":false, "isNew":null, "centerText":"fe1e40b6-bb9b-6087-e426-e150825c2d88"},
+{"deletable":false, "text":"小程序添加四象", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"1f71c70a-f816-a764-04fc-ffed40a1b64a", "width":150, "role":"shiText", "level":0, "group":-15, "order":7, "olive":"51453a68-6c81-11ba-5068-2c0da5a240d2", "loc":"481.7504232349641 -438.2800944013237", "locationSpot":"0 0 0 0", "textStroke":"rgba(14, 57, 157, 1)", "showBorder":true, "angle":0, "minSize":"120 30"},
+{"deletable":false, "text":"从旧网站拿来模板", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"18ae650d-fe38-8446-9c18-0872d880ed02", "width":150, "role":"xuText", "level":0, "group":-15, "order":7, "olive":"51453a68-6c81-11ba-5068-2c0da5a240d2", "loc":"402.5381775399851 -552.3297283061223", "locationSpot":"1 1 0 0", "textStroke":"rgba(203, 28, 39, 1)", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center", "nloc":true},
+{"text":"已提交，待测试", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"fe1e40b6-bb9b-6087-e426-e150825c2d88", "width":120, "role":"centerText", "level":0, "group":-15, "order":7, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"51453a68-6c81-11ba-5068-2c0da5a240d2", "loc":"451.58219584771217 -490.7217577646367", "angle":0}
+ ],
+  "linkDataArray": []}
+
+        myDiagram = new Trtd("myDiagramDiv",{
+                    modelChangedListener:function(m){
+                        // console.log('from trtd:',m);
+                    },
+                    model: JSON.stringify(jsonData)
+                })
+        // myDiagram.loadModel(JSON.stringify(jsonData));
+        
+        // console.log('tdData:', tdData);
+        // var tdData = myDiagram.getTdData();
+        // console.log('tdData:', tdData);
+
+        // myDiagram.downloadImage();
+        // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
+        // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
+
+
+
+        setTimeout(function(){
+            
+            // 双击画布创建的节点类型
+            myDiagram.addTextNode('新增文本节点');
+            // myDiagram.insertPicture('http://ytyi.oss-cn-beijing.aliyuncs.com/test/cbian.png');
+
+        },1000)
+
+
+    }
+    load();
+
+    document.getElementById('demo-btn').addEventListener('click', () => {
+        // myDiagram.
+        console.log("demo-btn",myDiagram.diagram.viewportBounds,myDiagram.diagram.viewportBounds.offset(myDiagram.diagram.viewportBounds.width,0))
+        var bounds = myDiagram.diagram.viewportBounds.copy()
+        bounds.offset(bounds.width,0)
+        myDiagram.diagram.scrollToRect(bounds)
+    })
+</script>
+<script src='./domjs.js'></script>
+</html>

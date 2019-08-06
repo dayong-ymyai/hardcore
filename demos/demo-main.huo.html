@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>trtd core demo2</title>
+    <link rel="stylesheet" href="./menus.css">
+    <style>
+        .diagramdiv{
+            width: 100%;
+            height: 500px;
+            /* margin: 50px auto; */
+            border: solid 1px #000;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div style="position:relative;height:100%" class="mainbox" id="mainbox">
+        <div id="myDiagramDiv" class="diagramdiv"></div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<script src='../lib/main.js'></script>
+
+<script>
+     var myDiagram;
+    function load(){
+        console.log('dddd',window.Trtd)
+       
+        if(myDiagram){
+            myDiagram.diagram == null;
+        }
+        myDiagram = new Trtd("myDiagramDiv",{type:'huo',
+            modelChangedListener:function(m){
+                // console.log('from trtd:',m);
+            },
+            deleteCallback: function(data){
+                console.log("deleteCallback:",data)
+            }
+        })
+        
+        // var jsonData = { "class": "go.GraphLinksModel",
+        // "modelData": {"currentType":"dipan","currentThemeID":6,"isNewFile":true},
+        // "nodeDataArray": [
+        //     { "key": 1, "text": "中心主题", "fill": "#FF91E4", "category": "Root", "dangle": 0, "sweep": 360, "dradius": 0, "level": 0, "isparent": 2 ,"group":"g_1"}, 
+        //     { "key": 2, "text": "双击编辑内容", "level": 1, "category": "dipan", "parent": 1, "radius": 100, "fill": "#EBBAFF", "strokeWidth": 2, "stroke": "#767678", "loc": "90.93266739736603 -52.50000000000005", "dangle": -30, "sweep": 120, "dradius": 70, "next":3, "isparent": 5, "group": -5 }, 
+        //     { "key": 3, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 90, "dradius": 70, "sweep": 120, "parent": 1, "prev": 2, "strokeWidth": 2, "stroke": "#767678", "loc": "0 105", "next": 4, "isparent": 7, "group": -7 }, 
+        //     { "key": 4, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 210, "dradius": 70, "sweep": 120, "parent": 1, "prev": 3, "strokeWidth": 2, "stroke": "#767678", "loc": "-90.93266739736605 -52.500000000000014", "isparent": 9, "group": -9 }, 
+        //     { "isGroup": true, "parent": 2, "key": -5 }, 
+        //     { "key": 5, "text": "双击编辑内容", "level": 2, "parent": 2, "category": "dipan", "radius": 90, "group": -5, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "151.55444566227672 -87.50000000000007", "dangle": -30, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": 3, "key": -7 }, 
+        //     { "key": 7, "text": "双击编辑内容", "level": 2, "parent": 3, "category": "dipan", "istemp": false, "radius": 90, "group": -7, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "0 175", "dangle": 90, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": "4", "key": -9 }, 
+        //     { "key": 9, "text": "双击编辑内容", "level": 2, "parent": 4, "category": "dipan", "istemp": false, "radius": 90, "group": -9, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "-151.55444566227675 -87.50000000000001", "dangle": 210, "sweep": 120, "dradius": 140 }
+        // ], 
+        // "linkDataArray": [
+        //     { "from": 1, "to": "2", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "2", "to": "3", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "3", "to": "4", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 },
+        //     { "from": "2", "to": "5", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "3", "to": "7", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "4", "to": "9", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }
+        // ]}
+        
+
+        var jsonData = { "class": "go.GraphLinksModel",
+  "modelData": {"currentType":"tianpan", "updatedAt":1552038705247},
+  "nodeDataArray": [ 
+{"key":"8", "strokeWidth":5,selectable:false, "stroke":"black", "fill":"black", "level":1, "loc":"-750.81192458967428 24.75961991831798", "category":"8", "geometryValue":"fireWheel", "desiredSize":"870 880", "angle":0},
+{"key":"10", "text":"机会", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5, "loc":"-959.0975023834795 243.53478188420019"},
+{"key":"122", "text":"问题", role:"theme",movable:false, "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5, "loc":"-841.5153190741647 -294.85811159830916"}
+ ],
+  "linkDataArray": []}
+        myDiagram.loadModel(JSON.stringify(jsonData));
+        
+        // console.log('tdData:', tdData);
+        // var tdData = myDiagram.getTdData();
+        // console.log('tdData:', tdData);
+
+        // myDiagram.downloadImage();
+        // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
+        // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
+
+
+
+        setTimeout(function(){
+            
+            // 双击画布创建的节点类型
+            console.log("myDiagram.apiGetTheme()",myDiagram.apiGetTheme())
+            myDiagram.addTextNode('新增文本节点');
+            myDiagram.insertPicture('http://www.365trtd.com/media/images/qipao/gpsmapicons02_看图王.png');
+
+        },1000)
+
+
+    }
+    load();
+</script>
+<!-- <script src='./domjs.js'></script> -->
+</html>
