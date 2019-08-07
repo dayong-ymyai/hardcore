@@ -35,6 +35,12 @@ hardcore.js是基于gojs开发的一个图形库，仅用于公益目的，本�
 * [火花矩阵八维](https://dayong-ymyai.github.io/hardcore/demos/demo-main.yun.html)
 * [云盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.yunpan.html)
 * [天盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.tianpan.html)
+* [地盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.dipan.html)
+* [火盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.huo.html)
+* [水盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.shui.html)
+* [金盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.jin.html)
+* [三叶轮](https://dayong-ymyai.github.io/hardcore/demos/demo-main.wheel.html)
+* [常变](https://dayong-ymyai.github.io/hardcore/demos/demo-main.cbian.html)
 
 ## 安装
 
