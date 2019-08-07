@@ -4,83 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>trtd core demo11</title>
+    <title>云盘hardcore.js</title>
     <link rel="stylesheet" href="./menus.css">
     <style>
         .diagramdiv{
-            width: 1200px;
+            width: 100%;
             height: 900px;
-            /* background-color: darkcyan; */
-            margin: 0 auto;
             /* margin: 50px auto; */
-            /* border: solid 1px gray; */
-            border: none;
-            outline:0 none !important;
-            outline: none !important;
+            border: solid 1px #000;
         }
-       :input{
-           outline: 0;
-       }
+        #demo-btn {
+            position: fixed;
+            bottom: 120px;
+            cursor: pointer;
+            z-index: 9999;
+            right:20px;
+            width:100px;
+            height:30px;
+            display: block;
+            background-color: antiquewhite;
+            
+        }
     </style>
 </head>
 <body>
     <div style="position:relative;height:100%" class="mainbox" id="mainbox">
         <div id="myDiagramDiv" class="diagramdiv"></div>
-        <!-- <div id="savedModel"></div> -->
     </div>
+    <div id="demo-btn">下一页</div>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js'></script>
+<!-- <script src='go2.js'></script> -->
+<script src='figure.js'></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/2.0.5/go.js'></script> -->
+
 <script src='../lib/main.js'></script>
 
 <script>
-    // function change(v){
-    //     console.log(v)
-    // }
      var myDiagram;
     function load(){
         console.log('dddd',window.Trtd)
-        console.log(window.Trtd)
        
         if(myDiagram){
-            myDiagram.destroyNewInstance();
+            myDiagram.diagram == null;
         }
+     
+        // var jsonData = { "class": "go.GraphLinksModel",
+        // "modelData": {"currentType":"dipan","currentThemeID":6,"isNewFile":true},
+        // "nodeDataArray": [
+        //     { "key": 1, "text": "中心主题", "fill": "#FF91E4", "category": "Root", "dangle": 0, "sweep": 360, "dradius": 0, "level": 0, "isparent": 2 ,"group":"g_1"}, 
+        //     { "key": 2, "text": "双击编辑内容", "level": 1, "category": "dipan", "parent": 1, "radius": 100, "fill": "#EBBAFF", "strokeWidth": 2, "stroke": "#767678", "loc": "90.93266739736603 -52.50000000000005", "dangle": -30, "sweep": 120, "dradius": 70, "next":3, "isparent": 5, "group": -5 }, 
+        //     { "key": 3, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 90, "dradius": 70, "sweep": 120, "parent": 1, "prev": 2, "strokeWidth": 2, "stroke": "#767678", "loc": "0 105", "next": 4, "isparent": 7, "group": -7 }, 
+        //     { "key": 4, "text": "双击编辑内容", "color": "yellow", "level": 1, "category": "dipan", "radius": 100, "fill": "#EBBAFF", "dangle": 210, "dradius": 70, "sweep": 120, "parent": 1, "prev": 3, "strokeWidth": 2, "stroke": "#767678", "loc": "-90.93266739736605 -52.500000000000014", "isparent": 9, "group": -9 }, 
+        //     { "isGroup": true, "parent": 2, "key": -5 }, 
+        //     { "key": 5, "text": "双击编辑内容", "level": 2, "parent": 2, "category": "dipan", "radius": 90, "group": -5, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "151.55444566227672 -87.50000000000007", "dangle": -30, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": 3, "key": -7 }, 
+        //     { "key": 7, "text": "双击编辑内容", "level": 2, "parent": 3, "category": "dipan", "istemp": false, "radius": 90, "group": -7, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "0 175", "dangle": 90, "sweep": 120, "dradius": 140 }, 
+        //     { "isGroup": true, "parent": "4", "key": -9 }, 
+        //     { "key": 9, "text": "双击编辑内容", "level": 2, "parent": 4, "category": "dipan", "istemp": false, "radius": 90, "group": -9, "fill": "#B4B0FC", "strokeWidth": 2, "stroke": "#767678", "loc": "-151.55444566227675 -87.50000000000001", "dangle": 210, "sweep": 120, "dradius": 140 }
+        // ], 
+        // "linkDataArray": [
+        //     { "from": 1, "to": "2", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "2", "to": "3", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 }, 
+        //     { "from": "3", "to": "4", "level": 1, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 4 },
+        //     { "from": "2", "to": "5", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "3", "to": "7", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }, 
+        //     { "from": "4", "to": "9", "level": 2, "color": "blue", "category": "dipan", "isTreeLink": true, "strokeWidth": 2.5 }
+        // ]}
         
-        var jsonData = {
-            "nodeDataArray": [ 
-            {"key": guid(),"category": "yunpanx","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4,2],"strokeWidth":2,"loc": "0 -200"},
-            {"key": guid(),"category": "ytext" ,"text":"维度1","textStroke":"#666666","loc": "0 -200","dir": "right"}, 
-            {"key": guid(),"category": "yunpanx","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "0 -400"},
-            {"key": guid(),"category": "ytext" ,"text":"维度2","textStroke":"#666666","loc": "0 -400","dir": "right"}, 
-            {"key": guid(),"category": "yunpanx","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "0 -600" },
-            {"key": guid(),"category": "ytext" ,"text":"维度3","textStroke":"#666666","loc": "0 -600","dir": "right"}, 
-            {"key": guid(),"category": "yunpany","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "200 0" },
-            {"key": guid(),"category": "xtext" ,"text":"维度1","margin":10,"textStroke":"#666666","loc": "200 0","dir": "top"}, 
-            {"key": guid(),"category": "yunpany","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "400 0" },
-            {"key": guid(),"category": "xtext" ,"text":"维度2","margin":10,"textStroke":"#666666","loc": "400 0","dir": "top"}, 
-            {"key": guid(),"category": "yunpany","stroke":"#8799c4","geometryString":"M 0 0 L 0 800","strokeDashArray": [4, 2],"strokeWidth":2,"loc": "600 0" },
-            {"key": guid(),"category": "xtext" ,"text":"维度3","margin":10,"textStroke":"#666666","loc": "600 0","dir": "top"},
-            {"key": guid(),"category": "x" ,"strokeWidth":2,"stroke":"#8799c4","height":810,"angle": 90,"loc": "0 0"},
-            {"key": guid(),"category": "y","strokeWidth":2,"stroke":"#8799c4","height":810,"loc": "0 0"},
-            {"key": guid(),"category": "LogicXor","strokeWidth":2,"stroke":"#8799c4","loc": "810 10"},
-            {"key": guid(),"category": "LogicXor","strokeWidth":2,"stroke":"#8799c4","loc": "-25 -825"}
-            ]
-        }
-        myDiagram = new Trtd("myDiagramDiv",{type:'yunpan',
-            modelChangedListener:function(m){
-                // console.log('from trtd:',m);
-            }
-            
-        })
-        // console.log(JSON.stringify(jsonData))
-        myDiagram.loadModel(JSON.stringify(jsonData));
 
-        function guid() {
-            function S4() {
-                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-            }
-            return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-        }
+        var jsonData = { "class": "go.GraphLinksModel",
+  "modelData": {"currentType":"tianpan", "type":"dspiral", "updatedAt":1565155910003},
+  "nodeDataArray": [ 
+{"category":"yunpanGroup", "zOrder":15, "autoSnapText":true, "snapType":"grid", "gridWidth":120, "gridHeight":120, "width":1000, "height":800, "layerName":"background", "isGroup":true, "level":0, "key":-19, "loc":"-1411.5783089888712 -1110.4716999798711", "angle":0, "desiredSize":"300 150", "shapeStrokes":[ "RGBA(237,28,36,0.3)","RGBA(255,192,0,0.3)","RGBA(255,255,0,0.3)","RGBA(146,208,80,0.3)","RGBA(192,200,250,0.3)","RGBA(255,178,125,0.3)","RGBA(209,110,210,0.3)","RGBA(248,163,62,0.3)","RGBA(248,161,164,0.3)","RGBA(244,115,120,0.3)" ], "beginSpark":"line", "showShape":true},
+{"category":"line", "level":0, "key":-16, "loc":"-1411.5783089888712 -1230.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":1, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true},
+{"category":"line", "level":0, "key":-8, "loc":"-1411.5783089888712 -1110.4716999798711", "desiredSize":"1110 10", "width":1400, "height":1, "angle":0, "group":-19, "role":"axisX", "selectable":false, "stroke":"#0e399d"},
+{"category":"line", "level":0, "key":-7, "loc":"-1411.5783089888712 -1110.4716999798711", "desiredSize":"870 10", "width":1400, "height":1, "angle":270, "group":-19, "role":"axisY", "selectable":false, "stroke":"#cb1c27"},
+{"text":"能量", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"-1411.5783089888712 -2000.4716999798711", "key":-12, "role":"axisYText", "locationSpot":"0.5 1 0 0", "group":-19, "movable":true},
+{"text":"", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"-1430.3926665904555 -1099.9866908896215", "key":-13, "level":0, "role":"themeText", "group":-19, "locationSpot":"0.5 0 0 0", "movable":true, "width":300},
+{"text":"时间", "deletable":false, "font":"24px 'Microsoft YaHei'", "category":"autoText", "loc":"-281.5783089888712 -1110.4716999798711", "key":-14, "role":"axisXText", "group":-19, "locationSpot":"0 0.5 0 0"},
+{"text":"主题", "font":"24px 'Microsoft YaHei'", "deletable":false, "role":"freeText", "textStroke":"black", "iconVisible":false, "locationSpot":"0.5 0.5 0 0", "textAlign":"center", "category":"autoText", "loc":"-1449.4113645444268 -1082.1619777576493", "movable":true, "group":-19, "key":-64, "minSize":"60 50", "strokeDashArray":"[10, 5]", "height":null, "width":null, "subRole":"themeText"},
+{"text":"维度1", "dimX":0, "dimY":1, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1230.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-68},
+{"category":"line", "level":0, "loc":"-1291.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":1, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-32},
+{"text":"维度", "dimX":1, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1291.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-33},
+{"category":"line", "level":0, "loc":"-1171.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":2, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-30},
+{"text":"维度2", "dimX":2, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1171.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-31},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1350.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":2, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-20},
+{"text":"维度2", "dimX":0, "dimY":2, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1350.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-21},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1470.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":3, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-18},
+{"text":"维度3", "dimX":0, "dimY":3, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1470.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-22},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1590.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":4, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-23},
+{"text":"维度4", "dimX":0, "dimY":4, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1590.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-24},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1710.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":5, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-25},
+{"text":"维度5", "dimX":0, "dimY":5, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1710.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-26},
+{"category":"line", "level":0, "loc":"-1051.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":3, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-27},
+{"text":"维度3", "dimX":3, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1051.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-28},
+{"category":"line", "level":0, "loc":"-931.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":4, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-29},
+{"text":"维度4", "dimX":4, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-931.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-34},
+{"category":"line", "level":0, "loc":"-811.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":5, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-35},
+{"text":"维度5", "dimX":5, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-811.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-36},
+{"category":"line", "level":0, "loc":"-691.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":6, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-37},
+{"text":"维度6", "dimX":6, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-691.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-38},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1830.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":6, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-39},
+{"text":"维度6", "dimX":0, "dimY":6, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1830.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-40},
+{"category":"line", "level":0, "loc":"-571.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":7, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-41},
+{"text":"维度7", "dimX":7, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-571.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-42},
+{"category":"line", "level":0, "loc":"-1411.5783089888712 -1950.4716999798711", "desiredSize":"1100 10", "width":1400, "height":1, "group":-19, "angle":0, "role":"horizontalLine", "order":7, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-43},
+{"text":"维度7", "dimX":0, "dimY":7, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"1 0.5 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-1421.5783089888712 -1950.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-44},
+{"category":"line", "level":0, "loc":"-451.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":8, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-45},
+{"text":"维度8", "dimX":8, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-451.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-46},
+{"category":"line", "level":0, "loc":"-331.5783089888712 -1110.4716999798711", "desiredSize":"860 10", "width":1400, "height":1, "group":-19, "angle":270, "role":"verticalLine", "order":9, "selectable":false, "stroke":"rgba(0,0,0,0.3)", "showArrow":false, "showEndArrow":false, "strokeDashArray":"[15,10]", "strokeWidth":1, "deletable":true, "key":-48},
+{"text":"维度9", "dimX":9, "dimY":0, "deletable":true, "font":"20px 'Microsoft YaHei'", "role":"freeText", "fill":"black", "iconVisible":false, "locationSpot":"0.5 0 0 0", "minSize":"60 50", "width":null, "textAlign":"center", "category":"autoText", "loc":"-331.5783089888712 -1110.4716999798711", "movable":true, "group":-19, "strokeDashArray":"[10, 5]", "subRole":"dimText", "height":null, "key":-49}
+ ],
+  "linkDataArray": []}
 
+        myDiagram = new Trtd("myDiagramDiv",{
+                    modelChangedListener:function(m){
+                        // console.log('from trtd:',m);
+                    },
+                    model: JSON.stringify(jsonData)
+                })
+        // myDiagram.loadModel(JSON.stringify(jsonData));
+        
+        // console.log('tdData:', tdData);
         // var tdData = myDiagram.getTdData();
         // console.log('tdData:', tdData);
 
@@ -88,13 +134,27 @@
         // console.log('myDiagram.downloadImage():', myDiagram.downloadImage())
         // document.getElementsByTagName('img')[0].setAttribute('src', myDiagram.downloadImage())
 
-        
-        
-        // 双击画布创建的节点类型
-    
-        // myDiagram.doubleClickCreateNodeType('0');
+
+
+        setTimeout(function(){
+            
+            // 双击画布创建的节点类型
+            myDiagram.addTextNode('新增文本节点');
+            // myDiagram.insertPicture('http://ytyi.oss-cn-beijing.aliyuncs.com/test/cbian.png');
+
+        },1000)
+
+
     }
     load();
+
+    document.getElementById('demo-btn').addEventListener('click', () => {
+        // myDiagram.
+        console.log("demo-btn",myDiagram.diagram.viewportBounds,myDiagram.diagram.viewportBounds.offset(myDiagram.diagram.viewportBounds.width,0))
+        var bounds = myDiagram.diagram.viewportBounds.copy()
+        bounds.offset(bounds.width,0)
+        myDiagram.diagram.scrollToRect(bounds)
+    })
 </script>
 <script src='./domjs.js'></script>
 </html>
