@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>trtd core demo2</title>
+    <title>地盘hardcore.js</title>
     <link rel="stylesheet" href="./menus.css">
     <style>
         .diagramdiv{
@@ -69,28 +69,17 @@
         
 
         var jsonData ={ "class": "go.GraphLinksModel",
-                "modelData": {"currentType":"dipan", "currentThemeID":6, "isNewFile":false, "updatedAt":1542969061833},
-                "nodeDataArray": [ 
-                {"key":1, "text":"333", "textStroke":"#535e75","fill":"#dccdb4","font":"26px 幼圆","width":120, "category":"Root", "dangle":0, "sweep":360, "dradius":0, "level":0, "isparent":2, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan",  "currentThemeID":6, "strokeWidth":2, "stroke":"#dccdb4"},
-                {"key":2, "text":"2","textStroke":"#535e75", "level":1, "category":"dipan", "parent":1, "radius":100, "fill":"#f0e9de", "strokeWidth":2, "stroke":"#dccdb4", "loc":"129.90381056766574 -75.00000000000007", "dangle":-30, "sweep":120, "dradius":100, "next":3, "isparent":5,  "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
-                {"key":3, "text":"3","textStroke":"#535e75", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"#f0e9de", "dangle":90, "dradius":100, "sweep":120, "parent":1, "prev":2, "strokeWidth":2, "stroke":"#dccdb4", "loc":"0 150", "next":4, "isparent":7, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
-                {"key":4, "text":"4","textStroke":"#535e75", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"#f0e9de", "dangle":210, "dradius":100, "sweep":120, "parent":1, "prev":3, "strokeWidth":2, "stroke":"#dccdb4", "loc":"-129.9038105676658 -75.00000000000001", "isparent":9, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":180},
-              
-                {"key":5, "text":"5", "textStroke":"#535e75","level":2, "parent":2, "category":"dipan", "radius":90,  "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"216.5063509461096 -125.00000000000011", "dangle":-30, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
-              
-                {"key":7, "text":"6","textStroke":"#535e75", "level":2, "parent":3, "category":"dipan", "istemp":false, "radius":90, "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"0 250", "dangle":90, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
-          
-                {"key":9, "text":"7","textStroke":"#535e75", "level":2, "parent":4, "category":"dipan", "istemp":false, "radius":90,  "fill":"#f8f5f0", "strokeWidth":2, "stroke":"#dccdb4", "loc":"-216.50635094610965 -125.00000000000003", "dangle":210, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":180},
-               
-                ],
-                "linkDataArray": [ 
-                {"from":1, "to":"2", "level":1, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":4},
-                {"from":"2", "to":"3", "level":1, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":4},
-                {"from":"3", "to":"4", "level":1, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":4},
-                {"from":"2", "to":"5", "level":2, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":2.5},
-                {"from":"3", "to":"7", "level":2, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":2.5},
-                {"from":"4", "to":"9", "level":2, "color":"black", "category":"dipan", "isTreeLink":true, "strokeWidth":2.5}
-        ]}
+            "modelData": {"currentType":"dipan", "type":"dipan", "currentThemeID":6, "isNewFile":false, "updatedAt":1565159351216},
+            "nodeDataArray": [ 
+            {"key":1, "text":"中心主题", "fill":"white", "category":"Root", "dangle":0, "sweep":360, "dradius":0, "level":0, "isparent":2, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "currentThemeID":6, "strokeWidth":2, "stroke":"black", "role":"theme", "font":"bold 18px 幼圆"},
+            {"key":2, "text":"双击编辑内容", "level":1, "category":"dipan", "parent":1, "radius":100, "fill":"white", "strokeWidth":2, "stroke":"black", "loc":"129.90381056766574 -75.00000000000007", "dangle":-30, "sweep":120, "dradius":100, "next":3, "isparent":5, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+            {"key":3, "text":"双击编辑内容", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"white", "dangle":90, "dradius":100, "sweep":120, "parent":1, "prev":2, "strokeWidth":2, "stroke":"black", "loc":"0 150", "next":4, "isparent":7, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+            {"key":4, "text":"双击编辑内容", "color":"yellow", "level":1, "category":"dipan", "radius":100, "fill":"white", "dangle":210, "dradius":100, "sweep":120, "parent":1, "prev":3, "strokeWidth":2, "stroke":"black", "loc":"-129.9038105676658 -75.00000000000001", "isparent":9, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":180},
+            {"key":5, "text":"双击编辑内容", "level":2, "parent":2, "category":"dipan", "radius":90, "fill":"white", "strokeWidth":2, "stroke":"black", "loc":"216.5063509461096 -125.00000000000011", "dangle":-30, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+            {"key":7, "text":"双击编辑内容", "level":2, "parent":3, "category":"dipan", "istemp":false, "radius":90, "fill":"white", "strokeWidth":2, "stroke":"black", "loc":"0 250", "dangle":90, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":0},
+            {"key":9, "text":"双击编辑内容", "level":2, "parent":4, "category":"dipan", "istemp":false, "radius":90, "fill":"white", "strokeWidth":2, "stroke":"black", "loc":"-216.50635094610965 -125.00000000000003", "dangle":210, "sweep":120, "dradius":200, "layerThickness":100, "tdDipanTextAngle":"xuanzhuan", "textAngle":180}
+            ],
+            "linkDataArray": []}
         
         myDiagram.loadModel(JSON.stringify(jsonData));
         
