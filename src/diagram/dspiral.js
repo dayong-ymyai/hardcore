@@ -1190,6 +1190,7 @@ class Trtd extends Trtd_tianpan {
     }
 
 
+    
     // 切换为螺旋形状
     apiSwitchToWave(){
         var node = this.diagram.selection.first()
