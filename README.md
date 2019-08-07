@@ -1,35 +1,35 @@
-## description
+## 简介
 
 hardcore.js(硬核)是一个用于创建各种可视化图形的javascript库，使用canvas，基于商用图形库[gojs](https://gojs.net/latest/index.html)
 
 
-## Table of Contents
+## 目录
 
-- [description](#description)
-- [Table of Contents](#table-of-contents)
-- [Declare](#declare)
-- [Features](#features)
-- [Install](#install)
-- [Introduction](#introduction)
-- [Getting started](#getting-started)
-- [Scripts](#scripts)
-- [Api docs](#api-docs)
-- [Readings](#readings)
-- [Debugging and reporting problems](#debugging-and-reporting-problems)
-- [Contributing](#contributing)
+- [简介](#%e7%ae%80%e4%bb%8b)
+- [目录](#%e7%9b%ae%e5%bd%95)
+- [声明](#%e5%a3%b0%e6%98%8e)
+- [特点](#%e7%89%b9%e7%82%b9)
+- [安装](#%e5%ae%89%e8%a3%85)
+- [介绍](#%e4%bb%8b%e7%bb%8d)
+- [起步](#%e8%b5%b7%e6%ad%a5)
+- [常用命令](#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4)
+- [Api文档](#api%e6%96%87%e6%a1%a3)
+- [扩展阅读](#%e6%89%a9%e5%b1%95%e9%98%85%e8%af%bb)
+- [调试与提交bug](#%e8%b0%83%e8%af%95%e4%b8%8e%e6%8f%90%e4%ba%a4bug)
+- [如何参与项目](#%e5%a6%82%e4%bd%95%e5%8f%82%e4%b8%8e%e9%a1%b9%e7%9b%ae)
 - [Todo](#todo)
 - [License](#license)
 
-## Declare
+## 声明
 hardcore.js是基于gojs开发的一个图形库，仅用于公益目的，本项目中不包括gojs库。任何使用者，如果将本项目用于商业目的，都需要去[gojs](https://gojs.net/latest/index.html)获取商业授权。由于不当使用该项目引起的任何纠纷本项目概不负责。
 
-## Features
+## 特点
 * 可以很方便地绘制拓扑图，火花矩阵图，常变图等多种图形
 * 数据驱动图形，开发者可以通过修改json数据来方便地增删图形以及改变图形样式
 * 对外提供来各种接口，开发者可以自定义各种交互操作触发的行为
 * 基于功能强大的绘图库[gojs](https://gojs.net/latest/index.html)
 
-## Install
+## 安装
 
 可以通过引入js文件
 ```html
@@ -54,7 +54,7 @@ $ npm install hardcord
 ```
 
 
-## Introduction
+## 介绍
 
 hardcore.js是一个JavaScript图形库，底层是基于canvas，使用gojs作为底层绘图引擎，该项目开源协议为Apache-2.0。
 
@@ -62,7 +62,7 @@ hardcore.js是一个JavaScript图形库，底层是基于canvas，使用gojs作�
 [查看大图](docs/images/trtd_core.png)
 ![text](docs/images/trtd_core.png)
 
-Here is an example on how to use it:
+下面是一个简单的例子:
 
 在html文件里引入gojs和hardcord.js
 ```html
@@ -211,38 +211,38 @@ var myDiagram;
 上面的完整代码请查看[demos/demo-main.dspiral.html](demos/demo-main.dspiral.html)
 
 
-## Getting started
+## 起步
 
-1. Development mode
+1. 开发
   * git clone下来代码后 `npm install` 安装所有依赖模块
-  * Having all the dependencies installed run `npm run dev`. This command will generate an non-minified version of your library and will run a watcher so you get the compilation on file change.
+  * 然后执行 `npm run dev`. 将会在lib目录下生成main.js，同时会自动监听代码变更实时更新main.js。
   * 打开demos下面[demos/demo-main.dspiral.html](demos/demo-main.dspiral.html)可以查看当前更改代码的结果，更改代码需要刷新页面才能生效。
-2. Build your library
-  * Run `npm install` to get the project's dependencies
-  * Run `npm run build` to produce minified version of your library.
+2. 打包
+  * `npm install` 安装依赖
+  * `npm run build` 会在lib下生成hardcore.min.js
   * 可以将生成的lib目录下的文件放到其他项目代码里引入
-3. Running the tests
+3. 测试
   * Run `yarn test` or `npm run test`
 
-## Scripts
+## 常用命令
 
 * `npm run build` - produces production version of your library under the `lib` folder
 * `npm run dev` - produces development version of your library and runs a watcher
 * `npm run test` - well ... it runs the tests :)
 * `npm run publish` - 发布到线上cdn，需要配置文件
 
-## Api docs
+## Api文档
 初始化通过myDiagram = new Trtd()初始化myDiagram后，可以通过myDiagram.__trtd访问hardcore提供的api，来操作图形
 
-## Readings
+## 扩展阅读
 
 * [Start your own JavaScript library using webpack and ES6](http://krasimirtsonev.com/blog/article/javascript-library-starter-using-webpack-es6)
 * [建议阅读gojs官方教程](https://gojs.net/latest/intro/index.html)
 
-## Debugging and reporting problems
+## 调试与提交bug
  todo
 
-## Contributing
+## 如何参与项目
 This project welcomes contributions from the community. Contributions are
 accepted using GitHub pull requests. If you're not familiar with making
 GitHub pull requests, please refer to the
@@ -260,6 +260,7 @@ For a good pull request, we ask you provide the following:
    appropriate documentation additions in the `Readme.md` file as well.
 5. To help ensure that your code is similar in style to the existing code,
    run the command `npm run lint` and fix any displayed issues.
+   
 ## Todo
   1. 国际化
   2. 升级gojs版本到2.0以上
@@ -271,4 +272,4 @@ For a good pull request, we ask you provide the following:
   8. 补充npm的引入方式
 
 ## License
- Apache-2.0
+ [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
