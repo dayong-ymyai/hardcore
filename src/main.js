@@ -1,13 +1,5 @@
 'use strict';
 
-var typeList = webpack_typeList
-var version = webpack_typeList
-console.log('typeList:',version)
-var typeModules = {}
-// for(var i=0;i<typeList.length;i++){
-//     typeModules[typeList[i]] = require(`./diagram/${typeList[i]}`)
-// }
-
 typeModules['tianpan'] = require(`./diagram/tianpan`)
 typeModules['dipan'] = require(`./diagram/dipan`)
 typeModules['jin'] = require(`./diagram/jin`)
