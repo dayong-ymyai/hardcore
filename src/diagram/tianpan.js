@@ -781,11 +781,13 @@ class Trtd  extends TRTD_BASE {
             var intoLink = node.findLinksInto().first();
             var tmpNodeData = {};
             // _.extendOwn(tmpNodeData, node.data);
-            tmpNodeData = helpers.extend(tmpNodeData, node.data);
+            // tmpNodeData = helpers.extend(tmpNodeData, node.data);
+            tmpNodeData = JSON.parse(JSON.stringify(node.data));
             var oldlink = node.findLinksInto().first() ? node.findLinksInto().first().data : null;
             var link = {};
             // link = _.extendOwn(link, oldlink);
-            link = helpers.extend(link, oldlink);
+            // link = helpers.extend(link, oldlink);
+            link = JSON.parse(JSON.stringify(oldlink))
             delete link.__gohashid;
             delete link.points;
             if (node.data.group) {
@@ -1011,7 +1013,10 @@ class Trtd  extends TRTD_BASE {
         if (nextlink != null) {
             var copyLink = {};
             // _.extendOwn(copyLink, nextlink.data);
-            copyLink = helpers.extend(copyLink, nextlink.data);
+            // copyLink = helpers.extend(copyLink, nextlink.data);
+            delete nextlink.data.points
+            copyLink = JSON.parse(JSON.stringify(nextlink.data));
+
             delete copyLink.__gohashid;
             delete copyLink.points;
             copyLink.from = follower.key;
@@ -1306,7 +1311,9 @@ class Trtd  extends TRTD_BASE {
         if (firstLink != null) {
             var copyLink = {};
             // _.extendOwn(copyLink, firstLink.data);
-            copyLink = helpers.extend(copyLink, firstLink.data);
+            // copyLink = helpers.extend(copyLink, firstLink.data);
+            delete firstLink.data.points
+            copyLink = JSON.parse(JSON.stringify(firstLink.data))
             delete copyLink.__gohashid;
             delete copyLink.points;
             copyLink.from = follower.key;

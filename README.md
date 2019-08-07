@@ -31,7 +31,10 @@ hardcore.js是基于gojs开发的一个图形库，仅用于公益目的，本�
 * 基于功能强大的绘图库[gojs](https://gojs.net/latest/index.html)
 
 ## 在线例子
-* [橄榄拓扑](demos/demo-main.dspiral.html)
+* [橄榄拓扑](https://dayong-ymyai.github.io/hardcore/demos/demo-main.dspiral.html)
+* [火花矩阵八维](https://dayong-ymyai.github.io/hardcore/demos/demo-main.yun.html)
+* [云盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.yunpan.html)
+* [天盘](https://dayong-ymyai.github.io/hardcore/demos/demo-main.tianpan.html)
 
 ## 安装
 
