@@ -19,8 +19,8 @@ hardcore.js(硬核)是一个用于创建各种可视化图形的javascript库，
     - [addCbian(options) - 添加常变](#addcbianoptions---%e6%b7%bb%e5%8a%a0%e5%b8%b8%e5%8f%98)
     - [addAxisGroup(options) - 插入拓扑](#addaxisgroupoptions---%e6%8f%92%e5%85%a5%e6%8b%93%e6%89%91)
     - [addWater() - 插入水盘](#addwater---%e6%8f%92%e5%85%a5%e6%b0%b4%e7%9b%98)
-    - [resetZoom(value) - 控制画布缩放比例，参考scale](#resetzoomvalue---%e6%8e%a7%e5%88%b6%e7%94%bb%e5%b8%83%e7%bc%a9%e6%94%be%e6%af%94%e4%be%8b%e5%8f%82%e8%80%83scale)
-    - [apiGetTheme() - 获取画布的主题，获取第一个满足以下条件节点的text值：role == "theme" 或者 role == "themeText" 或者 subRole == "themeText"](#apigettheme---%e8%8e%b7%e5%8f%96%e7%94%bb%e5%b8%83%e7%9a%84%e4%b8%bb%e9%a2%98%e8%8e%b7%e5%8f%96%e7%ac%ac%e4%b8%80%e4%b8%aa%e6%bb%a1%e8%b6%b3%e4%bb%a5%e4%b8%8b%e6%9d%a1%e4%bb%b6%e8%8a%82%e7%82%b9%e7%9a%84text%e5%80%bcrole--%22theme%22-%e6%88%96%e8%80%85-role--%22themetext%22-%e6%88%96%e8%80%85-subrole--%22themetext%22)
+    - [resetZoom(value) - 控制画布缩放比例](#resetzoomvalue---%e6%8e%a7%e5%88%b6%e7%94%bb%e5%b8%83%e7%bc%a9%e6%94%be%e6%af%94%e4%be%8b)
+    - [apiGetTheme() - 获取画布的主题](#apigettheme---%e8%8e%b7%e5%8f%96%e7%94%bb%e5%b8%83%e7%9a%84%e4%b8%bb%e9%a2%98)
     - [insertFigure(source, figureId) - 插入图片](#insertfiguresource-figureid---%e6%8f%92%e5%85%a5%e5%9b%be%e7%89%87)
     - [apiPreviewImage(background="white", scale=1) - 生成图片，返回base64](#apipreviewimagebackground%22white%22-scale1---%e7%94%9f%e6%88%90%e5%9b%be%e7%89%87%e8%bf%94%e5%9b%9ebase64)
     - [apiUndo() - 撤销](#apiundo---%e6%92%a4%e9%94%80)
@@ -31,7 +31,52 @@ hardcore.js(硬核)是一个用于创建各种可视化图形的javascript库，
     - [apiSwitchWaveTail - 橄榄串添加/删除尾巴](#apiswitchwavetail---%e6%a9%84%e6%a6%84%e4%b8%b2%e6%b7%bb%e5%8a%a0%e5%88%a0%e9%99%a4%e5%b0%be%e5%b7%b4)
     - [apiSwitchTextAngle - 橄榄串添加/删除尾巴](#apiswitchtextangle---%e6%a9%84%e6%a6%84%e4%b8%b2%e6%b7%bb%e5%8a%a0%e5%88%a0%e9%99%a4%e5%b0%be%e5%b7%b4)
     - [apiSwitchWaveTail - 切换文字方向](#apiswitchwavetail---%e5%88%87%e6%8d%a2%e6%96%87%e5%ad%97%e6%96%b9%e5%90%91)
-    - [addDimTtext - 云盘增加唯独](#adddimttext---%e4%ba%91%e7%9b%98%e5%a2%9e%e5%8a%a0%e5%94%af%e7%8b%ac)
+    - [addDimTtext - 云盘增加纬度](#adddimttext---%e4%ba%91%e7%9b%98%e5%a2%9e%e5%8a%a0%e7%ba%ac%e5%ba%a6)
+- [节点数据格式](#%e8%8a%82%e7%82%b9%e6%95%b0%e6%8d%ae%e6%a0%bc%e5%bc%8f)
+    - [cagegory属性](#cagegory%e5%b1%9e%e6%80%a7)
+      - [wave 橄榄模板](#wave-%e6%a9%84%e6%a6%84%e6%a8%a1%e6%9d%bf)
+      - [waveGroup 橄榄串组模板](#wavegroup-%e6%a9%84%e6%a6%84%e4%b8%b2%e7%bb%84%e6%a8%a1%e6%9d%bf)
+      - [labelGroup 图例框组模板](#labelgroup-%e5%9b%be%e4%be%8b%e6%a1%86%e7%bb%84%e6%a8%a1%e6%9d%bf)
+      - [axisGroup 橄榄坐标轴组模板](#axisgroup-%e6%a9%84%e6%a6%84%e5%9d%90%e6%a0%87%e8%bd%b4%e7%bb%84%e6%a8%a1%e6%9d%bf)
+      - [line 直线模板](#line-%e7%9b%b4%e7%ba%bf%e6%a8%a1%e6%9d%bf)
+      - [autoText 通用文字模板](#autotext-%e9%80%9a%e7%94%a8%e6%96%87%e5%ad%97%e6%a8%a1%e6%9d%bf)
+      - [天盘节点](#%e5%a4%a9%e7%9b%98%e8%8a%82%e7%82%b9)
+      - [地盘节点](#%e5%9c%b0%e7%9b%98%e8%8a%82%e7%82%b9)
+      - [yunGroup 火花矩阵组模板](#yungroup-%e7%81%ab%e8%8a%b1%e7%9f%a9%e9%98%b5%e7%bb%84%e6%a8%a1%e6%9d%bf)
+      - [shapeNode 火花矩阵矩形线模板](#shapenode-%e7%81%ab%e8%8a%b1%e7%9f%a9%e9%98%b5%e7%9f%a9%e5%bd%a2%e7%ba%bf%e6%a8%a1%e6%9d%bf)
+      - [yunpanGroup 云盘组模板](#yunpangroup-%e4%ba%91%e7%9b%98%e7%bb%84%e6%a8%a1%e6%9d%bf)
+      - [shapeText 带轮廓文字](#shapetext-%e5%b8%a6%e8%bd%ae%e5%bb%93%e6%96%87%e5%ad%97)
+      - [shape](#shape)
+    - [isGroup=true](#isgrouptrue)
+    - [loc](#loc)
+    - [key](#key)
+    - [deletable：是否允许删除](#deletable%e6%98%af%e5%90%a6%e5%85%81%e8%ae%b8%e5%88%a0%e9%99%a4)
+    - [selectable：是否允许选中](#selectable%e6%98%af%e5%90%a6%e5%85%81%e8%ae%b8%e9%80%89%e4%b8%ad)
+    - [数据角色(role/subRole)](#%e6%95%b0%e6%8d%ae%e8%a7%92%e8%89%b2rolesubrole)
+      - [role=freeText](#rolefreetext)
+      - [role=theme/themeText](#rolethemethemetext)
+      - [role=shiText](#roleshitext)
+      - [role=xuText](#rolexutext)
+      - [role=centerText](#rolecentertext)
+      - [role=shiText](#roleshitext-1)
+      - [role=centerLine](#rolecenterline)
+      - [role=axisX](#roleaxisx)
+      - [role=axisXText](#roleaxisxtext)
+      - [role=axisY](#roleaxisy)
+      - [role=axisYText](#roleaxisytext)
+      - [role=themeText](#rolethemetext)
+      - [role=labelText1/2/3](#rolelabeltext123)
+      - [role=horizontalLine](#rolehorizontalline)
+      - [role=background](#rolebackground)
+      - [role=freelLine](#rolefreelline)
+      - [role=verticalLine](#roleverticalline)
+      - [role=axisYText](#roleaxisytext-1)
+      - [subRole=dim](#subroledim)
+- [常用代码片段](#%e5%b8%b8%e7%94%a8%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5)
+  - [获取当前选中节点](#%e8%8e%b7%e5%8f%96%e5%bd%93%e5%89%8d%e9%80%89%e4%b8%ad%e8%8a%82%e7%82%b9)
+  - [遍历所有节点](#%e9%81%8d%e5%8e%86%e6%89%80%e6%9c%89%e8%8a%82%e7%82%b9)
+  - [遍历group下面所有节点](#%e9%81%8d%e5%8e%86group%e4%b8%8b%e9%9d%a2%e6%89%80%e6%9c%89%e8%8a%82%e7%82%b9)
+  - [修改节点属性值](#%e4%bf%ae%e6%94%b9%e8%8a%82%e7%82%b9%e5%b1%9e%e6%80%a7%e5%80%bc)
 - [扩展阅读](#%e6%89%a9%e5%b1%95%e9%98%85%e8%af%bb)
 - [调试与提交bug](#%e8%b0%83%e8%af%95%e4%b8%8e%e6%8f%90%e4%ba%a4bug)
 - [如何参与项目](#%e5%a6%82%e4%bd%95%e5%8f%82%e4%b8%8e%e9%a1%b9%e7%9b%ae)
@@ -283,8 +328,10 @@ options:
 #### addCbian(options) - 添加常变
 #### addAxisGroup(options) - 插入拓扑
 #### addWater() - 插入水盘
-#### resetZoom(value) - 控制画布缩放比例，参考[scale](https://gojs.net/latest/api/symbols/Diagram.html#scale)
-#### apiGetTheme() - 获取画布的主题，获取第一个满足以下条件节点的text值：role == "theme" 或者 role == "themeText" 或者 subRole == "themeText"
+#### resetZoom(value) - 控制画布缩放比例
+参考[scale](https://gojs.net/latest/api/symbols/Diagram.html#scale)
+#### apiGetTheme() - 获取画布的主题
+获取第一个满足以下条件节点的text值：role == "theme" 或者 role == "themeText" 或者 subRole == "themeText"
 #### insertFigure(source, figureId) - 插入图片
 #### apiPreviewImage(background="white", scale=1) - 生成图片，返回base64
 #### apiUndo() - 撤销
@@ -296,8 +343,142 @@ options:
 #### apiSwitchWaveTail - 橄榄串添加/删除尾巴
 #### apiSwitchTextAngle - 橄榄串添加/删除尾巴
 #### apiSwitchWaveTail - 切换文字方向
-#### addDimTtext - 云盘增加唯独
+#### addDimTtext - 云盘增加纬度
 
+## 节点数据格式
+gojs通过model存储画布对应的json数据，nodeDataArray里记录里所有的节点对应的数据，每个数据一个json。
+可以通过[model.setDataProperty](https://gojs.net/latest/api/symbols/Model.html#setDataProperty)来修改数据属性
+
+```js
+// 所有修改数据的操作都必须包含在事务里面
+this.myDiagram.model.startTransaction("changeTextAngle");
+    if(this.node.data.category == "wave"){
+      var objCenterText;
+      if(obj.data.centerText){
+        objCenterText = obj.diagram.findNodeForKey(obj.data.centerText)
+      }
+      if(objCenterText){
+        this.myDiagram.model.setDataProperty(objCenterText.data,"visible", false)
+        this.myDiagram.model.setDataProperty(this.node.data,"textVisible", true)
+        this.myDiagram.model.setDataProperty(this.node.data,"nangle", true)
+        this.myDiagram.model.setDataProperty(this.node.data,"textAngle", "vertical") 
+        
+      }
+    }else{
+      var olive,shi,xu;
+      this.myDiagram.model.setDataProperty(this.node.data,"nangle", true) 
+      this.myDiagram.model.setDataProperty(this.node.data,"textAngle", "vertical") 
+    }
+this.myDiagram.model.commitTransaction("changeTextAngle");
+```
+#### cagegory属性
+参考gojs[文档](https://gojs.net/latest/api/symbols/Part.html#category)
+gojs通过category属性来控制节点的模板，模板中包含样式和交互，每一个category里用户又可以自定义一些样式属性。
+hardcore.js里定义里以下几种category,对应代码在[src/nodeTemplate](src/nodeTemplate)
+
+##### wave 橄榄模板
+常用属性
+* shiText
+* xuText
+* centerText
+* order
+* shiStroke
+* xuStroke
+* font
+* textVisible
+
+##### waveGroup 橄榄串组模板
+常用属性
+* 实线颜色（shiStroke）
+* 虚线颜色（xuStroke）
+* 中线颜色（centerStroke）
+* 橄榄长度（oliveWidth）
+* 橄榄厚度（oliveHeight）
+* 是否包含开放尾部（haveTail）
+* 橄榄类型（oliveType：Wave螺旋形状，olive为橄榄形状）
+* 允许的最大橄榄数量（maxOlive）
+* 文字方向（textAngle：horizontal表示水平，vertical表示文字平行中轴）
+##### labelGroup 图例框组模板
+##### axisGroup 橄榄坐标轴组模板
+##### line 直线模板
+用来绘制坐标轴。catgory=line表示直线类型的节点，width：直线的长度，height：直线宽度，group=-15表示该直线属于key=-15的group节点，angle表示该直线旋转的角度（水平右方向为0度），role=centerLine表示该直线为拓扑里中轴线（中轴线的angle控制整个橄榄串的角度，中轴线上的所有橄榄会自动对齐角度），stroke控制直线的颜色（css一样的颜色定义方式），desiredSize控制节点元素的实际大小（优先级高于width和height）
+##### autoText 通用文字模板
+##### 天盘节点
+##### 地盘节点
+##### yunGroup 火花矩阵组模板
+##### shapeNode 火花矩阵矩形线模板
+##### yunpanGroup 云盘组模板
+##### shapeText 带轮廓文字
+##### shape
+更多类型可以参考[这里](docs/images/trtd_core.png)
+
+一些通用属性
+#### isGroup=true
+表示该节点是gojs里的group，可以包含其他节点元素（node）。
+#### loc
+表示当前节点在画布里的位置，通过go.Point.stringify(point)来获得
+#### key
+节点元素在画布的唯一标志，不允许重复，如果不指定会自动生产
+#### deletable：是否允许删除
+#### selectable：是否允许选中
+#### 数据角色(role/subRole)
+相同category时，有时需要在不同场景下触发不同的操作，hardcore.js通过role和subRole来实现
+##### role=freeText
+##### role=theme/themeText
+##### role=shiText
+##### role=xuText
+##### role=centerText
+##### role=shiText
+##### role=centerLine
+##### role=axisX
+##### role=axisXText
+##### role=axisY
+##### role=axisYText
+##### role=themeText
+##### role=labelText1/2/3
+##### role=horizontalLine
+##### role=background
+##### role=freelLine
+##### role=verticalLine
+##### role=axisYText
+##### subRole=dim
+
+## 常用代码片段
+### 获取当前选中节点
+```js
+var node = myDiagram.selection.first();
+// var node = this.part.diagram.selection.first();
+// var node = e.diagram.selection.first();
+if (!node) return;
+```
+### 遍历所有节点
+```js
+// 获取当前画布中所有橄榄拓扑的数量
+for(var i=0;i<diagram.model.nodeDataArray.length;i++){
+    if(diagram.model.nodeDataArray[i].category == "axisGroup"){
+        axisGroupCount += 1;
+    }
+}
+```
+### 遍历group下面所有节点
+```js
+var it = node.containingGroup.findSubGraphParts().iterator;
+var waveTail= null; // 查找是否存在尾巴
+while(it.next()){
+    var n = it.value;
+    lastNode = n;
+    if(n.data.role == "waveTail"){
+        waveTail = n;
+        break;
+    }
+}
+```
+### 修改节点属性值
+```js
+this.diagram.startTransaction("apiSwitchToWave")
+this.diagram.model.setDataProperty(node.data, "oliveType", "Wave")
+this.diagram.commitTransaction("apiSwitchToWave")
+```
 ## 扩展阅读
 
 * [Start your own JavaScript library using webpack and ES6](http://krasimirtsonev.com/blog/article/javascript-library-starter-using-webpack-es6)
@@ -330,8 +511,8 @@ For a good pull request, we ask you provide the following:
   2. 升级gojs版本到2.0以上
   3. 增加火花矩阵的参数说明
   4. 增加常变的参数说明
-  5. 数据格式优化
-  6. api文档
+  5. 数据格式说明文档完善
+  6. api文档完善
   7. 定义api的扩展机制
   8. 补充npm的引入方式
 
