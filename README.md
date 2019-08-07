@@ -15,6 +15,12 @@ hardcore.js(硬核)是一个用于创建各种可视化图形的javascript库，
 - [起步](#%e8%b5%b7%e6%ad%a5)
 - [常用命令](#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4)
 - [Api文档](#api%e6%96%87%e6%a1%a3)
+    - [初始化new Trtd("domId", options)](#%e5%88%9d%e5%a7%8b%e5%8c%96new-trtd%22domid%22-options)
+    - [addCbian(options) - 添加常变](#addcbianoptions---%e6%b7%bb%e5%8a%a0%e5%b8%b8%e5%8f%98)
+    - [addAxisGroup(options) - 插入拓扑](#addaxisgroupoptions---%e6%8f%92%e5%85%a5%e6%8b%93%e6%89%91)
+    - [resetZoom(value) - 控制画布缩放比例，参考scale](#resetzoomvalue---%e6%8e%a7%e5%88%b6%e7%94%bb%e5%b8%83%e7%bc%a9%e6%94%be%e6%af%94%e4%be%8b%e5%8f%82%e8%80%83scale)
+    - [apiGetTheme() - 获取画布的主题，获取第一个满足以下条件节点的text值：role == "theme" 或者 role == "themeText" 或者 subRole == "themeText"](#apigettheme---%e8%8e%b7%e5%8f%96%e7%94%bb%e5%b8%83%e7%9a%84%e4%b8%bb%e9%a2%98%e8%8e%b7%e5%8f%96%e7%ac%ac%e4%b8%80%e4%b8%aa%e6%bb%a1%e8%b6%b3%e4%bb%a5%e4%b8%8b%e6%9d%a1%e4%bb%b6%e8%8a%82%e7%82%b9%e7%9a%84text%e5%80%bcrole--%22theme%22-%e6%88%96%e8%80%85-role--%22themetext%22-%e6%88%96%e8%80%85-subrole--%22themetext%22)
+    - [](#)
 - [扩展阅读](#%e6%89%a9%e5%b1%95%e9%98%85%e8%af%bb)
 - [调试与提交bug](#%e8%b0%83%e8%af%95%e4%b8%8e%e6%8f%90%e4%ba%a4bug)
 - [如何参与项目](#%e5%a6%82%e4%bd%95%e5%8f%82%e4%b8%8e%e9%a1%b9%e7%9b%ae)
@@ -245,7 +251,27 @@ var myDiagram;
 * `npm run publish` - 发布到线上cdn，需要配置文件
 
 ## Api文档
+#### 初始化new Trtd("domId", options)
 初始化通过myDiagram = new Trtd()初始化myDiagram后，可以通过myDiagram.__trtd访问hardcore提供的api，来操作图形
+domId: 将在该dom元素下创建canvas
+options:
+* modelChangedListener(model) - model变化时的回调，传入一个函数，当图形对应的数据变化时触发回调，一般用来自动保存图形
+* nodeDoubleClickListener(node) - 节点双击时的回调
+* nodeClickListener(node) - 节点单击时的回调
+* showContextMenuListener
+* hideContextMenuListener
+* cxElement - 外部传入的菜单dom元素
+* deleteCallback(data) - 删除节点前的回调，可以用来做删除二次确认
+* type - 画布（diagram）类型，dspiral:橄榄火花常变都用这个画布，后面会持续扩展图形；tianpan:天盘用的画布，兼容早期画布;dipan:地盘专用画布
+* containerDivId - 根dom元素上一级dom元素id，调节样式时可能会用到
+* model - 初始化图形的json数据，需要用JSON.stringify序列化之后传入
+* tpid - 当前数据对应的一个唯一id，库的内部会实时自动将数据存储在localStorage里key=TDCurrent5d492368d9342a0009f3c1f2的值里，其中5d492368d9342a0009f3c1f2就是tpid
+* diagramConfig - 传入gojs的diagram原始的配置参数，参考[gojs文档diagram属性](https://gojs.net/latest/api/symbols/Diagram.html)，[gojs文档diagram event事件](https://gojs.net/latest/api/symbols/DiagramEvent.html)
+#### addCbian(options) - 添加常变
+#### addAxisGroup(options) - 插入拓扑
+#### resetZoom(value) - 控制画布缩放比例，参考[scale](https://gojs.net/latest/api/symbols/Diagram.html#scale)
+#### apiGetTheme() - 获取画布的主题，获取第一个满足以下条件节点的text值：role == "theme" 或者 role == "themeText" 或者 subRole == "themeText"
+#### 
 
 ## 扩展阅读
 
