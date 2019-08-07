@@ -1948,4 +1948,5 @@ Trtd.go = go;
 //     }
 // }
 
-export default Trtd;
+// export default Trtd;
+module.exports = Trtd;

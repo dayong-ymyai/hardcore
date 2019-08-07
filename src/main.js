@@ -57,4 +57,5 @@ if (typeof window !== 'undefined') {
 	window.Trtd = Trtd;
 }
 
-export default Trtd;
+// export default Trtd;
+module.exports = Trtd

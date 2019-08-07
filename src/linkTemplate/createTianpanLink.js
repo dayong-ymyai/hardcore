@@ -286,4 +286,4 @@ function createTianpanLink(diagram) {
 }
 
 
-export default createTianpanLink
+module.exports = createTianpanLink

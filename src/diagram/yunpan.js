@@ -1201,4 +1201,5 @@ function guid() {
 return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
-export default Trtd;
+// export default Trtd;
+module.exports = Trtd;

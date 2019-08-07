@@ -58,4 +58,5 @@ class Trtd extends Trtd_tianpan {
 }
 
 
-export default Trtd;
+// export default Trtd;
+module.exports = Trtd;

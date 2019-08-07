@@ -1,11 +1,11 @@
 {
     "name": "hardcore",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "hardcore.js is a diagram javascript library for drawing creative charts, based on gojs",
     "main": "lib/main.js",
     "scripts": {
         "dev": "cross-env libname=main  type=dipan webpack --display-modules --progress --colors --watch --env dev",
-        "build": "cross-env libname=hardcore  type=dipan webpack --env dev && cross-env libname=hardcore  type=dipan webpack --env build",
+        "build": "cross-env libname=hardcore  type=dipan webpack --env build",
         "publish": "cross-env uploadOss=true hasVersion=true libname=hardcore  webpack --env build --config ./webpack.config.publish.js && cross-env libname=hardcore  type=dipan uploadOss=true webpack --env build --config ./webpack.config.publish.js",
         "build:dipan": "cross-env libname=dipan webpack --env dev && cross-env libname=dipan webpack --env build",
         "build:main": "cross-env libname=main  type=dipan webpack --env dev && cross-env libname=main  type=dipan webpack --env build",
@@ -41,19 +41,21 @@
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.3",
         "babel-loader": "^7.1.2",
+        "babel-minify-webpack-plugin": "^0.3.1",
         "babel-plugin-add-module-exports": "^0.2.1",
         "babel-preset-env": "^1.6.1",
         "chai": "^4.1.2",
+        "cross-env": "^5.2.0",
         "dotenv": "^7.0.0",
         "eslint": "^4.13.1",
         "eslint-loader": "^1.9.0",
         "mocha": "^4.0.1",
         "semver": "^6.0.0",
+        "uglifyjs-webpack-plugin": "^2.2.0",
         "webpack": "^3.12.0",
         "yargs": "^10.0.3"
     },
     "dependencies": {
-        "cross-env": "^5.2.0",
         "css-loader": "^0.28.11",
         "style-loader": "^0.21.0"
     }

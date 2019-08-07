@@ -1,4 +1,4 @@
-import { setTimeout } from 'timers';
+
 
 var $ = go.GraphObject.make;
 var Base = require('./base')

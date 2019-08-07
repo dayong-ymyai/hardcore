@@ -2383,4 +2383,4 @@ Trtd.go = go;
 //     }
 // }
 
-export default Trtd;
+module.exports = Trtd;

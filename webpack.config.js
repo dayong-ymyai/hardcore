@@ -1,7 +1,8 @@
 /* global __dirname, require, module*/
 
 const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+// const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 const libname = process.env.libname // use --env with webpack 2
@@ -28,10 +29,14 @@ let plugins = [
 ], outputFile;
 
 
-
+var outpubFolder = "/lib"
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true,mangle:true }));
+  // plugins.push(new UglifyJsPlugin({ minimize: true,mangle:true }));
+  plugins.push(new MinifyPlugin({
+    removeConsole: true
+  }, {}))
   outputFile = libraryName + '.min.js';
+  outpubFolder = "/release"
 } else {
   outputFile = libraryName + '.js';
 }
@@ -44,7 +49,7 @@ const config = {
   entry: __dirname + `/src/main.js`,
   devtool: 'source-map',
   output: {
-    path: __dirname + '/lib',
+    path: __dirname + outpubFolder,
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',

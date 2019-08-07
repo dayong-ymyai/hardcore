@@ -1169,4 +1169,4 @@
 		return localization[key] ? (localization[key][localStorage.getItem("language")] ? localization[key][localStorage.getItem("language")] :localization[key]['chn']) : key;
 	};
 
-export default {trans:trans};
+module.exports = {trans:trans};

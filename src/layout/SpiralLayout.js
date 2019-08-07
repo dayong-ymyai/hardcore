@@ -530,4 +530,4 @@ function isThreePointsOnOneLine(p1, p2, p3) {
 }
 
 
-export default SpiralLayout;
+module.exports = SpiralLayout;

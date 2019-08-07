@@ -1,4 +1,4 @@
-import { setTimeout } from 'timers';
+// 
 
 var $ = go.GraphObject.make;
 var Base = require('./base')
@@ -853,3 +853,4 @@ class WaveNodeTemplate extends Base {
 }
 
 module.exports = WaveNodeTemplate
+// export default WaveNodeTemplate

@@ -2,7 +2,8 @@
 
 const webpack = require('webpack');
 var fs = require("fs")
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+// const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 const libname = process.env.libname // use --env with webpack 2
@@ -33,9 +34,12 @@ var defineEnvs = {
 let plugins = [
   new webpack.DefinePlugin(defineEnvs),
 ], outputFile;
-
+var outpubFolder = "/lib"
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true,mangle:true }));
+  // plugins.push(new UglifyJsPlugin({ minimize: true,mangle:true }));
+  plugins.push(new MinifyPlugin({
+    removeConsole: true
+  }, {}))
   if(uploadOss){
     const AliyunOSSPlugin = require("aliyun-oss-webpack-plugin")
     // console.log(`${process.env.AccessKeyId}`)
@@ -60,11 +64,11 @@ if(libname){
   sourceName = libname;
 }
 const config = {
-  entry: __dirname + `/src/${sourceName}.js`,
+  entry: __dirname + `/src/main.js`,
   devtool: 'source-map',
   output: {
     publicPath: publicPath,
-    path: __dirname + '/publish',
+    path: __dirname + '/release',
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
