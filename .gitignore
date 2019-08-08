@@ -62,6 +62,8 @@ typings/
 
 # npm run output
 lib/
+lib/main.js
+lib/main.js.map
 
 # intellij configuration
 .idea/
