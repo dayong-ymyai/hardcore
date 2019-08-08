@@ -237,7 +237,7 @@ var exports = module.exports = {
 					var evt = e;
 					console.log('textblock catched the key:' + evt);
 					if (evt.which) {
-						if (evt.keyCode == 13 && evt.altKey || evt.keyCode == 10 && evt.ctrlKey) {
+						if (evt.keyCode == 13 && evt.altKey || evt.keyCode == 10 && evt.ctrlKey || evt.keyCode == 13 && evt.shiftKey || evt.keyCode == 10 && evt.shiftKey) {
 							var start = this.selectionStart,
 								end = this.selectionEnd,
 								val = this.value;
