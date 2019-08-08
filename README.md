@@ -508,13 +508,14 @@ For a good pull request, we ask you provide the following:
    
 ## Todo
   1. 国际化
-  2. 升级gojs版本到2.0以上
+  2. ~~升级gojs版本到2.0以上~~
   3. 增加火花矩阵的参数说明
   4. 增加常变的参数说明
   5. 数据格式说明文档完善
-  6. api文档完善
-  7. 定义api的扩展机制
-  8. 补充npm的引入方式
+  6. 定义api的扩展机制
+  7. 补充npm的引入方式
+  8. demo里添加各种api的使用示例
+  9. 地盘重构
 
 ## License
  [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
