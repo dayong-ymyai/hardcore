@@ -1,5 +1,7 @@
 'use strict';
 
+let typeModules = {};
+
 typeModules['tianpan'] = require(`./diagram/tianpan`)
 typeModules['dipan'] = require(`./diagram/dipan`)
 typeModules['jin'] = require(`./diagram/jin`)
