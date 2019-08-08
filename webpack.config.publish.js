@@ -17,10 +17,15 @@ var result = require('dotenv').config({ path: path.resolve(process.cwd(),"..", e
 var publicPath = process.env.publicPath
 
 let libraryName = pkg.name;
+// let pkgVersion = ""
 if(hasVersion){
-  pkg.version = semver.inc(pkg.version, "patch")
+  // let pkgVersion = pkg.version
+  // publicPath = publicPath+"/v"+pkg.version
+  // process.env.publicPath = publicPath
+  // console.log("publicPath:"+publicPath)
+  // pkg.version = semver.inc(pkg.version, "patch")
   libraryName = pkg.name+pkg.version;
-  fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify(pkg, null, 4));
+  // fs.writeFileSync(path.join(__dirname, 'package.json'), JSON.stringify(pkg, null, 4));
 }
 
 var defineEnvs = {
