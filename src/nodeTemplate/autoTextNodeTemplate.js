@@ -344,11 +344,11 @@ class AutoTextTemplate extends Base {
                 console.log("selectionChanged",node)
 
                 if(node.data.category != "autoText" || node.data.orderX ==null 
-                || node.data.orderY ==null || node.data.role != "freeText" || node.data.subRole !="coreText"|| node.data.subRole !="yunpanText"){
+                || node.data.orderY ==null || node.data.role != "freeText" || (node.data.subRole !="coreText"&& node.data.subRole !="yunpanText")){
                     return;
                 }
 
-                if( !node.containingGroup || node.containingGroup.data.category != "yunGroup" || node.containingGroup.data.category != "yunpanGroup"){
+                if( !node.containingGroup || (node.containingGroup.data.category != "yunGroup" && node.containingGroup.data.category != "yunpanGroup")){
                     return;
                 }
 
