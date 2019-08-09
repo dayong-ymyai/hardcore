@@ -54,7 +54,7 @@ class AutoTextTemplate extends Base {
               resizeCellSize: new go.Size(10, 10),
             //   locationObjectName: "textBorder",
             //   selectionObjectName: "textBorder",
-              resizable: false,
+              resizable: true,
             //   selectable: false,
             //   clickable: false,
               // resizeObjectName: "SHAPE", // user can resize the Shape
@@ -616,28 +616,28 @@ class AutoTextTemplate extends Base {
               alignment: go.Spot.Center,
               alignmentFocus: go.Spot.Center,
               contextMenu: diagram.__trtd.getNodeContextMenu(),
-              // resizeAdornmentTemplate:  // specify what resize handles there are and how they look
-              // $(go.Adornment, "Spot",
-              //   $(go.Placeholder),  // takes size and position of adorned object
-              //   $(go.Shape, "Circle",  // left resize handle
-              //     { alignment: go.Spot.Left, cursor: "col-resize",
-              //       desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
-              //   $(go.Shape, "Circle",  // right resize handle
-              //     { alignment: go.Spot.Right, cursor: "col-resize",
-              //       desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
-              // $(go.Shape, "Circle",  // right resize handle
-              // { alignment: go.Spot.Top, cursor: "col-resize",
-              // desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
-              // $(go.Shape, "Circle",  // right resize handle
-              // { alignment: go.Spot.Bottom, cursor: "col-resize",
-              // desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
-              //   // $(go.TextBlock, // show the width as text
-              //   //   { alignment: go.Spot.Top, alignmentFocus: new go.Spot(0.5, 1, 0, -2),
-              //   //     stroke: "dodgerblue" },
-              //   //   new go.Binding("text", "adornedObject",
-              //   //                  function(shp) { return shp.naturalBounds.width.toFixed(0); })
-              //   //       .ofObject())
-              // ),
+              resizeAdornmentTemplate:  // specify what resize handles there are and how they look
+              $(go.Adornment, "Spot",
+                $(go.Placeholder),  // takes size and position of adorned object
+                $(go.Shape, "Circle",  // left resize handle
+                  { alignment: go.Spot.Left, cursor: "col-resize",
+                    desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
+                $(go.Shape, "Circle",  // right resize handle
+                  { alignment: go.Spot.Right, cursor: "col-resize",
+                    desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
+              $(go.Shape, "Circle",  // right resize handle
+              { alignment: go.Spot.Top, cursor: "col-resize",
+              desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
+              $(go.Shape, "Circle",  // right resize handle
+              { alignment: go.Spot.Bottom, cursor: "col-resize",
+              desiredSize: new go.Size(9, 9), fill: "lightblue", stroke: "dodgerblue" }),
+                // $(go.TextBlock, // show the width as text
+                //   { alignment: go.Spot.Top, alignmentFocus: new go.Spot(0.5, 1, 0, -2),
+                //     stroke: "dodgerblue" },
+                //   new go.Binding("text", "adornedObject",
+                //                  function(shp) { return shp.naturalBounds.width.toFixed(0); })
+                //       .ofObject())
+              ),
               doubleClick: function (e, node){
                   e.diagram.__trtd.selectText(e, node)
               }
