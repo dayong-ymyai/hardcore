@@ -787,6 +787,7 @@ class Trtd  extends TRTD_BASE {
             var link = {};
             // link = _.extendOwn(link, oldlink);
             // link = helpers.extend(link, oldlink);
+            delete oldlink.points;
             link = JSON.parse(JSON.stringify(oldlink))
             delete link.__gohashid;
             delete link.points;
