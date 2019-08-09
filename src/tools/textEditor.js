@@ -20,6 +20,54 @@
     this.rows = tempText.lineCount;
   }, false);
 
+  var observe;
+  if (window.attachEvent) {
+    observe = function (element, handlers) {
+      handlers.forEach(t => {
+        element.attachEvent('on' + t.evt, t.handler);
+      });
+    };
+  } else {
+    observe = function (element, handlers) {
+      handlers.forEach(t => {
+        element.addEventListener(t.evt, t.handler, false);
+      });
+    };
+  }
+
+  function resize() {
+    textarea.style.minHeight = "40px";
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  function delayedResize() {
+    setTimeout(resize, 0);
+  }
+
+  observe(textarea, [
+    {
+      evt: "change",
+      handler: resize
+    },
+    {
+      evt: "cut",
+      handler: delayedResize
+    },
+    {
+      evt: "paste",
+      handler: delayedResize
+    },
+    {
+      evt: "drop",
+      handler: delayedResize
+    },
+    {
+      evt: "keydown",
+      handler: delayedResize
+    }
+  ]);
+
   textarea.addEventListener('keydown', function(e) {
     var tool = TextEditor.tool;
     if (tool.textBlock === null) return;
