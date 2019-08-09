@@ -104,6 +104,10 @@ class Trtd extends Trtd_tianpan {
                         e.subject.part.layout.isOngoing = true;
                         e.subject.part.layout.isValidLayout = false;
                     },100)
+                }else if(node.data.category === "autoText"){
+                    e.diagram.startTransaction("resize");
+                    e.diagram.model.setDataProperty(node.data, "width", e.subject.width);
+                    e.diagram.commitTransaction("resize");
                 }
             },
             SelectionMoved: (e)=>{

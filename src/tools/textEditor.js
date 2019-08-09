@@ -185,6 +185,8 @@
       textarea.select();
       textarea.setSelectionRange(0, 9999);
     }
+
+    resize();
   };
 
   TextEditor.hide = function(diagram, tool) {
