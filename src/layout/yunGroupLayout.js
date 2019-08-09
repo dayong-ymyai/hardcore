@@ -403,13 +403,13 @@
           }
           if(obj.data.orderY == centerOrderY||obj.data.dimY == centerOrderY){
             // console.log("Ddddddd")
-            obj.diagram.model.setDataProperty(obj.data, "width",`${gridWidth-10}`)
+            obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
             // delete obj.data.height
             obj.diagram.model.setDataProperty(obj.data, "height", null)
           }
           if(obj.data.orderX == centerOrderX || obj.data.dimX == centerOrderX ){
             // console.log("Ddddddd")
-            obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight-10}`)
+            obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
             obj.diagram.model.setDataProperty(obj.data, "width", null)
             // delete obj.data.width
           }
@@ -417,8 +417,8 @@
           if(Math.abs(obj.data.orderX-centerOrderX) <= 1 && Math.abs(obj.data.orderY-centerOrderY) <= 1){
             // 中心节点
             if(snapType != "between"){
-              obj.diagram.model.setDataProperty(obj.data, "width",`${gridWidth-10}`)
-              obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight-10}`)
+              obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
+              obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
             }
           }
 
@@ -429,11 +429,11 @@
             // obj.diagram.model.setDataProperty(obj.data, "subRole", "themeText")
             // obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight-10}`)
             if(snapType == "between"){
-              obj.diagram.model.setDataProperty(obj.data, "width",`${gridWidth+gridWidth-10}`)
-              obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight+gridHeight-10}`)
+              obj.diagram.model.setDataProperty(obj.data, "width",gridWidth+gridWidth-10)
+              obj.diagram.model.setDataProperty(obj.data, "height",gridHeight+gridHeight-10)
             }else{
-              obj.diagram.model.setDataProperty(obj.data, "width",`${gridWidth-10}`)
-              obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight-10}`)
+              obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
+              obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
             }
           }
           // else{

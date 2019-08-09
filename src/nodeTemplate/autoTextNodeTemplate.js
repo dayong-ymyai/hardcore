@@ -748,10 +748,10 @@ class AutoTextTemplate extends Base {
                   var width = NaN
                   var height = NaN
                   if(data.width){
-                      width = data.width
+                      width = parseInt(data.width)
                   }
                   if(data.height){
-                      height = data.height
+                      height = parseInt(data.height)
                   }
 
                   return new go.Size(width,height)

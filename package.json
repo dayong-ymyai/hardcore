@@ -18,7 +18,7 @@
     },
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/dayong-ymyai/hardcore"
     },
     "keywords": [
         "webpack",
@@ -32,9 +32,9 @@
     "author": "Zhenyuan",
     "license": "Apache-2.0",
     "bugs": {
-        "url": ""
+        "url": "https://github.com/dayong-ymyai/hardcore/issues"
     },
-    "homepage": "",
+    "homepage": "https://dayong-ymyai.github.io/hardcore/",
     "devDependencies": {
         "aliyun-oss-webpack-plugin": "^2.0.1",
         "babel-cli": "^6.26.0",
