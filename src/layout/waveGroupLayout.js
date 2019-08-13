@@ -168,7 +168,7 @@
                     shi.location = computeNewRotateLoc(group.location, shi.location, obj.angle)
                     // shi.location = shi.__location.copy()
                     // delete shi.__offset
-                    delete shi.__switchOrder
+                    delete shi.__switchOrder 
                 }else{
                    
                     if(!shi.__offset){
@@ -454,24 +454,24 @@
                     }
                     else{
                         // 之前是自动布局，如果有记录相对位置，则恢复
-                        if(shiTextColl[index].__offset){
-                            obj.diagram.model.setDataProperty(shiTextColl[index].data,"nloc", true)
-                            // xu.__offset = xu.__location.copy().subtract(xu.location)
-                            // shiTextColl[index].location = shiTextColl[index].__location.copy().subtract(shiTextColl[index].__offset)
-                            // delete shiTextColl[index].__oldLocation
-                        }
+                        // if(shiTextColl[index].__offset){
+                        //     obj.diagram.model.setDataProperty(shiTextColl[index].data,"nloc", true)
+                        //     // xu.__offset = xu.__location.copy().subtract(xu.location)
+                        //     // shiTextColl[index].location = shiTextColl[index].__location.copy().subtract(shiTextColl[index].__offset)
+                        //     // delete shiTextColl[index].__oldLocation
+                        // }
                     }
 
                     if(xuTextColl[index].data.nloc){
                         obj.diagram.model.setDataProperty(xuTextColl[index].data,"nloc", null)
                         xuTextColl[index].__oldLocation = xuTextColl[index].location
                     }else{
-                        if(xuTextColl[index].__offset){
-                            obj.diagram.model.setDataProperty(xuTextColl[index].data,"nloc", true)
-                            // xu.__offset = xu.__location.copy().subtract(xu.location)
-                            // xuTextColl[index].location = xuTextColl[index].__location.copy().subtract(xuTextColl[index].__offset)
-                            // delete shiTextColl[index].__oldLocation
-                        }
+                        // if(xuTextColl[index].__offset){
+                        //     obj.diagram.model.setDataProperty(xuTextColl[index].data,"nloc", true)
+                        //     // xu.__offset = xu.__location.copy().subtract(xu.location)
+                        //     // xuTextColl[index].location = xuTextColl[index].__location.copy().subtract(xuTextColl[index].__offset)
+                        //     // delete shiTextColl[index].__oldLocation
+                        // }
                     }
                     // shiTextColl[index].__switchOrder = true;
                     // xuTextColl[index].__switchOrder = true;

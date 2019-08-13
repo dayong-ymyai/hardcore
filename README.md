@@ -184,7 +184,7 @@ var myDiagram;
                 { "category": "line", "level": 0, "key": -7, "loc": "-267.4188527901979 -104.90629298215384", "desiredSize": "349.05387059630493 10", "width": 1400, "height": 1, "angle": 270, "group": -19, "role": "axisY", "selectable": false, "stroke": "#cb1c27" },
                 // category=autoText表示该节点为通用文字节点元素，role=axisYText表示该文字为Y轴顶部文字（随纵轴长度变化自动调整位置），locationSpot表示文字相对坐标中心的位置（参考[gojs文档](https://gojs.net/latest/api/symbols/Spot.html)），text存储该节点对应的文字内容，font控制该文字字体样式（同CSS文字样式）
                 { "text": "能量", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "-277.4188527901979 -453.9601635784589", "key": -12, "role": "axisYText", "locationSpot": "1 0.5 0 0", "group": -19, "movable": true },
-                // role=themeText表示该节点为该拓扑的主题（不允许删除，可以通过myDiagram.__trtd.apiGetTheme()获取该节点对应text），movable控制该节点是否允许拖动，width控制该文字最大宽度（超过该宽度会自动换行）
+                // role=themeText表示该节点为该拓扑的主题（不允许删除，可以通过myDiagram.apiGetTheme()获取该节点对应text），movable控制该节点是否允许拖动，width控制该文字最大宽度（超过该宽度会自动换行）
                 { "text": "主题", "role": "themeText", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "-310.9294316472132 -101.40896142630251", "key": -13, "level": 0, "group": -19, "locationSpot": "0.5 0 0 0", "movable": true, "width": 300 },
                 // role=axisXText表示该文字为X轴顶部文字（随横轴长度变化自动调整位置）
                 { "text": "时间", "deletable": false, "font": "24px 'Microsoft YaHei'", "category": "autoText", "loc": "339.3441943886312 -104.90629298215362", "key": -14, "role": "axisXText", "group": -19, "locationSpot": "0.5 0 0 0" },
@@ -308,7 +308,7 @@ var myDiagram;
 
 ## Api文档
 #### 初始化new Trtd("domId", options)
-初始化通过myDiagram = new Trtd()初始化myDiagram后，可以通过**myDiagram.__trtd**访问hardcore提供的api，来操作图形
+初始化通过myDiagram = new Trtd()初始化myDiagram后，可以通过**myDiagram**访问hardcore提供的api，来操作图形
 domId: 将在该dom元素下创建canvas
 options:
 * modelChangedListener(model) - model变化时的回调，传入一个函数，当图形对应的数据变化时触发回调，一般用来自动保存图形

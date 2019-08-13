@@ -1285,6 +1285,7 @@ class Trtd extends Trtd_tianpan {
     getDefaultCustomMenuDivStr(){
         return `
         <ul>
+            <li trtd_action="drillAnalyze"><a class="i18n" data-lang="cancelfix">拓扑分析</a></li>
             <li trtd_action="addFollower"><a class="i18n" data-lang="insertsl">插入同级节点</a></li>
             <li trtd_action="startNewSpiral"><a class="i18n" data-lang="icn">插入子节点</a></li>
             <li trtd_action="apiDuplicateNode"><a class="i18n" data-lang="duplicateNode">复制节点</a></li>
@@ -1377,11 +1378,17 @@ class Trtd extends Trtd_tianpan {
             if(node.data.category == "shapeText"&& node.containingGroup.data.category == "yunpanGroup"){
                 showIds = "apiDeleteSelection"
             }
+
+            // 橄榄/文字节点可以拓扑钻取分析
+            // if(["wave","autoText"].indexOf(node.data.category)>-1){
+            //     showIds += ",drillAnalyze"
+            // }
             // return "addFollowerGround," + "addNewCircle,"+"apiDeleteSelection";
         }else{
             // return "addFollowerGround"
             showIds = "addCbian,addAxisGroup"
         }
+
         return showIds;
     }
     
@@ -1901,6 +1908,33 @@ class Trtd extends Trtd_tianpan {
                     break;
             }
         }
+    }
+    // 拓扑分析
+    async drillAnalyze(){
+        console.log("拓扑分析")
+        var node = this.diagram.selection.first();
+        if(!node) return;
+        // 如果当前节点包含有figure属性
+        if(node.data.figure != null){
+            if(this.openFigure){
+                this.openFigure({
+                    figure: node.data.figure,
+                    title: node.data.text,
+                    key: node.data.key
+                })
+            }
+        }else{
+            if(this.createFigure){
+                var figure = await this.createFigure({
+                    title: node.data.text||"未命名拓扑",
+                    key: node.data.key
+                })
+                if(figure){
+                    node.data.figure = figure;
+                }
+            }
+        }
+
     }
 }
 

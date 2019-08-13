@@ -15,6 +15,17 @@
             border: solid 1px #000;
         }
 
+        .demo-btn {
+            position: relative;
+            /* bottom: 120px; */
+            cursor: pointer;
+            z-index: 9999;
+            /* right: 20px; */
+            width: 100px;
+            height: 30px;
+            display: block;
+            background-color: antiquewhite;
+        }
         #demo-btn {
             position: fixed;
             bottom: 120px;
@@ -22,7 +33,7 @@
             z-index: 9999;
             right: 20px;
             width: 100px;
-            height: 30px;
+            /* height: 30px; */
             display: block;
             background-color: antiquewhite;
         }
@@ -33,7 +44,10 @@
     <div style="position:relative;height:100%" class="mainbox" id="mainbox">
         <div id="myDiagramDiv" class="diagramdiv"></div>
     </div>
-    <div id="demo-btn">下一页</div>
+    <div id="demo-btn">
+        <div class="demo-btn reload1">重新载入1</div>
+        <div class="demo-btn reload2">重新载入2</div>
+    </div>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/2.0.15/go.js'></script>
 <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/gojs/2.0.15/go.js'></script> -->
@@ -53,7 +67,7 @@
             myDiagram.diagram == null;
         }
         // 初始化canvas图形对应的json数据，这里用的是默认的拓扑数据
-        var jsonData = {
+        var jsonData1 = {
             "class": "go.GraphLinksModel",
             // type用来定义当前图形类型，火花矩阵和拓扑用的都是“dspriral”
             "modelData": { "currentType": "tianpan", "type": "dspiral", "updatedAt": 1565074310990 },
@@ -111,7 +125,7 @@
             "linkDataArray": []
         }
 
-        jsonData= { "class": "GraphLinksModel",
+       var jsonData2= { "class": "GraphLinksModel",
   "modelData": {"currentType":"tianpan", "type":"dspiral", "updatedAt":1565341337480},
   "nodeDataArray": [ 
 {"category":"labelGroup", "group":-19, "role":"labelGroup", "isGroup":true, "level":0, "key":-145, "loc":"-327.68756027319137 -289.8173348286974", "deletable":false, "selectable":false},
@@ -157,16 +171,29 @@
 {"text":"", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":"6c5c7c11-259e-dca5-90ea-815d5d0391f4", "width":120, "role":"centerText", "level":0, "group":-15, "order":5, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":"83c8c569-6620-d4c4-4461-85362eaa7be0", "loc":"156.7721824309348 -329.6116499199189", "angle":0}
  ],
   "linkDataArray": []}
+
+
   
         myDiagram = new Trtd("myDiagramDiv", {
             modelChangedListener: function (m) {
                 // console.log('from trtd:',m);
             },
-            model: JSON.stringify(jsonData)
+            model: JSON.stringify(jsonData1)
+        })
+
+        document.getElementsByClassName('reload2')[0].addEventListener('click', () => {
+            console.log("reload2")
+            myDiagram.loadModel(go.Model.fromJson(JSON.stringify(jsonData2)))
+        })
+        document.getElementsByClassName('reload1')[0].addEventListener('click', () => {
+            console.log("reload1")
+            // myDiagram.diagram.model = go.Model.fromJson(JSON.stringify(jsonData1))
+            myDiagram.loadModel(JSON.stringify(jsonData1))
         })
 
     }
     load();
+
 
 </script>
 <script src='./domjs.js'></script>

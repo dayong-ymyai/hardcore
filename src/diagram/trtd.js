@@ -14,6 +14,9 @@ class Trtd {
         this.cxElement = config.cxElement; // 外部传入的菜单dom元素
         this.deleteCallback = config.deleteCallback; // 删除回调
 
+        this.createFigure = config.createFigure; // 外部创建figure方法，异步调用，返回盘的id，写入节点的figure属性，一般为id
+        this.openFigure = config.openFigure; // 外部打开figure方法，根据节点的figure属性打开盘
+        
         this.useDefaultContext = config.useDefaultContext == null?true:config.useDefaultContext;
         // if()
         this.defaultCxElement = null; // 默认菜单dom元素
