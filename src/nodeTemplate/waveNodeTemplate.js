@@ -825,6 +825,13 @@ class WaveNodeTemplate extends Base {
                     // layerName: "overflow",
                     fill: "rgba(0,0,0,0)", stroke: null, width: 300, height: 150
                 },
+                new go.Binding("areaBackground", "isHighlighted", function(h, shape) {
+                    // node.areaBackground = "RGB(107,208,137)"
+                    if (h) return "RGBA(146,208,80,0.5)";
+                    return null
+                    var c = shape.part.data.color;
+                    return c ? c : "white";
+                  }).ofObject(),  // binding source is Node.isHighlighted
                 new go.Binding("fill", "fill").makeTwoWay(),
                 // new go.Binding("fill", "fill").makeTwoWay(),
                 new go.Binding("desiredSize", "desiredSize", function (v, d) {

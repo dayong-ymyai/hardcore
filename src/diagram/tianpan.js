@@ -1,6 +1,6 @@
 // require('./core/core.controller')(Trtd);
 // import * as go from 'gojs';
-let SpiralLayout = require('../layout/SpiralLayout');
+var SpiralLayout = require('../layout/SpiralLayout');
 var helpers = require('../helpers/helpers.gojs')
 // var commonFun = require('./commonFun')
 var TRTD_BASE = require('./trtd').Trtd

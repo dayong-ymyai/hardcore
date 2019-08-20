@@ -728,6 +728,13 @@ class AutoTextTemplate extends Base {
                     // }
                   },
               },
+              new go.Binding("areaBackground", "isHighlighted", function(h, shape) {
+                // node.areaBackground = "RGB(107,208,137)"
+                if (h) return "RGBA(146,208,80,0.5)";
+                return null
+                var c = shape.part.data.color;
+                return c ? c : "white";
+              }).ofObject(),  // binding source is Node.isHighlighted
               new go.Binding("background", "background", function(v) {
                   return v;
               }).makeTwoWay(),

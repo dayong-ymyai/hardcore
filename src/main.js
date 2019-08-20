@@ -1,7 +1,7 @@
-'use strict';
+// 'use strict';
 
 let typeModules = {};
-
+console.log("hardcorelog   aaaaaaaaaaaaaaa")
 typeModules['tianpan'] = require(`./diagram/tianpan`)
 typeModules['dipan'] = require(`./diagram/dipan`)
 typeModules['jin'] = require(`./diagram/jin`)
@@ -15,9 +15,9 @@ typeModules['dspiral'] = require(`./diagram/dspiral`)
 
 if(IS_PROD){
     console.log("生产环境屏蔽调试日志")
-    console.log   = function(){
+    // console.log   = function(){
         
-    }
+    // }
 }
 // console.error   = function(...messages){
 //     logger.error(`${JSON.stringify(messages)}`)

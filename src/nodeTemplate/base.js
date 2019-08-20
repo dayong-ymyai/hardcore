@@ -1,4 +1,5 @@
 var $ = go.GraphObject.make;
+console.info("gggggggggggggggggggggggg")
 go.GraphObject.defineBuilder('CircleButton', function (args) {
     // default colors for 'Button' shape
     var buttonFillNormal = '#F5F5F5';
@@ -13,7 +14,7 @@ go.GraphObject.defineBuilder('CircleButton', function (args) {
     var paddingHorizontal = 2.76142374915397;
     var paddingVertical = 2.761423749153969;
   
-    var button = /** @type {Panel} */ (
+    var button = (
       go.GraphObject.make(go.Panel, 'Auto',
         {
           isActionable: true,  // needed so that the ActionTool intercepts mouse events
@@ -144,7 +145,7 @@ go.GraphObject.defineBuilder('CircleButton', function (args) {
         if (shape instanceof go.Shape) {
           var oldskip = diagram.skipsUndoManager;
           diagram.skipsUndoManager = true;
-          let brush = btn['_buttonFillPressed'];
+          var brush = btn['_buttonFillPressed'];
           if (shape.fill !== brush) shape.fill = brush;
           brush = btn['_buttonStrokePressed'];
           if (shape.stroke !== brush) shape.stroke = brush;

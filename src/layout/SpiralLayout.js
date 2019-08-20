@@ -13,7 +13,7 @@
  * {@link #spacing} controls the spacing between nodes.
  */
 
-'use strict';
+// 'use strict';
 
 // import * as go from 'gojs';
 var $ = go.GraphObject.make;
