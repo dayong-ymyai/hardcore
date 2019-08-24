@@ -262,10 +262,16 @@ class Trtd  extends TRTD_BASE {
         // }
         // configModel(myDiagram.model);
         this.diagram.updateAllTargetBindings();
+        // this.diagram.animationManager.isEnabled = true
         // this.saveModel()
     }
     loadModel(model){
         // console.log(model)
+        // var node = this.diagram.selection.first()
+        // if(node){
+        //     this.diagram.commandHandler.scrollToPart(node)
+        // }
+        this.diagram.animationManager.isEnabled = false
         this.initModel(model)
     }
     // addNodeFile(model){

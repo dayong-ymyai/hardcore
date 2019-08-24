@@ -307,6 +307,10 @@ apiDuplicateNode() {
         }
         var list = new go.List(go.GraphObject);
         myDiagram.nodes.each(function(p) {
+            var temp = p.findObject("figure")
+            if(temp){
+                temp.visible = false;
+            }
             if (!(p instanceof go.Group)) {
                 list.add(p);
                 if( p instanceof go.Node){
@@ -322,6 +326,20 @@ apiDuplicateNode() {
         imageParas.parts = list.iterator;
 
         var imgdata = myDiagram.makeImageData(imageParas);
+        myDiagram.nodes.each(function(p) {
+            var temp = p.findObject("figure")
+            if(p.data.figure && temp){
+                temp.visible = true;
+            }
+            // if (!(p instanceof go.Group)) {
+            //     list.add(p);
+            //     if( p instanceof go.Node){
+            //         if(p.data.role == "centerText"){
+            //             p.layerName = "Foreground"
+            //         }
+            //     }
+            // }
+        })
         return imgdata;
     }
     apiDeleteSelection(){
@@ -480,12 +498,14 @@ apiDuplicateNode() {
             hasHorizontalScrollbar: false,
             scrollMode: go.Diagram.InfiniteScroll,
             scrollMargin: 50,
-            "animationManager.isEnabled": true,
+            "animationManager.isEnabled": false,
         
             //rotatingTool: go.GraphObject.make(TopRotatingTool),  // defined below
             
             maxSelectionCount: 1,
-        
+            InitialLayoutCompleted:(e)=>{
+                e.diagram.animationManager.isEnabled = true
+            },
             // make sure users can only create trees
 
             validCycle: go.Diagram.CycleDestinationTree,
