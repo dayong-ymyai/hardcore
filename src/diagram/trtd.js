@@ -11,6 +11,7 @@ class Trtd {
 		this.showContextMenuListener = config.showContextMenuListener;
 		this.hideContextMenuListener = config.hideContextMenuListener;
 		this.ViewportBoundsChangedListener = config.ViewportBoundsChangedListener;
+		this.InitialLayoutCompleted = config.InitialLayoutCompleted;
         this.cxElement = config.cxElement; // 外部传入的菜单dom元素
         this.deleteCallback = config.deleteCallback; // 删除回调
         this.canAddAxisGroup = config.canAddAxisGroup == null?true:config.canAddAxisGroup 
@@ -504,7 +505,11 @@ apiDuplicateNode() {
             
             maxSelectionCount: 1,
             InitialLayoutCompleted:(e)=>{
+                console.info("hhhhhhhhhhhhhhhhhhhh InitialLayoutCompleted")
                 e.diagram.animationManager.isEnabled = true
+                if(that.InitialLayoutCompleted){
+                    that.InitialLayoutCompleted(e)
+                }
             },
             // make sure users can only create trees
 
