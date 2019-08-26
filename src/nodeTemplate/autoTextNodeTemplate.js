@@ -853,7 +853,7 @@ class AutoTextTemplate extends Base {
               visible: false,
               name: "figure",
               cursor: "pointer",
-              alignment: new go.Spot(1,0,20,0),
+              alignment: new go.Spot(1,0,5,-5),
               alignmentFocus: go.Spot.RightCenter,
               width: 14,
               height: 14,
