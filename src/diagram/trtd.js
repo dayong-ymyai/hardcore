@@ -221,6 +221,32 @@ class Trtd {
         }
         return themeText
     }
+    apiGetThemeNode(){
+        var model = this.diagram.model;
+        var themeText = null
+        var it = this.diagram.nodes;
+        var tmp;
+        while(it.next()){
+            tmp = it.value;
+            if(tmp.data.role == "theme" || tmp.data.role == "themeText"|| tmp.data.subRole == "themeText"){
+                themeText = tmp
+                break;
+            }     
+        }
+        // for(var i=0;i<model.nodeDataArray.length;i++){
+        //     if(model.nodeDataArray[i].role == "theme" || model.nodeDataArray[i].role == "themeText"|| model.nodeDataArray[i].subRole == "themeText"){
+        //         themeText = model.nodeDataArray[i]
+        //         break;
+        //     }
+        // }
+        if(!themeText){
+            var root = this.diagram.findNodeForKey(1)
+            if(root){
+                themeText = root
+            }
+        }
+        return themeText
+    }
 
     insertFigure(source, figureId) { //rootKey表示属于某个地盘节点的背景
         // console.log(source)
