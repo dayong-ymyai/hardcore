@@ -1381,7 +1381,7 @@ class Trtd extends Trtd_tianpan {
             }
 
             // 橄榄/文字节点可以拓扑钻取分析
-            if(["wave","autoText"].indexOf(node.data.category)>-1){
+            if(["wave","autoText","shapeText"].indexOf(node.data.category)>-1){
                 if(node.data.text){
                     showIds += ",drillAnalyze"
                 }

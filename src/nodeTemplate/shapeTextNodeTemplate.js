@@ -725,6 +725,56 @@ class AutoTextTemplate extends Base {
         //     stroke: properties.stroke
         // }
     ),
+    $(
+        go.Shape,
+        {
+          geometryString: "M540.5696 556.81024a81.8176 81.8176 0 0 1-53.0432-19.47648l-225.4848-191.52896a81.92 81.92 0 1 1 106.0864-124.86656l172.4416 146.47296 172.4416-146.47296a81.92 81.92 0 0 1 106.0864 124.86656l-225.4848 191.52896a81.7152 81.7152 0 0 1-53.0432 19.47648z m53.06368 246.23104l225.44384-191.52896a81.92 81.92 0 1 0-106.0864-124.84608l-172.40064 146.47296-172.48256-146.47296a81.92 81.92 0 1 0-106.04544 124.86656l225.52576 191.52896a81.7152 81.7152 0 0 0 53.00224 19.47648c18.88256 0 37.76512-6.49216 53.0432-19.49696z",
+            // "M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13zM12 8c-1.105 0-2 0.895-2 2s0.895 2 2 2h5.172l-8.586 8.586c-0.781 0.781-0.781 2.047 0 2.829 0.39 0.39 0.902 0.586 1.414 0.586s1.024-0.195 1.414-0.586l8.586-8.586v5.172c0 1.105 0.895 2 2 2s2-0.895 2-2v-12h-12z",
+          visible: false,
+          name: "figure",
+          cursor: "pointer",
+          alignment: go.Spot.TopRight,
+          alignmentFocus: go.Spot.TopRight,
+          width: 14,
+          height: 14,
+          fill: "green",
+          toolTip: $(
+            "ToolTip",
+            $(
+              go.Panel,
+              "Vertical",
+              $(
+                go.Picture,
+                new go.Binding("source", "src", function(s) {
+                  return "images/" + s + ".png";
+                })
+              ),
+              $(go.TextBlock, {text:"进入子盘", margin: 3 })
+            )
+          ),
+          click: function(e) {
+            console.log("click figure", e);
+            var node = e.targetObject.part;
+            e.diagram.__trtd.openFigure({
+              figure: node.data.figure,
+              title: node.data.text,
+              key: node.data.key,
+              node: node
+            });
+          }
+        },
+        // new go.Binding("geometry", "geo", function(){
+
+        // })),
+        new go.Binding("visible", "figure", function(v) {
+          console.log("----------------------");
+          if (v) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+      ),
     // $(go.Shape, {
     //         name: "SHAPE_Back",
     //         figure: "Rectangle",
