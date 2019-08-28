@@ -1,7 +1,7 @@
 
 // var sampleNodeTemplate = require('./sampleNodeTemplate')
 var waveNodeTemplate = require('./waveNodeTemplate')
-var waveTailNodeTemplate = require('./waveTailNodeTemplate')
+// var waveTailNodeTemplate = require('./waveTailNodeTemplate')
 var waveGroupNodeTemplate = require('./waveGroupNodeTemplate')
 var axisGroupNodeTemplate = require('./axisGroupNodeTemplate')
 var iconTextNodeTemplate = require('./iconTextNodeTemplate')

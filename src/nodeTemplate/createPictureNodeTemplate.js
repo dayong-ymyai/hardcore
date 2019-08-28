@@ -25,7 +25,7 @@ module.exports = function createPictureNodeTemplate (diagram) {
             alignmentFocus: go.Spot.Center,
             resizeAdornmentTemplate: diagram.__trtd.nodeResizeAdornmentTemplate(),
 
-            contextMenu: diagram.__trtd.getNodeContextMenu(),
+            contextMenu: $(go.Adornment),
             selectionAdornmentTemplate: diagram.__trtd.getNodeSelectionAdornmentTemplate()
         //layoutConditions: go.Part.LayoutStandard & ~go.Part.LayoutNodeSized & ~go.Part.LayoutAdded
         },
@@ -66,7 +66,7 @@ module.exports = function createPictureNodeTemplate (diagram) {
             $(go.TextBlock, {
                     name: "TEXT",
                     alignment: new go.Spot(0.5, 0.5),
-                    font: "bold " + diagram.__trtd.InitialFontSize + "px 幼圆",
+                    font: "bold 18px 幼圆",
                     //margin: 3, editable: true,
                     stroke: "black",
                     isMultiline: true,

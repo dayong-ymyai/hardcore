@@ -383,7 +383,7 @@ apiDuplicateNode() {
     saveModel(e){
         // if (e.isTransactionFinished) {
             // console.log('model changed and has been saved to localstorage');
-            helpers.saveModelToLocalStorage(this.tpid, this.diagram.model)
+             helpers.saveModelToLocalStorage(this.tpid, this.diagram.model)
             // helpers.checkModel(e.model)
         // }
     }
@@ -518,9 +518,10 @@ apiDuplicateNode() {
             // enable undo & redo
             allowDrop: true,
             "undoManager.isEnabled": true,
+            "undoManager.maxHistoryLength": 20,
             "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
             maxScale: 5.0,
-            minScale: 0.05,
+            minScale: 0.2,
             hasVerticalScrollbar: false,
             hasHorizontalScrollbar: false,
             scrollMode: go.Diagram.InfiniteScroll,
@@ -599,7 +600,7 @@ apiDuplicateNode() {
         }
         //myDiagram.toolManager.draggingTool.computeEffectiveCollection = computeEffectiveCollection;
         myDiagram.toolManager.draggingTool.computeEffectiveCollection = computeEffectiveCollection;
-        myDiagram.toolManager.dragSelectingTool.isPartialInclusion = true;
+        // myDiagram.toolManager.dragSelectingTool.isPartialInclusion = true;
         
         myDiagram.toolManager.rotatingTool.handleArchetype =
                 $(go.Panel, "Auto",
@@ -1200,7 +1201,8 @@ apiDuplicateNode() {
 }
 
 function computeEffectiveCollection(parts) {
-    var coll = new go.Set(go.Part);
+    console.log("computeEffectiveCollection")
+    var coll = new go.Set();
     var node = parts.first();
     if (node) {
         if(node.containingGroup && node.containingGroup.data.category == "labelGroup"){

@@ -1693,7 +1693,7 @@ function changeTemp2normal(myDiagram) {
 
 
 function computeEffectiveCollection(parts) {
-    var coll = new go.Set(go.Part);
+    var coll = new go.Set();
     var node = parts.first();
     if (node) {
         helpers.travelParts(node, function(p) {

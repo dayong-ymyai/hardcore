@@ -146,23 +146,25 @@
           // axisY.desiredSize = new go.Size(x2, y2)
           this.diagram.model.setDataProperty(axisX.data, "desiredSize",`${x1} ${y1}`)
           this.diagram.model.setDataProperty(axisY.data, "desiredSize",`${x2} ${y2}`)
+          // this.diagram.model.setDataProperty(group.data, "desiredSize",`${x1} ${x2}`)
+
           group.width = x1
           group.height = x2
           var shiStroke = waveGroup.data.shiStroke
           var xuStroke = waveGroup.data.xuStroke
           var centerStroke = waveGroup.data.centerStroke || "#3f5369"
-
+          if(axisXText){
+            axisXText.location = group.location.copy().offset(x1, 0)
+            axisXText.locationSpot = go.Spot.Top
+          }
+          if(axisYText){
+            axisYText.location = group.location.copy().offset(-10, -x2)
+            axisYText.locationSpot = go.Spot.Right
+          }
           // this.diagram.model.setDataProperty(axisY.data, "desiredSize",axisY.width)
         }
 
-        if(axisXText){
-          axisXText.location = group.location.copy().offset(x1, 0)
-          axisXText.locationSpot = go.Spot.Top
-        }
-        if(axisYText){
-          axisYText.location = group.location.copy().offset(-10, -x2)
-          axisYText.locationSpot = go.Spot.Right
-        }
+ 
         if(themeText){
           // themeText.location = group.location.copy().offset(0, 0)
           // themeText.locationSpot = new go.Spot(0.7,0,0,0)

@@ -569,7 +569,7 @@ class AutoTextTemplate extends Base {
                 //   var textObj = node.findObject('TEXT');
                 //   textObj.isUnderline = true;
                 // }
-                console.log("mouseOvermouseOvermouseOver")
+                // console.log("mouseOvermouseOvermouseOver")
                 if(node.data.showBorder){
                     if(node.data.text == "" && (node.data.role == "xuText" || node.data.role == "shiText" )){
                         node.findObject("textBorder").visible = true;
@@ -619,7 +619,7 @@ class AutoTextTemplate extends Base {
               // fromLinkable: true, toLinkable: true,
               alignment: go.Spot.Center,
               alignmentFocus: go.Spot.Center,
-              contextMenu: diagram.__trtd.getNodeContextMenu(),
+              contextMenu: $(go.Adornment),
               resizeAdornmentTemplate:  // specify what resize handles there are and how they look
               $(go.Adornment, "Spot",
                 $(go.Placeholder),  // takes size and position of adorned object

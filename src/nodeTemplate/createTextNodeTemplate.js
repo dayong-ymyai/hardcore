@@ -28,7 +28,7 @@ module.exports = function createTextNodeTemplate (diagram) {
             // fromLinkable: true, toLinkable: true,
             alignment: go.Spot.Center,
             alignmentFocus: go.Spot.Center,
-            contextMenu: diagram.__trtd.getNodeContextMenu(),
+            contextMenu: $(go.Adornment),
             doubleClick: function (e, node){
                 e.diagram.__trtd.selectText(e, node)
             }
@@ -122,7 +122,7 @@ module.exports = function createTextNodeTemplate (diagram) {
         $(go.TextBlock, {
                 name: "TEXT",
                 alignment: new go.Spot(0.5, 0.5),
-                font: "bold " + diagram.__trtd.InitialFontSize + "px 幼圆",
+                font: "bold 18px 幼圆",
                 editable: true,
                 //margin: 3, editable: true,
                 stroke: "black",

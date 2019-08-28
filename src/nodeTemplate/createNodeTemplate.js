@@ -40,7 +40,7 @@ function createNodeTemplate (diagram) {
         alignmentFocus: go.Spot.Center,
         resizeAdornmentTemplate: diagram.__trtd.nodeResizeAdornmentTemplate(),
         // contextMenu: $(go.Adornment),
-        contextMenu: diagram.__trtd.getNodeContextMenu(),
+        contextMenu: $(go.Adornment),
         selectionAdornmentTemplate: diagram.__trtd.getNodeSelectionAdornmentTemplate(),
         mouseOver: function(e, node) {
             // if(node.data.hyperlink){
@@ -217,7 +217,7 @@ function createNodeTemplate (diagram) {
                         // stretch: go.GraphObject.Vertical,
                         name: "TEXT",
                         alignment: new go.Spot(0.5, 0.5),
-                        font: "bold " + diagram.__trtd.InitialFontSize + "px 幼圆",
+                        font: "bold 18px 幼圆",
                         // editable: true,
                         //margin: 3, editable: true,
                         stroke: "black",

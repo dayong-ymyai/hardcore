@@ -420,7 +420,7 @@ class Trtd extends Trtd_tianpan {
         // myDiagram.nodeTemplateMap.add("wave", createWaveNodeTemplate(this.diagram));
         // var sampleNode = nodeTemplateFactory("sample")
         myDiagram.nodeTemplateMap.add("wave", nodeTemplateFactory("wave",{diagram:myDiagram}).getNodeTemplate());
-        myDiagram.nodeTemplateMap.add("waveTail", nodeTemplateFactory("waveTail",{diagram:myDiagram}).getNodeTemplate());
+        // myDiagram.nodeTemplateMap.add("waveTail", nodeTemplateFactory("waveTail",{diagram:myDiagram}).getNodeTemplate());
         myDiagram.nodeTemplateMap.add("iconText", nodeTemplateFactory("iconText",{diagram:myDiagram}).getNodeTemplate());
         // myDiagram.nodeTemplateMap.add("cbian",  nodeTemplateFactory("cbian",{diagram:this.diagram}).getNodeTemplate())
         myDiagram.nodeTemplateMap.add("pic",  nodeTemplateFactory("pic",{diagram:this.diagram}).getNodeTemplate())
@@ -845,6 +845,7 @@ class Trtd extends Trtd_tianpan {
         delete data.centerText
         delete data.__gohashid
         delete data.hyperlink
+        delete data.figure
         delete data.remark
         // var data =  {"category":"wave", 
         //     "text":"", 
@@ -862,6 +863,7 @@ class Trtd extends Trtd_tianpan {
         delete shiText.__gohashid
         delete shiText.textAlign
         delete shiText.hyperlink
+        delete shiText.figure
         delete shiText.remark
         delete shiText.nloc
         Object.assign(shiText, {
@@ -891,6 +893,7 @@ class Trtd extends Trtd_tianpan {
         delete xuText.__gohashid
         delete xuText.textAlign
         delete xuText.hyperlink
+        delete xuText.figure
         delete xuText.remark
         delete xuText.nloc
         Object.assign(xuText, {

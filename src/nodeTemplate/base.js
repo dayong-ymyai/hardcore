@@ -206,7 +206,7 @@ class NodeBase {
             // alignmentFocus: go.Spot.Center,
             // resizeAdornmentTemplate: diagram.__trtd.nodeResizeAdornmentTemplate(),
             // // contextMenu: $(go.Adornment),
-            // contextMenu: diagram.__trtd.getNodeContextMenu(),
+            // contextMenu: $(go.Adornment),
             // selectionAdornmentTemplate: diagram.__trtd.getNodeSelectionAdornmentTemplate(),
             // mouseOver: that.mouseOver,
             // mouseLeave: that.mouseLeave,

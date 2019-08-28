@@ -18,7 +18,7 @@ class LabelGroupNodeTemplate extends Base {
     }
 
     hiddenAllText(group){
-      console.log("hiddenAllTexthiddenAllTexthiddenAllText")
+      // console.log("hiddenAllTexthiddenAllTexthiddenAllText")
       group.diagram.startTransaction()
       var it = group.findSubGraphParts().iterator;
       var oldStatus = null;
@@ -149,10 +149,7 @@ class LabelGroupNodeTemplate extends Base {
           // }
         }) 
       },
-      new go.Binding("location", "loc", function(v){
-        // console.log("go.Point.parsego.Point.parsego.Point.parse")
-        return go.Point.parse(v)
-      }).makeTwoWay(go.Point.stringify),
+      new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
       new go.Binding("angle", "angle").makeTwoWay(function(v,data){
 
         return v;
@@ -203,7 +200,7 @@ class LabelGroupNodeTemplate extends Base {
       // new go.Binding("width","width").ofObject("placeholder"),
       // new go.Binding("height","height").ofObject("placeholder"),
       new go.Binding("desiredSize","", function(v,d){
-          console.log("vvvvvvvvvvvvv,",v,d)
+          // console.log("vvvvvvvvvvvvv,",v,d)
           // if(d.part.placeholder.measuredBounds.width < 200){
           //   return new go.Size(200,200)
           // }

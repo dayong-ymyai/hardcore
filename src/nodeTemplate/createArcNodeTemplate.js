@@ -40,7 +40,7 @@ module.exports = function createArcNodeTemplate (diagram) {
                 alignmentFocus: go.Spot.Center,
                 resizeAdornmentTemplate: diagram.__trtd.nodeResizeAdornmentTemplate(),
                 // rotateAdornmentTemplate: nodeRotateAdornmentTemplate,
-                contextMenu: diagram.__trtd.getNodeContextMenu(),
+                contextMenu: $(go.Adornment),
                 // contextMenu: $(go.Adornment),
             },
             new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),

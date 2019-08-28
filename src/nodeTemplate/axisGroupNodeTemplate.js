@@ -1,3 +1,4 @@
+'use script'
 var $ = go.GraphObject.make;
 var Base = require('./base')
 var helpers = require('../helpers/helpers.gojs')
@@ -111,11 +112,11 @@ class AxisNodeTemplate extends Base {
                 break;
             }
         }
-        if(n){
-          setTimeout(function(){
-            n.__trtdNode.switchBorder(n, false)
-          },3000)
-        }
+        // if(n){
+        //   setTimeout(function(){
+        //     n.__trtdNode.switchBorder(n, false)
+        //   },3000)
+        // }
       },
         // rotatable: true,
         // resizable: true,
@@ -136,10 +137,12 @@ class AxisNodeTemplate extends Base {
         //   }
         // }) 
       },
+      new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
       new go.Binding("angle", "angle").makeTwoWay(function(v,data){
 
         return v;
       }),
+      // new go.Binding("desiredSize", "desiredSize", go.Size.parse).makeTwoWay(go.Size.stringify),
       new go.Binding("copyable", "copyable").makeTwoWay(),
         $(go.Shape,  // using a Shape instead of a Placeholder
           { name: "PH",
@@ -195,7 +198,7 @@ class AxisNodeTemplate extends Base {
           //   // group.diagram.model.setDataProperty(group.data, "desiredSize", `${maxWidth+100} ${maxHeight}`) 
           // }).makeTwoWay(go.Size.stringify)
         ),
-        new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+        
         // $(go.Placeholder,    // represents the area of all member parts,
         //   { padding: 0}
         // ),  // with some extra padding around them
