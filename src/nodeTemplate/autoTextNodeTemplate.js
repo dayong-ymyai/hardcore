@@ -516,7 +516,20 @@ class AutoTextTemplate extends Base {
               },
               click: (e, node)=>{
                 console.log(node.data)
-
+                // if(node.data.group && node.containingGroup.data.category == "picGroup"){
+                //     var it = node.containingGroup.findSubGraphParts().iterator;
+                //     var basePoint;
+                //     while(it.next()){
+                //         var n = it.value;
+                //         if(n.data.role == "theme"){
+                //             basePoint = n;
+                //             break;
+                //         }
+                //     }
+                //     if(basePoint){
+                //         console.log(`cbian ${node.data.role} offset: `, node.location.copy().subtract(basePoint.location))
+                //     }
+                // }
                 // if(node.data.role == "centerText"){
                 //     var waveNode = node.diagram.findNodeForKey(node.data.olive)
                 //     node.layerName = "Background"
@@ -566,6 +579,11 @@ class AutoTextTemplate extends Base {
                 //   textObj.isUnderline = true;
                 // }
                 // console.log("mouseOvermouseOvermouseOver")
+  
+                    if(node.data.text == ""){
+                        node.findObject("textBorder").visible = true;
+                    }
+                
                 if(node.data.showBorder){
                     if(node.data.text == "" && (node.data.role == "xuText" || node.data.role == "shiText" )){
                         node.findObject("textBorder").visible = true;
@@ -595,11 +613,11 @@ class AutoTextTemplate extends Base {
                 },
             mouseLeave: function(e, node) {
             //   if(node.data.text == ""){
-                if(node.data.showBorder){
+                // if(node.data.showBorder){
                     // if(node.data.text == ""){
                         node.findObject("textBorder").visible = false;
                     // }
-                }
+                // }
                 if(node.data.role == "centerText"){
                     node.layerName = "Foreground"
                     // node.diagram.model.startTransaction("centerText")
@@ -680,7 +698,7 @@ class AutoTextTemplate extends Base {
                   portId: "TEXT",
                   margin:5,
                   maxSize:new go.Size(600,NaN),
-                  minSize: new go.Size(10,10),
+                  minSize: new go.Size(50,10),
                   stretch: go.GraphObject.UniformToFill,
                   textEdited: function(textBlock,oldv,newv){
 

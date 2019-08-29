@@ -738,37 +738,52 @@ class Trtd extends Trtd_tianpan {
         if(cbian && cbian.group){
             groupData.group = cbian.group
         }
-        var picData = { "group":groupKey, "text":"", 
+        var picData = { "group":groupKey, "text":"", cbianName:"cbian1",
         "resizable":false, "category":"pic", 
         "loc":go.Point.stringify(basePoint),
         "picture":"https://static.365trtd.com/system/cbian/cbian.png", "width":150, "height":150}
         // "picture":"https://static.365trtd.com/system/cbian/cbian.png", "width":150, "height":150}
-        
-        var themeData = {"text":"总结", "deletable":true,  "fill":"black", "iconVisible":false, 
+       
+        var themeData = {"text":"总结","role":"theme", "deletable":false,  "fill":"black", "iconVisible":false, 
         "locationSpot":"1 0 0 0", "textAlign":"center", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(3,-3)), 
         "movable":true, "group":groupKey}
-        var timeData = {"text":"时间", "deletable":true,  "fill":"black", "iconVisible":false, 
+        var timeData = {"text":"时间","role":"axisXText", "deletable":false,  "fill":"black", "iconVisible":false, 
         "locationSpot":"1 0 0 0", "textAlign":"center", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(150, 0)), 
         "movable":true, "group":groupKey}
-        var energeData = {"text":"能量", "deletable":true, "fill":"black", "iconVisible":false, 
+        var energeData = {"text":"能量","role":"axisYText", "deletable":false, "fill":"black", "iconVisible":false, 
         "locationSpot":"1 0 0 0", "textAlign":"center", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(0, -150)), 
         "movable":true, "group":groupKey}
-        var text1Data = {"text":"总结1", "deletable":true,  "textStroke":"#0e399d", "iconVisible":false, 
+        var text1Data = {"text":"总结1","role":"cbianText1", "deletable":false,  "textStroke":"#0e399d", "iconVisible":false, 
         "locationSpot":"0 0 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(155*Math.cos(30*Math.PI/180), -150*Math.sin(30*Math.PI/180))), 
         "movable":true, "group":groupKey}
-        var text2Data = {"text":"总结3", "deletable":true, "textStroke":"#FFC000", "iconVisible":false, 
+        var text2Data = {"text":"总结3", "role":"cbianText3","deletable":false, "textStroke":"#FFC000", "iconVisible":false, 
         "locationSpot":"0 0.5 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(145*Math.cos(45*Math.PI/180), -150*Math.sin(45*Math.PI/180))), 
         "movable":true, "group":groupKey}
-        var text3Data = {"text":"总结2", "deletable":true, "textStroke":"#cb1c27", "iconVisible":false, 
+        var text3Data = {"text":"总结2","role":"cbianText2", "deletable":false, "textStroke":"#cb1c27", "iconVisible":false, 
         "locationSpot":"0 1 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(145*Math.cos(70*Math.PI/180), -140*Math.sin(70*Math.PI/180))), 
         "movable":true, "group":groupKey}
 
+        var cbianName = localStorage.getItem("cbianName");
+        if(cbianName){
+            try{
+                var theme = JSON.parse(cbianName);
+                picData.picture = theme["picture"]
+                picData.width = theme['size'][0]
+                picData.height = theme['size'][1]
+                picData.cbianName = theme['name']
+                text1Data.textStroke = theme["textStrokes"][0]
+                text3Data.textStroke = theme["textStrokes"][1]
+                text2Data.textStroke = theme["textStrokes"][2]
+            }catch(e){
+                console.error(e)
+            }
+        }
         if(cbian){
             text1Data.text = cbian.shiText;
             text2Data.text = cbian.centerText;
@@ -1320,6 +1335,7 @@ class Trtd extends Trtd_tianpan {
             <li trtd_action="bringToBackground"><a class="i18n" data-lang="cancelfix">置于底层</a></li>
             <li trtd_action="bringToForeground"><a class="i18n" data-lang="cancelfix">置于顶层</a></li>
             <li trtd_action="addDimTtext"><a class="i18n" data-lang="cancelfix">增加维度</a></li>
+            <li trtd_action="switchCbianSize"><a class="i18n" data-lang="cancelfix">切换大小</a></li>
         </ul>
         `
     }
@@ -1332,7 +1348,7 @@ class Trtd extends Trtd_tianpan {
                 showIds = "addCbian,apiDeleteSelection"
             }
             if(["picGroup"].indexOf(node.data.category) > -1){
-                showIds = "apiDeleteSelection"
+                showIds = "apiDeleteSelection,switchCbianSize"
             }
 
             if(["3"].indexOf(node.data.category) > -1){
@@ -1389,6 +1405,7 @@ class Trtd extends Trtd_tianpan {
                     showIds += ",drillAnalyze"
                 }
             }
+            
             // return "addFollowerGround," + "addNewCircle,"+"apiDeleteSelection";
         }else{
             // return "addFollowerGround"
@@ -1500,6 +1517,16 @@ class Trtd extends Trtd_tianpan {
         this.diagram.commitTransaction("addDimTtext");
     }
 
+    switchCbianSize(){
+        console.log("switchCbianSizeswitchCbianSize")
+        var node = this.diagram.selection.first();
+        if(!node) return;
+        if(node.data.cbianType == "big"){
+            node.__trtdNode.changeCbianSize(node,"small")
+        }else{
+            node.__trtdNode.changeCbianSize(node,"big")
+        }
+    }
     bringToBackground(){
         var node = this.diagram.selection.first();
         var myDiagram = this.diagram;
@@ -1815,7 +1842,7 @@ class Trtd extends Trtd_tianpan {
         }
         // 火花矩阵文字
         if(node.data.category == "autoText" && node.data.subRole == "coreText"){
-            if(!(node.containingGroup && node.containingGroup.data.category == "yunGroup" && node.containingGroup.data.category == "yunpanGroup")){
+            if(!(node.containingGroup && node.containingGroup.data.category == "yunGroup")){
                 return;
             }
             var nextNode;
