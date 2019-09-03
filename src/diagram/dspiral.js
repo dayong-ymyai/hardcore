@@ -105,9 +105,18 @@ class Trtd extends Trtd_tianpan {
                         e.subject.part.layout.isValidLayout = false;
                     },100)
                 }else if(node.data.category === "autoText"){
+                    console.log("e.subject.width resize")
+                    if(e.subject.width <= 50){
+                        e.subject.width = 50
+                    }
+                    if(e.subject.height <= 35){
+                        e.subject.height =35
+                    }
                     e.diagram.startTransaction("resize");
                     e.diagram.model.setDataProperty(node.data, "width", e.subject.width);
                     e.diagram.model.setDataProperty(node.data, "nwidth", true);
+                    e.diagram.model.setDataProperty(node.data, "height", e.subject.height);
+                    e.diagram.model.setDataProperty(node.data, "nheight", true);
                     e.diagram.commitTransaction("resize");
                 }
             },

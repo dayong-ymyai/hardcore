@@ -1,6 +1,6 @@
 {
     "name": "hardcore",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "description": "hardcore.js is a diagram javascript library for drawing creative charts, based on gojs",
     "main": "lib/main.js",
     "scripts": {
