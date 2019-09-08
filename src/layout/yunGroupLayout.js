@@ -356,8 +356,8 @@
         //   // obj.diagram.model.setDataProperty(obj.data, "height", null)
         // }
           obj.areaBackground = null
-          obj.diagram.model.setDataProperty(obj.data, "height", null)
-          obj.diagram.model.setDataProperty(obj.data, "width", null)
+          // obj.diagram.model.setDataProperty(obj.data, "height", null)
+          // obj.diagram.model.setDataProperty(obj.data, "width", null)
           // obj.findObject("place").visible = false;
           // console.log("verticalLines.length+1)/2verticalLines.length+1)/2",(verticalLines.length+1)/2)
           if(group.data.autoSnapText){
@@ -401,20 +401,20 @@
               obj.location = new go.Point(dimXLoc, dimYLoc)
             }
           }
-          if(obj.data.orderY == centerOrderY||obj.data.dimY == centerOrderY){
+          if(obj.data.subRole != "themeText" && obj.data.orderY == centerOrderY||obj.data.dimY == centerOrderY){
             // console.log("Ddddddd")
             obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
             // delete obj.data.height
             obj.diagram.model.setDataProperty(obj.data, "height", null)
           }
-          if(obj.data.orderX == centerOrderX || obj.data.dimX == centerOrderX ){
+          if(obj.data.subRole != "themeText" && obj.data.orderX == centerOrderX || obj.data.dimX == centerOrderX ){
             // console.log("Ddddddd")
             obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
             obj.diagram.model.setDataProperty(obj.data, "width", null)
             // delete obj.data.width
           }
 
-          if(Math.abs(obj.data.orderX-centerOrderX) <= 1 && Math.abs(obj.data.orderY-centerOrderY) <= 1){
+          if(Math.abs(obj.data.orderX-centerOrderX) == 1 && Math.abs(obj.data.orderY-centerOrderY) == 1){
             // 中心节点
             if(snapType != "between"){
               obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
@@ -428,13 +428,13 @@
             // obj.diagram.model.setDataProperty(obj.data, "deletable", false)
             // obj.diagram.model.setDataProperty(obj.data, "subRole", "themeText")
             // obj.diagram.model.setDataProperty(obj.data, "height",`${gridHeight-10}`)
-            if(snapType == "between"){
-              obj.diagram.model.setDataProperty(obj.data, "width",gridWidth+gridWidth-10)
-              obj.diagram.model.setDataProperty(obj.data, "height",gridHeight+gridHeight-10)
-            }else{
-              obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
-              obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
-            }
+            // if(snapType == "between"){
+            //   obj.diagram.model.setDataProperty(obj.data, "width",gridWidth+gridWidth-10)
+            //   obj.diagram.model.setDataProperty(obj.data, "height",gridHeight+gridHeight-10)
+            // }else{
+            //   obj.diagram.model.setDataProperty(obj.data, "width",gridWidth-10)
+            //   obj.diagram.model.setDataProperty(obj.data, "height",gridHeight-10)
+            // }
           }
           // else{
           //   // var list = verticalLines[0].layer.findObjectsNear(obj.location, dist)

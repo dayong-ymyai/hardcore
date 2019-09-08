@@ -35,7 +35,7 @@
         if(myDiagram){
             myDiagram.diagram == null;
         }
-        myDiagram = new Trtd("myDiagramDiv",{type:'huo',
+        myDiagram = new Trtd("myDiagramDiv",{type:'dspiral',
             modelChangedListener:function(m){
                 // console.log('from trtd:',m);
             }
@@ -64,13 +64,13 @@
         // ]}
         
 
-        var jsonData = { "class": "go.GraphLinksModel",
-  "modelData": {"currentType":"tianpan", "updatedAt":1552038919988},
+        var jsonData = { "class": "GraphLinksModel",
+  "modelData": {"currentType":"tianpan", "type":"dspiral", "updatedAt":1567597747156},
   "nodeDataArray": [ 
-{"key":"8", "strokeWidth":5, "stroke":"black", "fill":"black", "level":1, "loc":"-750.81192458967428 24.75961991831798", "category":"8", "geometryValue":"threeWheel", "desiredSize":"870 880", "angle":0},
-{"key":"10", "text":"3", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5, "loc":"-959.0975023834795 243.53478188420019"},
-{"key":"122", "text":"1", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5, "loc":"-841.5153190741647 -294.85811159830916"},
-{"key":"102", "text":"2", "level":0, "radius":100, "fill":"white", "category":"0", "strokeWidth":2, "stroke":"black", "font":"bold 18px 幼圆", "textStroke":"black", "newAdd":true, "angle":5, "loc":"-425.87009863347953 5.721701884200172"}
+{"key":"8", "strokeWidth":5, "stroke":"black", "fill":"black", "level":1, "loc":"-752.5019245896742 24.75961991831798", "category":"8", "geometryValue":"threeWheel", "desiredSize":"870 880", "angle":0},
+{"text":"1", "category":"text", "loc":"-752.0499999999998 -234.90999999999997", "key":-5},
+{"text":"3", "category":"text", "loc":"-973.4399999999997 168.9999999999999", "key":-6},
+{"text":"2", "category":"text", "loc":"-495.16999999999985 182.51999999999998", "key":-7}
  ],
   "linkDataArray": []}
         myDiagram.loadModel(JSON.stringify(jsonData));

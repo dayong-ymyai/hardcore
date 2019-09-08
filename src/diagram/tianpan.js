@@ -232,6 +232,16 @@ class Trtd  extends TRTD_BASE {
             if(tmpModel.nodeDataArray[i].category == "labelGroup"){
                 tmpModel.nodeDataArray[i].selectable = false
             }
+            // if(tmpModel.nodeDataArray[i].category == "autoText" && tmpModel.nodeDataArray[i].subRole=="themeText"
+            //     && tmpModel.nodeDataArray[i].orderX == 10 && tmpModel.nodeDataArray[i].orderY == 10
+            // ){
+            //     if(!tmpModel.nodeDataArray[i].width){
+            //         tmpModel.nodeDataArray[i].width = 140
+            //     }
+            //     if(!tmpModel.nodeDataArray[i].height){
+            //         tmpModel.nodeDataArray[i].height = 140
+            //     }
+            // }
         }
         // tmpModel.modelData.version = Trtd.version
         // console.log(" tmpModel.modelData.version ",  tmpModel.modelData.version)
@@ -793,7 +803,10 @@ class Trtd  extends TRTD_BASE {
             var link = {};
             // link = _.extendOwn(link, oldlink);
             // link = helpers.extend(link, oldlink);
-            delete oldlink.points;
+            if(oldlink){
+                delete oldlink.points;
+
+            }
             link = JSON.parse(JSON.stringify(oldlink))
             delete link.__gohashid;
             delete link.points;

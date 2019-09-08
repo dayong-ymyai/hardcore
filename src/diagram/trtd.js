@@ -10,6 +10,7 @@ class Trtd {
 		this.modelChangedListener = config.modelChangedListener;
 		this.showContextMenuListener = config.showContextMenuListener;
 		this.hideContextMenuListener = config.hideContextMenuListener;
+		this.dealFireTextCallback = config.dealFireTextCallback;
 		this.ViewportBoundsChangedListener = config.ViewportBoundsChangedListener;
 		this.InitialLayoutCompleted = config.InitialLayoutCompleted;
         this.cxElement = config.cxElement; // 外部传入的菜单dom元素

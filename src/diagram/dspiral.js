@@ -1142,6 +1142,78 @@ class Trtd extends Trtd_tianpan {
             }
         }
     }
+
+    apiGetFireText(){
+        var fireTexts = {}
+        var node = this.diagram.selection.first()
+        if(!node) return fireTexts
+        if(node.containingGroup && node.containingGroup.data.category == "yunGroup"){
+            var group = node.containingGroup;
+            
+            var x = Math.max(Math.abs(node.data.orderX - 10), Math.abs(node.data.orderY -10))
+            var it = group.findSubGraphParts().iterator;
+            while(it.next()){
+                var n = it.value;
+                if(n.data.dimX == (0) && n.data.dimY == (19)){
+                    fireTexts.dimText1 = n;
+                }
+                if(n.data.dimX == (10) && n.data.dimY == (19)){
+                    fireTexts.dimText2 = n;
+                }
+                if(n.data.dimX == (19) && n.data.dimY == (19)){
+                    fireTexts.dimText3 = n;
+                }
+                if(n.data.dimX == (19) && n.data.dimY == (10)){
+                    fireTexts.dimText4 = n;
+                }
+                if(n.data.dimX == (19) && n.data.dimY == (19)){
+                    fireTexts.dimText5 = n;
+                }
+                if(n.data.dimX == (10) && n.data.dimY == (0)){
+                    fireTexts.dimText6 = n;
+                }
+                if(n.data.dimX == (0) && n.data.dimY == (0)){
+                    fireTexts.dimText7 = n;
+                }
+                if(n.data.dimX == (0) && n.data.dimY == (10)){
+                    fireTexts.dimText8 = n;
+                }
+                if(n.data.orderX == (10-x) && n.data.orderY == (10+x)){
+                    fireTexts.text1 = n;
+                }
+ 
+                if(n.data.orderX == (10) && n.data.orderY == (10+x)){
+                    fireTexts.text2 = n;
+                }
+                if(n.data.orderX == (10+x) && n.data.orderY == (10+x)){
+                    fireTexts.text3 = n;
+                }
+                if(n.data.orderX == (10+x) && n.data.orderY == (10)){
+                    fireTexts.text4 = n;
+                }
+                if(n.data.orderX == (10+x) && n.data.orderY == (10-x)){
+                    fireTexts.text5 = n;
+                }
+                if(n.data.orderX == (10) && n.data.orderY == (10-x)){
+                    fireTexts.text6 = n;
+                }
+                if(n.data.orderX == (10-x) && n.data.orderY == (10-x)){
+                    fireTexts.text7 = n;
+                }
+                if(n.data.orderX == (10-x) && n.data.orderY == (10)){
+                    fireTexts.text8 = n;
+                }
+                if(n.data.subRole == "themeText"){
+                    fireTexts.themeText = n;
+                }
+
+            }
+            fireTexts.radius = x;
+            return fireTexts
+        }
+        return fireTexts
+    }
+
     apiSwitchWaveTail(){
         console.log("apiSwitchWaveTailapiSwitchWaveTail")
         var node = this.diagram.selection.first()
