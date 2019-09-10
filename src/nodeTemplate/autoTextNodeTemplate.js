@@ -8,7 +8,70 @@ class AutoTextTemplate extends Base {
     // this.nodeProperties = {}
   }
 
-  getFireGeo() {}
+  dealFireText(e, part) {
+    console.log("click fire button")
+    // return
+    var diagram = e.diagram;
+    var node = diagram.selection.first();
+    var it = node.containingGroup.findSubGraphParts().iterator;
+    var centerNode;
+    while(it.next()){
+        var n = it.value;
+        if(n.data.subRole == "themeText"){
+          centerNode= n;
+          // break;
+        }
+        
+    }
+    // diagram.commandHandler.scrollToPart(centerNode);
+    function checkSameRadius(n, centerNode, node){
+        if(n.data.dimKey == null) return false;
+        var maxRadius = Math.max(Math.abs(node.data.orderX-centerNode.data.orderX), Math.abs(node.data.orderY-centerNode.data.orderY));
+      if(Math.abs(n.data.orderX - centerNode.data.orderX) == maxRadius || Math.abs(n.data.orderY - centerNode.data.orderY) == maxRadius){
+          return true;
+      }else{
+          return false
+      }
+      var r1 = (n.data.orderX - centerNode.data.orderX)*(n.data.orderX - centerNode.data.orderX) + (n.data.orderY - centerNode.data.orderY)*(n.data.orderY - centerNode.data.orderY)
+      var r2 = (node.data.orderX - centerNode.data.orderX)*(node.data.orderX - centerNode.data.orderX) + (node.data.orderY - centerNode.data.orderY)*(node.data.orderY - centerNode.data.orderY)
+      return r1 == r2
+    }
+    var radius = Math.max(node.data.orderX, node.data.orderY);
+    radius = Math.abs(radius - centerNode.data.orderX);
+    // if(radius < 5) return;
+    it.reset()
+    while(it.next()){
+      var n = it.value;
+
+      if(!checkSameRadius(n, centerNode, node)){
+      //   centerNode= n;
+      // n.opacity = 0.1
+      
+        // break;
+      }else{
+          var obj = n.findObject("TEXT");
+          // obj.__font = obj.font;
+          // obj.font = "30px 'Microsoft YaHei'";
+          // n.findObject("TEXT").font = "40px 'Microsoft YaHei'";
+      }
+      
+  }
+  //   node.data.role == "centerText"
+  //   diagram.scrollToRect(node.naturalBounds)
+  var group = node.containingGroup;
+  var width = group.data.gridWidth
+  radius = 10
+  var rect = new go.Rect(new go.Point(centerNode.position.x- width*(radius+1),centerNode.position.y- width*(radius+1)), new go.Size(width*(radius+1)*2, width*(radius+1)*2))
+  // var rect = new go.Rect(go.Point.parse("1803.1413612565443 1348.6910994764396"), new go.Size(700,700))
+  diagram.animationManager.isEnabled = false
+  diagram.zoomToRect(rect)
+  diagram.centerRect(centerNode.actualBounds);
+  diagram.animationManager.isEnabled = true
+    if(e.diagram.__trtd.dealFireTextCallback){
+      e.diagram.__trtd.dealFireTextCallback(e, node)
+  }
+
+  }
 
   getNodeSelectionAdornmentTemplate() {
       var that = this;
@@ -142,65 +205,8 @@ class AutoTextTemplate extends Base {
           cursor: "pointer",
           click: function(e, part){
             //    if()
-            if(e.diagram.__trtd.dealFireTextCallback){
-               e.diagram.__trtd.dealFireTextCallback(e, part)
-           }
-              console.log("click fire button")
-              // return
-              var diagram = e.diagram;
-              var node = diagram.selection.first();
-              var it = node.containingGroup.findSubGraphParts().iterator;
-              var centerNode;
-              while(it.next()){
-                  var n = it.value;
-                  if(n.data.subRole == "themeText"){
-                    centerNode= n;
-                    // break;
-                  }
-                  
-              }
-              diagram.commandHandler.scrollToPart(centerNode);
-              function checkSameRadius(n, centerNode, node){
-                  if(n.data.dimKey == null) return false;
-                  var maxRadius = Math.max(Math.abs(node.data.orderX-centerNode.data.orderX), Math.abs(node.data.orderY-centerNode.data.orderY));
-                if(Math.abs(n.data.orderX - centerNode.data.orderX) == maxRadius || Math.abs(n.data.orderY - centerNode.data.orderY) == maxRadius){
-                    return true;
-                }else{
-                    return false
-                }
-                var r1 = (n.data.orderX - centerNode.data.orderX)*(n.data.orderX - centerNode.data.orderX) + (n.data.orderY - centerNode.data.orderY)*(n.data.orderY - centerNode.data.orderY)
-                var r2 = (node.data.orderX - centerNode.data.orderX)*(node.data.orderX - centerNode.data.orderX) + (node.data.orderY - centerNode.data.orderY)*(node.data.orderY - centerNode.data.orderY)
-                return r1 == r2
-              }
-              var radius = Math.max(node.data.orderX, node.data.orderY);
-              radius = Math.abs(radius - centerNode.data.orderX);
-              // if(radius < 5) return;
-              it.reset()
-              while(it.next()){
-                var n = it.value;
-
-                if(!checkSameRadius(n, centerNode, node)){
-                //   centerNode= n;
-                // n.opacity = 0.1
-                
-                  // break;
-                }else{
-                    var obj = n.findObject("TEXT");
-                    // obj.__font = obj.font;
-                    // obj.font = "30px 'Microsoft YaHei'";
-                    // n.findObject("TEXT").font = "40px 'Microsoft YaHei'";
-                }
-                
-            }
-            //   node.data.role == "centerText"
-            //   diagram.scrollToRect(node.naturalBounds)
-            var group = node.containingGroup;
-            var width = group.data.gridWidth
-            radius = 10
-            var rect = new go.Rect(new go.Point(centerNode.position.x- width*(radius+1),centerNode.position.y- width*(radius+1)), new go.Size(width*(radius+1)*2, width*(radius+1)*2))
-            // var rect = new go.Rect(go.Point.parse("1803.1413612565443 1348.6910994764396"), new go.Size(700,700))
-            diagram.zoomToRect(rect)
-              diagram.centerRect(centerNode.actualBounds);
+     
+            that.dealFireText(e, part)
             // diagram.commandHandler.scrollToPart(centerNode)
             
           } // this function is defined below
@@ -457,6 +463,11 @@ class AutoTextTemplate extends Base {
               "dim" + normDim,
               selOrder
             );
+            // e.diagram.model.setDataProperty(
+            //   node.data,
+            //   "rho" + normDim,
+            //   selOrder
+            // );
             e.diagram.model.commitTransaction("dimTextExchange");
             return;
           }

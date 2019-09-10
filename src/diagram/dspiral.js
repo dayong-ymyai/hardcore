@@ -1143,15 +1143,35 @@ class Trtd extends Trtd_tianpan {
         }
     }
 
-    apiGetFireText(){
+    triggerShowFireText(){
+        var e = this.diagram.lastInput;
+        var node = this.diagram.selection.first()
+        if(!node) return;
+        node.__trtdNode.dealFireText(e)
+    }
+    
+    // 获取火花矩阵某一圈的文字
+    apiGetFireText(theta){
         var fireTexts = {}
         var node = this.diagram.selection.first()
+        // var group = node.containingGroup;
+       
         if(!node) return fireTexts
         if(node.containingGroup && node.containingGroup.data.category == "yunGroup"){
             var group = node.containingGroup;
-            
+            var it;
+            if(theta){
+                 it = group.findSubGraphParts().iterator;
+                while(it.next()){
+                    if(it.value.data.theta == theta){
+                        node = it.value;
+                        break;
+                    }
+                }
+                it.reset();
+            }
             var x = Math.max(Math.abs(node.data.orderX - 10), Math.abs(node.data.orderY -10))
-            var it = group.findSubGraphParts().iterator;
+             it = group.findSubGraphParts().iterator;
             while(it.next()){
                 var n = it.value;
                 if(n.data.dimX == (0) && n.data.dimY == (19)){
