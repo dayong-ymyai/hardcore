@@ -47,6 +47,7 @@ Trtd.go = go;
 Trtd.version = TRTD_VERSION
 /*eslint-enable no-undef */
 console.info(`Trtd version:${Trtd.version}`)
+window.localStorage.setItem("HARDCORE_VERSION",Trtd.version)
 if (typeof window !== 'undefined') {
 	window.Trtd = Trtd;
 }

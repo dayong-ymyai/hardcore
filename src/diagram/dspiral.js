@@ -633,6 +633,31 @@ class Trtd extends Trtd_tianpan {
             }
         }
     }
+    exportAsSubFigure(){
+        var diagram = this.diagram
+        var node = diagram.selection.first()
+        if(!node) return;
+        if(!node.data.isGroup) return;
+        var it = node.findSubGraphParts().iterator;
+        var groupData = [node.data]
+        var theme = null;
+        while(it.next()){
+            var n = it.value;
+            groupData.push(n.data)
+            if(n.data.role == "themeText"){
+                theme = n
+            }
+        }
+        var model = JSON.parse(diagram.model.toJson())
+        model.nodeDataArray = groupData;
+        if(this.exportAsSubFigureCallback){
+            this.exportAsSubFigureCallback({
+                node: node,
+                model: model,
+                theme: theme
+            })
+        }
+    }
 
     // 拆分橄榄
     splitOlive2Half(){
@@ -1405,6 +1430,7 @@ class Trtd extends Trtd_tianpan {
     getDefaultCustomMenuDivStr(){
         return `
         <ul>
+            <li trtd_action="exportAsSubFigure"><a class="i18n" data-lang="cancelfix">创建为子盘</a></li>
             <li trtd_action="drillAnalyze"><a class="i18n" data-lang="cancelfix">插入子盘</a></li>
             <li trtd_action="addFollower"><a class="i18n" data-lang="insertsl">插入同级节点</a></li>
             <li trtd_action="startNewSpiral"><a class="i18n" data-lang="icn">插入子节点</a></li>
@@ -1446,7 +1472,7 @@ class Trtd extends Trtd_tianpan {
         if(node){
             // 双螺旋可以添加常变
             if(["axisGroup"].indexOf(node.data.category) > -1){
-                showIds = "addCbian,apiDeleteSelection"
+                showIds = "addCbian,apiDeleteSelection,exportAsSubFigure"
             }
             if(["picGroup"].indexOf(node.data.category) > -1){
                 showIds = "apiDeleteSelection,switchCbianSize"
@@ -1506,7 +1532,13 @@ class Trtd extends Trtd_tianpan {
                     showIds += ",drillAnalyze"
                 }
             }
+            if(["autoText"].indexOf(node.data.category)>-1){
+                // if(node.data.text){
+                    showIds += ",apiDuplicateNode"
+                // }
+            }
             
+            // apiDuplicateNode
             // return "addFollowerGround," + "addNewCircle,"+"apiDeleteSelection";
         }else{
             // return "addFollowerGround"

@@ -11,6 +11,7 @@ class Trtd {
 		this.showContextMenuListener = config.showContextMenuListener;
 		this.hideContextMenuListener = config.hideContextMenuListener;
 		this.dealFireTextCallback = config.dealFireTextCallback;
+		this.exportAsSubFigureCallback = config.exportAsSubFigureCallback; // 将选中内容创建为子盘
 		this.ViewportBoundsChangedListener = config.ViewportBoundsChangedListener;
 		this.InitialLayoutCompleted = config.InitialLayoutCompleted;
         this.cxElement = config.cxElement; // 外部传入的菜单dom元素
@@ -319,6 +320,19 @@ apiDuplicateNode() {
         delete data.next;
         delete data.group;
         delete data.parent;
+        delete data.role
+        delete data.group
+        delete data.dimKey
+        delete data.subRole
+        delete data.order
+        delete data.figure
+        delete data.iconVisible
+        delete data.deletable
+        delete data.theta
+        delete data.orderX
+        delete data.orderY
+        delete data.dimX
+        delete data.dimY
         return data;
     }
 }

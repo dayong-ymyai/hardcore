@@ -662,6 +662,7 @@ class WaveNodeTemplate extends Base {
         resizeObjectName: "main",
         selectionObjectName: "main",
         rotatable: false,
+        toolTip: that.getTooTip(),
         resizeAdornmentTemplate: that.nodeResizeAdornmentTemplate(),
         layoutConditions:
           ~go.Part.LayoutStandard &
@@ -669,6 +670,7 @@ class WaveNodeTemplate extends Base {
           go.Part.LayoutAdded &
           go.Part.LayoutNodeSized,
         locationSpot: go.Spot.LeftCenter,
+        
         // toolTip:  // define a tooltip for each node that displays the color as text
         // $(go.Adornment, "Spot",
         //   $(go.TextBlock, { margin: 4 },
@@ -927,6 +929,7 @@ class WaveNodeTemplate extends Base {
           fill: "rgba(0,0,0,0)",
           stroke: null,
           width: 300,
+        
           height: 150
         },
         new go.Binding("areaBackground", "isHighlighted", function(h, shape) {

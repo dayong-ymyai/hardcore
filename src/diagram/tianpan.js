@@ -752,7 +752,13 @@ class Trtd  extends TRTD_BASE {
                 return;
             }
             myDiagram.startTransaction('sub');
-            this.deleteNode(node, e);
+
+            if(node.data.category == "autoText"){
+                myDiagram.model.removeNodeData(node.data)
+            }else{
+                this.deleteNode(node, e);
+            }
+
     
             myDiagram.commitTransaction('sub');
             // myDiagram.model.removeNodeData(node.data);
@@ -763,6 +769,7 @@ class Trtd  extends TRTD_BASE {
         } catch (ex) {
             console.log(ex);
             myDiagram.commitTransaction("deleteSelection1");
+            return;
         }
         // myDiagram.updateAllTargetBindings();
         myDiagram.commitTransaction("deleteSelection1");

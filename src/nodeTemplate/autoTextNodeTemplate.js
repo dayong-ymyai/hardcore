@@ -8,73 +8,91 @@ class AutoTextTemplate extends Base {
     // this.nodeProperties = {}
   }
 
+
+
   dealFireText(e, part) {
-    console.log("click fire button")
+    console.log("click fire button");
     // return
     var diagram = e.diagram;
     var node = diagram.selection.first();
     var it = node.containingGroup.findSubGraphParts().iterator;
     var centerNode;
-    while(it.next()){
-        var n = it.value;
-        if(n.data.subRole == "themeText"){
-          centerNode= n;
-          // break;
-        }
-        
+    while (it.next()) {
+      var n = it.value;
+      if (n.data.subRole == "themeText") {
+        centerNode = n;
+        // break;
+      }
     }
     // diagram.commandHandler.scrollToPart(centerNode);
-    function checkSameRadius(n, centerNode, node){
-        if(n.data.dimKey == null) return false;
-        var maxRadius = Math.max(Math.abs(node.data.orderX-centerNode.data.orderX), Math.abs(node.data.orderY-centerNode.data.orderY));
-      if(Math.abs(n.data.orderX - centerNode.data.orderX) == maxRadius || Math.abs(n.data.orderY - centerNode.data.orderY) == maxRadius){
-          return true;
-      }else{
-          return false
+    function checkSameRadius(n, centerNode, node) {
+      if (n.data.dimKey == null) return false;
+      var maxRadius = Math.max(
+        Math.abs(node.data.orderX - centerNode.data.orderX),
+        Math.abs(node.data.orderY - centerNode.data.orderY)
+      );
+      if (
+        Math.abs(n.data.orderX - centerNode.data.orderX) == maxRadius ||
+        Math.abs(n.data.orderY - centerNode.data.orderY) == maxRadius
+      ) {
+        return true;
+      } else {
+        return false;
       }
-      var r1 = (n.data.orderX - centerNode.data.orderX)*(n.data.orderX - centerNode.data.orderX) + (n.data.orderY - centerNode.data.orderY)*(n.data.orderY - centerNode.data.orderY)
-      var r2 = (node.data.orderX - centerNode.data.orderX)*(node.data.orderX - centerNode.data.orderX) + (node.data.orderY - centerNode.data.orderY)*(node.data.orderY - centerNode.data.orderY)
-      return r1 == r2
+      var r1 =
+        (n.data.orderX - centerNode.data.orderX) *
+          (n.data.orderX - centerNode.data.orderX) +
+        (n.data.orderY - centerNode.data.orderY) *
+          (n.data.orderY - centerNode.data.orderY);
+      var r2 =
+        (node.data.orderX - centerNode.data.orderX) *
+          (node.data.orderX - centerNode.data.orderX) +
+        (node.data.orderY - centerNode.data.orderY) *
+          (node.data.orderY - centerNode.data.orderY);
+      return r1 == r2;
     }
     var radius = Math.max(node.data.orderX, node.data.orderY);
     radius = Math.abs(radius - centerNode.data.orderX);
     // if(radius < 5) return;
-    it.reset()
-    while(it.next()){
+    it.reset();
+    while (it.next()) {
       var n = it.value;
 
-      if(!checkSameRadius(n, centerNode, node)){
-      //   centerNode= n;
-      // n.opacity = 0.1
-      
+      if (!checkSameRadius(n, centerNode, node)) {
+        //   centerNode= n;
+        // n.opacity = 0.1
         // break;
-      }else{
-          var obj = n.findObject("TEXT");
-          // obj.__font = obj.font;
-          // obj.font = "30px 'Microsoft YaHei'";
-          // n.findObject("TEXT").font = "40px 'Microsoft YaHei'";
+      } else {
+        var obj = n.findObject("TEXT");
+        // obj.__font = obj.font;
+        // obj.font = "30px 'Microsoft YaHei'";
+        // n.findObject("TEXT").font = "40px 'Microsoft YaHei'";
       }
-      
-  }
-  //   node.data.role == "centerText"
-  //   diagram.scrollToRect(node.naturalBounds)
-  var group = node.containingGroup;
-  var width = group.data.gridWidth
-  radius = 10
-  var rect = new go.Rect(new go.Point(centerNode.position.x- width*(radius+1),centerNode.position.y- width*(radius+1)), new go.Size(width*(radius+1)*2, width*(radius+1)*2))
-  // var rect = new go.Rect(go.Point.parse("1803.1413612565443 1348.6910994764396"), new go.Size(700,700))
-  diagram.animationManager.isEnabled = false
-  diagram.zoomToRect(rect)
-  diagram.centerRect(centerNode.actualBounds);
-  diagram.animationManager.isEnabled = true
-    if(e.diagram.__trtd.dealFireTextCallback){
-      e.diagram.__trtd.dealFireTextCallback(e, node)
-  }
-
+    }
+    //   node.data.role == "centerText"
+    //   diagram.scrollToRect(node.naturalBounds)
+    var group = node.containingGroup;
+    var width = group.data.gridWidth;
+    radius = 10;
+    var rect = new go.Rect(
+      new go.Point(
+        centerNode.position.x - width * (radius + 1),
+        centerNode.position.y - width * (radius + 1)
+      ),
+      new go.Size(width * (radius + 1) * 2, width * (radius + 1) * 2)
+    );
+    // var rect = new go.Rect(go.Point.parse("1803.1413612565443 1348.6910994764396"), new go.Size(700,700))
+    diagram.animationManager.isEnabled = false;
+    diagram.zoomToRect(rect);
+    diagram.centerRect(centerNode.actualBounds);
+    diagram.animationManager.isEnabled = true;
+    if (e.diagram.__trtd.dealFireTextCallback) {
+      e.diagram.__trtd.dealFireTextCallback(e, node);
+    }
   }
 
   getNodeSelectionAdornmentTemplate() {
-      var that = this;
+    var that = this;
     return $(
       go.Adornment,
       "Spot",
@@ -181,7 +199,7 @@ class AutoTextTemplate extends Base {
           // 放大镜
           name: "ButtonIcon1",
           visible: false,
-        //   alignment: new go.Spot(0, 1, 5, -5),
+          //   alignment: new go.Spot(0, 1, 5, -5),
           alignment: new go.Spot(1, 0, 20, -20),
           //alignment: go.Spot.BottomLeft,
           //alignmentFocus: go.Spot.BottomLeft,
@@ -203,19 +221,18 @@ class AutoTextTemplate extends Base {
             )
           ),
           cursor: "pointer",
-          click: function(e, part){
+          click: function(e, part) {
             //    if()
-     
-            that.dealFireText(e, part)
+
+            that.dealFireText(e, part);
             // diagram.commandHandler.scrollToPart(centerNode)
-            
           } // this function is defined below
         },
-        new go.Binding("visible","", function(e, obj){
-            if(obj.part.data.subRole == "coreText"){
-                return true;
-            }
-            return false;
+        new go.Binding("visible", "", function(e, obj) {
+          if (obj.part.data.subRole == "coreText") {
+            return true;
+          }
+          return false;
         }),
         $(go.Shape, "Circle", {
           fill: "rgba(1,1,1,0)",
@@ -227,18 +244,16 @@ class AutoTextTemplate extends Base {
         $(
           go.Shape,
           {
-            
             //   _para1: true,
-            
+
             name: "FireButton",
             fill: "red",
             width: 30,
             height: 40,
             strokeWidth: 2,
-            stroke: "red",
+            stroke: "red"
             //   geometryString: icons["zoomout"], // default value for isTreeExpanded is true
             //   desiredSize: new go.Size(30, 30),
-  
           },
           new go.Binding("geometryString", "", function(d, button) {
             // console.log('dddddd:', d);
@@ -310,6 +325,7 @@ class AutoTextTemplate extends Base {
         visible: true,
         locationSpot: go.Spot.Center,
         resizeCellSize: new go.Size(10, 10),
+        toolTip: that.getTooTip(),
         //   locationObjectName: "textBorder",
         //   selectionObjectName: "textBorder",
         resizable: true,
@@ -875,7 +891,7 @@ class AutoTextTemplate extends Base {
               var it = node.containingGroup.findSubGraphParts().iterator;
               while (it.next()) {
                 var n = it.value;
-                n.opacity = 1
+                n.opacity = 1;
                 // var textObj = n.findObject("TEXT");
                 // if(textObj && textObj.__font){
                 //     textObj.font = textObj.__font;
@@ -1161,7 +1177,7 @@ class AutoTextTemplate extends Base {
           spacingAbove: 4,
           spacingBelow: 4,
           portId: "TEXT",
-          margin: 0,
+          margin: 5,
           maxSize: new go.Size(300, NaN),
           minSize: new go.Size(50, 10),
           stretch: go.GraphObject.UniformToFill,

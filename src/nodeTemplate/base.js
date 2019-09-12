@@ -181,6 +181,33 @@ class NodeBase {
         // this.nodeTemplate = this.getNodeTemplate()
     }
 
+    getTooTip() {
+      var that = this;
+      return $(
+        "ToolTip",
+        { "Border.fill": "whitesmoke", "Border.stroke": "black" },
+        new go.Binding("visible", "", function(obj) {
+          console.log("ToolTipToolTipToolTip");
+          return obj.remark != null;
+        }),
+        $(
+          go.TextBlock,
+          {
+            maxSize: new go.Size(400, NaN),
+  
+            font: "24px bold",
+            wrap: go.TextBlock.WrapFit,
+            margin: 5
+          },
+  
+          new go.Binding("text", "", function(obj) {
+           
+            return obj.remark || "";
+          })
+        )
+      );
+    }
+
     getNodeProperties(){
         var that = this
         var diagram = this.diagram
