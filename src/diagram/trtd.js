@@ -526,6 +526,7 @@ apiDuplicateNode() {
                 console.log("eeee:",e)
                 localStorage.setItem("TRTD_documentPoint",go.Point.stringify(e.documentPoint))
             },
+            "dragSelectingTool.isEnabled": false,
             "draggingTool.isCopyEnabled": false,
             // "rotatingTool.snapAngleEpsilon": 10,
             "commandHandler.archetypeGroupData": { text: "Group", isGroup: true, color: "blue" },
