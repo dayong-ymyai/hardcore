@@ -6,7 +6,8 @@ var nodeTemplateFactory = require('../nodeTemplate/factory')
 class Trtd {
     constructor(div, config){
         console.log('trtd base')
-		this.config = config;
+        this.config = config;
+        this.textDoubleClick = config.textDoubleClick
 		this.modelChangedListener = config.modelChangedListener;
 		this.showContextMenuListener = config.showContextMenuListener;
 		this.hideContextMenuListener = config.hideContextMenuListener;

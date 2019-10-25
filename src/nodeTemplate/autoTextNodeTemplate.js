@@ -1134,6 +1134,9 @@ class AutoTextTemplate extends Base {
           //       .ofObject())
         ),
         doubleClick: function(e, node) {
+          if(e.diagram.__trtd.textDoubleClick){
+            return e.diagram.__trtd.textDoubleClick(e, node)
+          }
           e.diagram.__trtd.selectText(e, node);
         },
 

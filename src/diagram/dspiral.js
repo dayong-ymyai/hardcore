@@ -621,6 +621,14 @@ class Trtd extends Trtd_tianpan {
             }
         },200)
     }
+    // 复制拓扑
+    copyWaveGroup(){
+        var diagram = this.diagram
+        var cmd = this.diagram.commandHandler;
+        cmd.copySelection()
+        cmd.pasteSelection()
+        return;
+    }
 
     layoutAllGroup(){
         console.log("layoutAllGroup")
@@ -1463,6 +1471,7 @@ class Trtd extends Trtd_tianpan {
             <li trtd_action="bringToForeground"><a class="i18n" data-lang="cancelfix">置于顶层</a></li>
             <li trtd_action="addDimTtext"><a class="i18n" data-lang="cancelfix">增加维度</a></li>
             <li trtd_action="switchCbianSize"><a class="i18n" data-lang="cancelfix">切换大小</a></li>
+            <li trtd_action="copyWaveGroup"><a class="i18n" data-lang="cancelfix">复制</a></li>
         </ul>
         `
     }
@@ -1472,7 +1481,7 @@ class Trtd extends Trtd_tianpan {
         if(node){
             // 双螺旋可以添加常变
             if(["axisGroup"].indexOf(node.data.category) > -1){
-                showIds = "addCbian,apiDeleteSelection,exportAsSubFigure"
+                showIds = "addCbian,apiDeleteSelection,exportAsSubFigure,copyWaveGroup"
             }
             if(["picGroup"].indexOf(node.data.category) > -1){
                 showIds = "apiDeleteSelection,switchCbianSize"
@@ -1824,6 +1833,9 @@ class Trtd extends Trtd_tianpan {
                 }
             }
             setTimeout(()=>{
+                if(this.textDoubleClick){
+                    return this.textDoubleClick(e, node)
+                }
                 this.selectText(e, diagram);
             },100)
             return true;
