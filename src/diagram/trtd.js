@@ -349,20 +349,53 @@ apiDuplicateNode() {
             maxSize: new go.Size(9000, 9000)
         }
         var list = new go.List(go.GraphObject);
-        myDiagram.nodes.each(function(p) {
-            var temp = p.findObject("figure")
-            if(temp){
-                temp.visible = false;
+
+        var node = myDiagram.selection.first()
+        var isSelected = false
+        if(node ){
+            while(node.containingGroup){
+                node = node.containingGroup
             }
-            if (!(p instanceof go.Group)) {
-                list.add(p);
-                if( p instanceof go.Node){
-                    if(p.data.role == "centerText"){
-                        p.layerName = "Foreground"
+            if(node.data.isGroup){
+                isSelected = true
+            }
+            
+        }
+
+        if(isSelected){
+            var it = node.findSubGraphParts().iterator;
+            while(it.next()){
+                var p = it.value;
+                var temp = p.findObject("figure")
+                if(temp){
+                    temp.visible = false;
+                }
+                if (!(p instanceof go.Group)) {
+                    list.add(p);
+                    if( p instanceof go.Node){
+                        if(p.data.role == "centerText"){
+                            p.layerName = "Foreground"
+                        }
                     }
                 }
             }
-        })
+        }else{
+            myDiagram.nodes.each(function(p) {
+                var temp = p.findObject("figure")
+                if(temp){
+                    temp.visible = false;
+                }
+                if (!(p instanceof go.Group)) {
+                    list.add(p);
+                    if( p instanceof go.Node){
+                        if(p.data.role == "centerText"){
+                            p.layerName = "Foreground"
+                        }
+                    }
+                }
+            })
+        }
+        
         myDiagram.links.each(function(p) {
             list.add(p);
         })
