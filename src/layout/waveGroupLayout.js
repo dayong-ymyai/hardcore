@@ -635,9 +635,9 @@
                 if(!xuTextColl[index].data.nwidth){
                     obj.diagram.model.setDataProperty(xuTextColl[index].data,"width", oliveWidth)
                 }
-                if(!xuTextColl[index].data.nalign){
-                    obj.diagram.model.setDataProperty(xuTextColl[index].data,"textAlign", "center")
-                }
+                // if(!xuTextColl[index].data.nalign){
+                //     obj.diagram.model.setDataProperty(xuTextColl[index].data,"textAlign", "center")
+                // }
                 // obj.diagram.model.setDataProperty(xuTextColl[index].data,"textAlign", null)
                 // delete xuTextColl[index].data.textAlign
                 // if(!xuTextColl[index].__oldOrder){

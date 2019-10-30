@@ -798,15 +798,15 @@ class Trtd extends Trtd_tianpan {
         "locationSpot":"1 0 0 0", "textAlign":"center", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(0, -150)), 
         "movable":true, "group":groupKey}
-        var text1Data = {"text":"总结1","role":"cbianText1", "deletable":false,  "textStroke":"#0e399d", "iconVisible":false, 
+        var text1Data = {"text":"总结1","role":"cbianText1", "deletable":false,"font":"normal bold 18px 'Microsoft YaHei'", "textStroke":"#0e399d", "iconVisible":false, 
         "locationSpot":"0 0 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(155*Math.cos(30*Math.PI/180), -150*Math.sin(30*Math.PI/180))), 
         "movable":true, "group":groupKey}
-        var text2Data = {"text":"总结3", "role":"cbianText3","deletable":false, "textStroke":"#FFC000", "iconVisible":false, 
+        var text2Data = {"text":"总结3", "role":"cbianText3","deletable":false, "font":"normal bold 18px 'Microsoft YaHei'", "textStroke":"rgba(252, 172, 0, 1)", "iconVisible":false, 
         "locationSpot":"0 0.5 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(145*Math.cos(45*Math.PI/180), -150*Math.sin(45*Math.PI/180))), 
         "movable":true, "group":groupKey}
-        var text3Data = {"text":"总结2","role":"cbianText2", "deletable":false, "textStroke":"#cb1c27", "iconVisible":false, 
+        var text3Data = {"text":"总结2","role":"cbianText2","font":"normal bold 18px 'Microsoft YaHei'", "deletable":false, "textStroke":"#cb1c27", "iconVisible":false, 
         "locationSpot":"0 1 0 0", "textAlign":"left", "category":"autoText", 
         "loc":go.Point.stringify(basePoint.copy().offset(145*Math.cos(70*Math.PI/180), -140*Math.sin(70*Math.PI/180))), 
         "movable":true, "group":groupKey}
@@ -918,7 +918,7 @@ class Trtd extends Trtd_tianpan {
         // }
         var shiText = JSON.parse(JSON.stringify(curShiText.data))
         delete shiText.__gohashid
-        delete shiText.textAlign
+        // delete shiText.textAlign
         delete shiText.hyperlink
         delete shiText.figure
         delete shiText.remark
@@ -948,7 +948,7 @@ class Trtd extends Trtd_tianpan {
         // }
         var xuText = JSON.parse(JSON.stringify(curXuText.data))
         delete xuText.__gohashid
-        delete xuText.textAlign
+        // delete xuText.textAlign
         delete xuText.hyperlink
         delete xuText.figure
         delete xuText.remark
@@ -1058,17 +1058,17 @@ class Trtd extends Trtd_tianpan {
     if(!options){
         temp = temp.concat([
             {"category":"wave", "text":"1\n", "level":0, "key":olive1Key, "group":waveGroupKey, "desiredSize":"150 120", "order":1, "shiText":olive1ShiTextKey, "xuText":olive1XuTextKey, "angle":330.08938180947, "loc":"-91.91674008334496 -140.02427812707123", "oliveType":"Ellipse", "textAlign":"center", "shiStroke":"#cb1c27", "xuStroke":"#0e399d", "centerText":olive1CenterTextKey, "textVisible":false},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive1ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":1, "olive":olive1Key, "loc":"4.128618140465704 -125.47989214278559", "locationSpot":"0 0 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive1XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":1, "olive":olive1Key, "loc":"-56.2078366340385 -230.36321886941172", "locationSpot":"1 1 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive1ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":1, "olive":olive1Key, "loc":"4.128618140465704 -125.47989214278559", "locationSpot":"0 0 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive1XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":1, "olive":olive1Key, "loc":"-56.2078366340385 -230.36321886941172", "locationSpot":"1 1 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
             {"category":"wave", "text":"3\n", "level":0, "key":olive2Key, "group":waveGroupKey, "desiredSize":"150 120", "order":3, "shiText":olive2ShiTextKey, "xuText":olive2XuTextKey, "angle":330.08938180947, "loc":"168.12456585043884 -289.61879409691636", "oliveType":"Ellipse", "textAlign":"center", "shiStroke":"#cb1c27", "xuStroke":"#0e399d", "centerText":olive2CenterTextKey, "textVisible":false},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive2ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":3, "olive":olive2Key, "loc":"264.16992407424954 -275.07440811263075", "locationSpot":"0 0 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive2XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":3, "olive":olive2Key, "loc":"203.83346929974533 -379.9577348392569", "locationSpot":"1 1 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive2ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":3, "olive":olive2Key, "loc":"264.16992407424954 -275.07440811263075", "locationSpot":"0 0 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive2XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":3, "olive":olive2Key, "loc":"203.83346929974533 -379.9577348392569", "locationSpot":"1 1 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
             {"category":"wave", "text":"2\n", "level":0, "key":olive3Key, "group":waveGroupKey, "desiredSize":"150 120", "order":2, "shiText":olive3ShiTextKey, "xuText":olive3XuTextKey, "angle":330.08938180947, "loc":"38.10391288354694 -214.8215361119938", "oliveType":"Ellipse", "textAlign":"center", "shiStroke":"#cb1c27", "xuStroke":"#0e399d", "centerText":olive3CenterTextKey, "textVisible":false},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive3ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":2, "olive":olive3Key, "loc":"73.8128163328534 -305.1604768543343", "locationSpot":"1 1 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive3XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":2, "olive":olive3Key, "loc":"134.1492711073576 -200.27715012770815", "locationSpot":"0 0 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive3ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":2, "olive":olive3Key, "loc":"73.8128163328534 -305.1604768543343", "locationSpot":"1 1 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive3XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":2, "olive":olive3Key, "loc":"134.1492711073576 -200.27715012770815", "locationSpot":"0 0 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
             {"category":"wave", "text":"4\n", "level":0, "key":olive4Key, "group":waveGroupKey, "desiredSize":"150 120", "order":4, "shiText":olive4ShiTextKey, "xuText":olive4XuTextKey, "angle":330.08938180947, "loc":"298.1452188173308 -364.41605208183887", "oliveType":"Ellipse", "textAlign":"center", "shiStroke":"#cb1c27", "xuStroke":"#0e399d", "centerText":olive4CenterTextKey, "textVisible":false},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive4ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":4, "olive":olive4Key, "loc":"333.8541222666372 -454.7549928241794", "locationSpot":"1 1 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
-            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive4XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":4, "olive":olive4Key, "loc":"394.1905770411414 -349.87166609755326", "locationSpot":"0 0 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"center"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive4ShiTextKey, "width":150, "role":"shiText", "level":0, "group":waveGroupKey, "order":4, "olive":olive4Key, "loc":"333.8541222666372 -454.7549928241794", "locationSpot":"1 1 0 0", "textStroke":"#cb1c27", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
+            {"deletable":false, "text":"", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive4XuTextKey, "width":150, "role":"xuText", "level":0, "group":waveGroupKey, "order":4, "olive":olive4Key, "loc":"394.1905770411414 -349.87166609755326", "locationSpot":"0 0 0 0", "textStroke":"#0e399d", "showBorder":true, "angle":0, "minSize":"120 30", "textAlign":"start"},
             {"text":"1\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive1CenterTextKey, "width":120, "role":"centerText", "level":0, "group":waveGroupKey, "order":1, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":olive1Key, "loc":"-26.039609246786398 -177.92155550609866", "angle":0},
             {"text":"2\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive3CenterTextKey, "width":120, "role":"centerText", "level":0, "group":waveGroupKey, "order":2, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":olive3Key, "loc":"103.9810437201055 -252.71881349102122", "angle":0},
             {"text":"3\n", "minSize":"120 30", "deletable":false, "textAlign":"center", "font":"18px 'Microsoft YaHei'", "category":"autoText", "key":olive2CenterTextKey, "width":120, "role":"centerText", "level":0, "group":waveGroupKey, "order":3, "visible":true, "layerName":"Foreground", "locationSpot":"0.5 0.5 0 0", "selectable":false, "olive":olive2Key, "loc":"234.00169668699743 -327.5160714759438", "angle":0},
