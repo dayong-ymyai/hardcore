@@ -410,83 +410,86 @@ class AutoTextTemplate extends Base {
             e.diagram.model.setDataProperty(node.data, "dimKey", selDimKey);
             e.diagram.model.commitTransaction("coreTextExchange");
           }
-
+          console.log("switch dim1")
           // 云盘互换维度
-          if (
-            selnode.data.subRole == "dimText" &&
-            node.data.subRole == "dimText" &&
-            selnode.data.category == node.data.category
-          ) {
-            if (selnode.data.group != node.data.group) return;
-            if (!selnode.containingGroup) return;
-            if (selnode.containingGroup.data.category != "yunpanGroup") return;
+          if(selnode.containingGroup && selnode.containingGroup.data.category == "yunpanGroup"){
             if (
-              !(
-                selnode.data.dimX == node.data.dimX ||
-                selnode.data.dimY == node.data.dimY
-              )
+              selnode.data.subRole == "dimText" &&
+              node.data.subRole == "dimText" &&
+              selnode.data.category == node.data.category
             ) {
-              return;
-            }
-
-            e.diagram.model.startTransaction("dimTextExchange");
-            var selOrderX = selnode.data.dimX;
-            var selOrderY = selnode.data.dimY;
-            var it = node.containingGroup.findSubGraphParts().iterator;
-            var nodeCoreTexts = [];
-            var selnodeCoreTexts = [];
-            var yunnodeCoreTexts = [];
-            var yunselnodeCoreTexts = [];
-            var normDim = "X";
-            if (selnode.data.dimX == 0) {
-              normDim = "Y";
-            }
-            var selOrder = selnode.data["dim" + normDim];
-            var nodeOrder = node.data["dim" + normDim];
-            while (it.next()) {
-              var n = it.value;
-              if (n.data.subRole == "yunpanText") {
-                if (n.data["order" + normDim] == nodeOrder) {
-                  yunnodeCoreTexts.push(n);
-                }
-                if (n.data["order" + normDim] == selOrder) {
-                  yunselnodeCoreTexts.push(n);
+              if (selnode.data.group != node.data.group) return;
+              // if (!selnode.containingGroup) return;
+              // if (selnode.containingGroup.data.category != "yunpanGroup") return;
+              if (
+                !(
+                  selnode.data.dimX == node.data.dimX ||
+                  selnode.data.dimY == node.data.dimY
+                )
+              ) {
+                return;
+              }
+              console.log("switch dim")
+              e.diagram.model.startTransaction("dimTextExchange");
+              var selOrderX = selnode.data.dimX;
+              var selOrderY = selnode.data.dimY;
+              var it = node.containingGroup.findSubGraphParts().iterator;
+              var nodeCoreTexts = [];
+              var selnodeCoreTexts = [];
+              var yunnodeCoreTexts = [];
+              var yunselnodeCoreTexts = [];
+              var normDim = "X";
+              if (selnode.data.dimX == 0) {
+                normDim = "Y";
+              }
+              var selOrder = selnode.data["dim" + normDim];
+              var nodeOrder = node.data["dim" + normDim];
+              while (it.next()) {
+                var n = it.value;
+                if (n.data.subRole == "yunpanText") {
+                  if (n.data["order" + normDim] == nodeOrder) {
+                    yunnodeCoreTexts.push(n);
+                  }
+                  if (n.data["order" + normDim] == selOrder) {
+                    yunselnodeCoreTexts.push(n);
+                  }
                 }
               }
-            }
-            var tmpX, tmpY;
-            for (var i = 0; i < yunnodeCoreTexts.length; i++) {
+              var tmpX, tmpY;
+              for (var i = 0; i < yunnodeCoreTexts.length; i++) {
+                e.diagram.model.setDataProperty(
+                  yunnodeCoreTexts[i].data,
+                  "order" + normDim,
+                  selOrder
+                );
+              }
+              for (var i = 0; i < yunselnodeCoreTexts.length; i++) {
+                e.diagram.model.setDataProperty(
+                  yunselnodeCoreTexts[i].data,
+                  "order" + normDim,
+                  nodeOrder
+                );
+              }
               e.diagram.model.setDataProperty(
-                yunnodeCoreTexts[i].data,
-                "order" + normDim,
-                selOrder
-              );
-            }
-            for (var i = 0; i < yunselnodeCoreTexts.length; i++) {
-              e.diagram.model.setDataProperty(
-                yunselnodeCoreTexts[i].data,
-                "order" + normDim,
+                selnode.data,
+                "dim" + normDim,
                 nodeOrder
               );
+              e.diagram.model.setDataProperty(
+                node.data,
+                "dim" + normDim,
+                selOrder
+              );
+              // e.diagram.model.setDataProperty(
+              //   node.data,
+              //   "rho" + normDim,
+              //   selOrder
+              // );
+              e.diagram.model.commitTransaction("dimTextExchange");
+              return;
             }
-            e.diagram.model.setDataProperty(
-              selnode.data,
-              "dim" + normDim,
-              nodeOrder
-            );
-            e.diagram.model.setDataProperty(
-              node.data,
-              "dim" + normDim,
-              selOrder
-            );
-            // e.diagram.model.setDataProperty(
-            //   node.data,
-            //   "rho" + normDim,
-            //   selOrder
-            // );
-            e.diagram.model.commitTransaction("dimTextExchange");
-            return;
           }
+      
 
           // 互换维度
           if (
@@ -494,6 +497,7 @@ class AutoTextTemplate extends Base {
             node.data.subRole == "dimText"
           ) {
             e.diagram.model.startTransaction("dimTextExchange");
+            var selDimId = selnode.data.dimid;
             var selOrderX = selnode.data.dimX;
             var selOrderY = selnode.data.dimY;
             var it = node.containingGroup.findSubGraphParts().iterator;
@@ -604,6 +608,11 @@ class AutoTextTemplate extends Base {
             }
             e.diagram.model.setDataProperty(
               selnode.data,
+              "dimid",
+              node.data.dimid
+            );
+            e.diagram.model.setDataProperty(
+              selnode.data,
               "dimX",
               node.data.dimX
             );
@@ -612,6 +621,7 @@ class AutoTextTemplate extends Base {
               "dimY",
               node.data.dimY
             );
+            e.diagram.model.setDataProperty(node.data, "dimid", selDimId);
             e.diagram.model.setDataProperty(node.data, "dimX", selOrderX);
             e.diagram.model.setDataProperty(node.data, "dimY", selOrderY);
             e.diagram.model.commitTransaction("dimTextExchange");
@@ -1263,7 +1273,7 @@ class AutoTextTemplate extends Base {
         }).makeTwoWay(),
         new go.Binding("maxSize", "", function(data, d, m) {
           // console.log("maxSize",v,m,d)
-          var width = NaN;
+          var width = 1000;
           var height = NaN;
           if (data.width) {
             width = parseInt(data.width);
@@ -1290,7 +1300,7 @@ class AutoTextTemplate extends Base {
         // }).ofObject("SHAPE"),
         new go.Binding("text", "text").makeTwoWay(),
         new go.Binding("stroke", "textStroke").makeTwoWay(),
-        new go.Binding("font", "font").makeTwoWay()
+        new go.Binding("font", "font").makeTwoWay() 
       ),
       $(
         go.Panel,

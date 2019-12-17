@@ -109,8 +109,8 @@ class Trtd extends Trtd_tianpan {
                     if(e.subject.width <= 50){
                         e.subject.width = 50
                     }
-                    if(e.subject.height <= 35){
-                        e.subject.height =35
+                    if(e.subject.height <= 50){
+                        e.subject.height =50
                     }
                     e.diagram.startTransaction("resize");
                     e.diagram.model.setDataProperty(node.data, "width", e.subject.width);
@@ -1444,6 +1444,7 @@ class Trtd extends Trtd_tianpan {
             <li trtd_action="startNewSpiral"><a class="i18n" data-lang="icn">插入子节点</a></li>
             <li trtd_action="apiDuplicateNode"><a class="i18n" data-lang="duplicateNode">复制节点</a></li>
             <li trtd_action="apiDeleteSelection"><a class="i18n" data-lang="remove">删除</a></li>
+            <li trtd_action="clearDim"><a class="i18n" data-lang="clearDim">清空维度</a></li>
             <li trtd_action="splitOlive2Cbian"><a class="i18n" data-lang="remove">分离</a></li>
             <li trtd_action="splitOlive2Half"><a class="i18n" data-lang="remove">拆分</a></li>
             <li trtd_action="orderChildNode"><a class="i18n" data-lang="ordernode">子节点编号</a></li>
@@ -1461,6 +1462,7 @@ class Trtd extends Trtd_tianpan {
             <li trtd_action="apiSwitchTextAngle"><a class="i18n" data-lang="cancelfix">切换文字方向</a></li>
             <li trtd_action="addCbian"><a class="i18n" data-lang="cancelfix">添加总结图</a></li>
             <li trtd_action="addAxisGroup"><a class="i18n" data-lang="cancelfix">插入拓扑</a></li>
+            <li trtd_action="addYunText"><a class="i18n" data-lang="cancelfix">添加文字</a></li>
             <li trtd_action="showRect"><a class="i18n" data-lang="cancelfix">显示矩形线</a></li>
             <li trtd_action="hideRect"><a class="i18n" data-lang="cancelfix">隐藏矩形线</a></li>
             <li trtd_action="offShowRedLine"><a class="i18n" data-lang="cancelfix">关闭自动显示红线</a></li>
@@ -1513,7 +1515,7 @@ class Trtd extends Trtd_tianpan {
                 
             }
             if( ["yunGroup"].indexOf(node.data.category) > -1){
-                showIds = "";
+                showIds = "addYunText,";
                 if(node.data.showShape){
                     showIds += "hideRect"
                 }else{
@@ -1544,6 +1546,10 @@ class Trtd extends Trtd_tianpan {
             if(["autoText"].indexOf(node.data.category)>-1){
                 // if(node.data.text){
                     showIds += ",apiDuplicateNode"
+
+                    if(node.data.subRole == "dimText"){
+                        showIds+=",clearDim"
+                    }
                 // }
             }
             
@@ -1564,6 +1570,31 @@ class Trtd extends Trtd_tianpan {
         return showIds;
     }
     
+    addYunText(){
+        var node = this.diagram.selection.first();
+        var myDiagram = this.diagram;
+        if(!node) return;
+        var e = myDiagram.lastInput;
+        node.__trtdNode.addFreeText(e, node)
+    }
+    // 清空维度
+    clearDim(){
+        var node = this.diagram.selection.first();
+        var it = node.containingGroup.findSubGraphParts().iterator;
+        this.diagram.startTransaction("clearDim");
+        while (it.next()) {
+            var n = it.value;
+            if(n.data.subRole == "coreText" && n.data.dimKey == node.data.key){
+                // if(n.data.order == node.data.order+1){
+                //     locateNode = n;
+                // }
+                this.diagram.model.setDataProperty(n.data, 'text', (n.data.theta?n.data.theta:"")+'')
+            }
+        }
+        this.diagram.model.setDataProperty(node.data, 'text', "维度")
+        this.diagram.model.setDataProperty(node.data, 'dimid', null)
+        this.diagram.commitTransaction("clearDim");
+    }
     // 云盘增加维度
     addDimTtext(){
         var node = this.diagram.selection.first();

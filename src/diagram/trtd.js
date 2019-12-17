@@ -211,9 +211,11 @@ class Trtd {
         var model = this.diagram.model;
         var themeText = ""
         for(var i=0;i<model.nodeDataArray.length;i++){
-            if(model.nodeDataArray[i].role == "theme" || model.nodeDataArray[i].role == "themeText"|| model.nodeDataArray[i].subRole == "themeText"){
-                themeText = model.nodeDataArray[i].text
-                break;
+            if(model.nodeDataArray[i].role == "theme" || model.nodeDataArray[i].role == "themeText"|| model.nodeDataArray[i].subRole == "themeText" ){
+                if(model.nodeDataArray[i].text){
+                    themeText = model.nodeDataArray[i].text
+                    break;
+                }
             }
         }
         if(!themeText){

@@ -129,7 +129,7 @@ class YunNodeTemplate extends Base {
           }
         },
         doubleClick: function (e, node){
-          that.addFreeText(e, node)
+          // that.addFreeText(e, node)
         },
         mouseOver: function(e, node) {
           // if(node.data.hyperlink){
