@@ -444,19 +444,12 @@ class Trtd extends Trtd_tianpan {
         myDiagram.groupTemplateMap.add("yunpanGroup",  nodeTemplateFactory("yunpanGroup",{diagram:this.diagram}).getNodeTemplate())
         
     }
-
-    deleteSelection(node){
+    deleteSelectionActual(node){
+       
         var cmd = this.diagram.commandHandler;
-        if(!node){
-            node = this.diagram.selection.first()
-        }
         var locateNode = null;
-        var shiText,xuText,centerText;
-        if(!node) return;
-        if(!node.canDelete()) return;
-        if(node.data.category == "yunGroup" && !node.data.deletable){   
-            return
-        }
+        var shiText,xuText,centerText;  
+
         this.diagram.startTransaction("deleteSelection1");
         var count = 0;
         if(node){
@@ -605,6 +598,37 @@ class Trtd extends Trtd_tianpan {
         if (locateNode) {
             this.diagram.select(locateNode);
         }
+    }
+    deleteSelection(node){
+        
+        if(!node){
+            node = this.diagram.selection.first()
+        }
+
+        if(!node) return;
+        if(!node.canDelete()) return;
+        if(node.data.category == "yunGroup" && !node.data.deletable){   
+            return
+        }
+        var that = this
+        var nodeCopy = JSON.parse(JSON.stringify(node.data))
+        console.log("deleteConfirm", that.deleteConfirm)
+        if(that.deleteConfirm){
+            that.deleteConfirm(nodeCopy, (flag)=>{
+                if(flag){
+                    that.deleteSelectionActual(node);
+                    if(that.deleteCallback){
+                        that.deleteCallback(nodeCopy)
+                    }
+                }
+            })
+        }else{
+            that.deleteSelectionActual(node);
+            if(that.deleteCallback){
+                that.deleteCallback(nodeCopy)
+            }
+        }
+        // this.deleteSelectionActual(node)
     }
 
 
@@ -1090,7 +1114,7 @@ class Trtd extends Trtd_tianpan {
             }
         }
         // 最多插入13个拓扑
-        if(axisGroupCount > 13){
+        if(axisGroupCount > 20){
             return;
         }
         var axisData = this.getAxisGroupData(options)
@@ -1439,6 +1463,7 @@ class Trtd extends Trtd_tianpan {
         return `
         <ul>
             <li trtd_action="exportAsSubFigure"><a class="i18n" data-lang="cancelfix">创建为子盘</a></li>
+            <li trtd_action="addToDimStore"><a class="i18n" data-lang="cancelfix">添加到维度库</a></li>
             <li trtd_action="drillAnalyze"><a class="i18n" data-lang="cancelfix">插入子盘</a></li>
             <li trtd_action="addFollower"><a class="i18n" data-lang="insertsl">插入同级节点</a></li>
             <li trtd_action="startNewSpiral"><a class="i18n" data-lang="icn">插入子节点</a></li>
@@ -1547,8 +1572,9 @@ class Trtd extends Trtd_tianpan {
                 // if(node.data.text){
                     showIds += ",apiDuplicateNode"
 
-                    if(node.data.subRole == "dimText"){
-                        showIds+=",clearDim"
+                    if(node.data.subRole == "dimText" && node.containingGroup && node.containingGroup.data.category == "yunGroup"){
+                        showIds+=",clearDim,addToDimStore"
+                        // showIds = showIds.replace('apiDeleteSelection','')
                     }
                 // }
             }
@@ -1576,6 +1602,11 @@ class Trtd extends Trtd_tianpan {
         if(!node) return;
         var e = myDiagram.lastInput;
         node.__trtdNode.addFreeText(e, node)
+    }
+    addToDimStore(){
+        if(this.addToDimStoreCallback){
+            this.addToDimStoreCallback(this.diagram)
+        }
     }
     // 清空维度
     clearDim(){
@@ -1889,8 +1920,9 @@ class Trtd extends Trtd_tianpan {
             } else if (cmd.canExpandSubGraph()) {
                 cmd.expandSubGraph();
             }
-        } else if (e.key == "Del") {
-            e.diagram.commandHandler.deleteSelection();
+        } else if (e.key == "Del" || e.key == 'Backspace') {
+            this.apiDeleteSelection()
+            // e.diagram.commandHandler.deleteSelection();
         } else if (e.event.keyCode == 113) { //F2,不知道为什么失效了，重新赋予功能
             // selectText();
             this.selectText(e, diagram);

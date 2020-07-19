@@ -49,9 +49,9 @@ const config = {
   entry: __dirname + `/src/main.js`,
   devtool: 'source-map',
   output: {
-    path: __dirname + outpubFolder,
+    // path: __dirname + outpubFolder,
     // path: path.join(__dirname, "../new365trtd/static/trtd"),
-    // path: path.join(__dirname, "../new365trtd/quasar/src/statics/"),
+    path: path.join(__dirname, "../new365trtd/quasar/src/statics/"),
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',

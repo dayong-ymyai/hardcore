@@ -85,6 +85,7 @@ class AutoTextTemplate extends Base {
     diagram.animationManager.isEnabled = false;
     diagram.zoomToRect(rect);
     diagram.centerRect(centerNode.actualBounds);
+    console.log("enterNode.actualBounds)",centerNode.actualBounds)
     diagram.animationManager.isEnabled = true;
     if (e.diagram.__trtd.dealFireTextCallback) {
       e.diagram.__trtd.dealFireTextCallback(e, node);

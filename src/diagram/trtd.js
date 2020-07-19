@@ -17,6 +17,8 @@ class Trtd {
 		this.InitialLayoutCompleted = config.InitialLayoutCompleted;
         this.cxElement = config.cxElement; // 外部传入的菜单dom元素
         this.deleteCallback = config.deleteCallback; // 删除回调
+        this.deleteConfirm = config.deleteConfirm; // 删除回调
+        this.addToDimStoreCallback = config.addToDimStoreCallback
         this.canAddAxisGroup = config.canAddAxisGroup == null?true:config.canAddAxisGroup 
         this.createFigure = config.createFigure; // 外部创建figure方法，异步调用，返回盘的id，写入节点的figure属性，一般为id
         this.openFigure = config.openFigure; // 外部打开figure方法，根据节点的figure属性打开盘
@@ -692,10 +694,23 @@ apiDuplicateNode() {
                 return;
             }
             var nodeCopy = JSON.parse(JSON.stringify(node.data))
-            that.deleteSelection();
-            if(that.deleteCallback){
-                that.deleteCallback(nodeCopy)
+            console.log("deleteConfirm", that.deleteConfirm)
+            if(that.deleteConfirm){
+                that.deleteConfirm(nodeCopy, (flag)=>{
+                    if(flag){
+                        that.deleteSelection();
+                        if(that.deleteCallback){
+                            that.deleteCallback(nodeCopy)
+                        }
+                    }
+                })
+            }else{
+                that.deleteSelection();
+                if(that.deleteCallback){
+                    that.deleteCallback(nodeCopy)
+                }
             }
+            
         }
         myDiagram.commandHandler.redo = function() {
             var cmd = myDiagram.commandHandler;
