@@ -1462,6 +1462,7 @@ class Trtd extends Trtd_tianpan {
     getDefaultCustomMenuDivStr(){
         return `
         <ul>
+            <li trtd_action="addTopuText"><a class="i18n" data-lang="cancelfix">添加文字</a></li>
             <li trtd_action="exportAsSubFigure"><a class="i18n" data-lang="cancelfix">创建为子盘</a></li>
             <li trtd_action="addToDimStore"><a class="i18n" data-lang="cancelfix">添加到维度库</a></li>
             <li trtd_action="drillAnalyze"><a class="i18n" data-lang="cancelfix">插入子盘</a></li>
@@ -1508,7 +1509,7 @@ class Trtd extends Trtd_tianpan {
         if(node){
             // 双螺旋可以添加常变
             if(["axisGroup"].indexOf(node.data.category) > -1){
-                showIds = "addCbian,apiDeleteSelection,exportAsSubFigure,copyWaveGroup"
+                showIds = "addCbian,apiDeleteSelection,exportAsSubFigure,copyWaveGroup,addTopuText"
             }
             if(["picGroup"].indexOf(node.data.category) > -1){
                 showIds = "apiDeleteSelection,switchCbianSize"
@@ -1596,6 +1597,13 @@ class Trtd extends Trtd_tianpan {
         return showIds;
     }
     
+    addTopuText(){
+        var node = this.diagram.selection.first();
+        var myDiagram = this.diagram;
+        if(!node) return;
+        var e = myDiagram.lastInput;
+        node.__trtdNode.addFreeText(e, node)
+    }
     addYunText(){
         var node = this.diagram.selection.first();
         var myDiagram = this.diagram;

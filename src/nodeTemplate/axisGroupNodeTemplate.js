@@ -13,6 +13,7 @@ class AxisNodeTemplate extends Base {
     
     addFreeText(e, node){
       console.log("eeeeeeeeeee",e)
+      // return
       var data = {"text":"自由文本",
       "deletable":true, 
       "role":"freeText",
@@ -36,6 +37,7 @@ class AxisNodeTemplate extends Base {
       layerName: "Background",
         locationObjectName: "PH",
         locationSpot: go.Spot.BottomLeft ,
+        __trtdNode: that,
         // rotationSpot: go.Spot.LeftCenter,
         rotatable: false,
         alignment: go.Spot.Left,
@@ -68,6 +70,7 @@ class AxisNodeTemplate extends Base {
           }
         },
         doubleClick: function (e, node){
+          return
           that.addFreeText(e, node)
         },
         mouseOver: function(e, node) {

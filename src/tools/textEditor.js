@@ -108,12 +108,14 @@
     var tool = TextEditor.tool;
     if (!tool || tool.currentTextEditor === null || tool.state === go.TextEditingTool.StateNone) return;
 
-    textarea.focus();
+    tool.acceptText(go.TextEditingTool.LostFocus);
 
-    if (tool.selectsTextOnActivate) {
-      textarea.select();
-      textarea.setSelectionRange(0, 9999);
-    }
+    // textarea.focus();
+
+    // if (tool.selectsTextOnActivate) {
+    //   textarea.select();
+    //   textarea.setSelectionRange(0, 9999);
+    // }
   }, false);
 
 
